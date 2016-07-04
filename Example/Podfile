@@ -1,0 +1,12 @@
+platform :ios, '8.0'
+use_frameworks!
+
+target 'Segmentio_Example' do
+  pod 'Segmentio', :path => '../'
+
+  target 'Segmentio_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end

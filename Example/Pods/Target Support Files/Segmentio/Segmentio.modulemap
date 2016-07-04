@@ -1,0 +1,6 @@
+framework module Segmentio {
+  umbrella header "Segmentio-umbrella.h"
+
+  export *
+  module * { export * }
+}
