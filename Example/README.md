@@ -1,6 +1,6 @@
 ##Segmentio
 [![License](http://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://github.com/Yalantis/Segmentio/blob/master/LICENSE)
-[![Swift 2.2.x](https://img.shields.io/badge/Swift-2.2.x-orange.svg)]
+![Swift 2.2.x](https://img.shields.io/badge/Swift-2.2.x-orange.svg)
 
 Animated top/bottom segmented control written in Swift.
 
@@ -17,7 +17,7 @@ iOS 8.x, Swift 2.2
 use_frameworks! 
 
 # Swift 2.2
-pod 'Segmentio', '~> 0.1.0'
+pod 'Segmentio', '~> 0.1.1'
 ```
 
 *(CocoaPods v1.0.1 or later required. See [this blog post](http://blog.cocoapods.org/Pod-Authors-Guide-to-CocoaPods-Frameworks/) for details.)*
