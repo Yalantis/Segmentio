@@ -1,6 +1,5 @@
 ##Segmentio
-[![License](http://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://github.com/Yalantis/Segmentio/blob/master/LICENSE)
-![Swift 2.2.x](https://img.shields.io/badge/Swift-2.2.x-orange.svg)
+[![License](http://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://github.com/Yalantis/Segmentio/blob/master/LICENSE) ![Swift 2.2.x](https://img.shields.io/badge/Swift-2.2.x-orange.svg)
 
 Animated top/bottom segmented control written in Swift.
 
@@ -8,7 +7,7 @@ Animated top/bottom segmented control written in Swift.
 
 ##Requirements
 
-iOS 8.x, Swift 2.2
+iOS 8.x, Swift 2.2.x
 
 ##Installation
 
