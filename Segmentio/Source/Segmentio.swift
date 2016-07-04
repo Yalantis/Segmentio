@@ -402,7 +402,7 @@ public class Segmentio: UIView {
     
     // MARK: Move shape layer
     
-    private func moveShapeLayer(shapeLayer: CAShapeLayer, startPoint startPoint: CGPoint, endPoint: CGPoint, animated: Bool = false) {
+    private func moveShapeLayer(shapeLayer: CAShapeLayer, startPoint: CGPoint, endPoint: CGPoint, animated: Bool = false) {
         var endPointWithVerticalSeparator = endPoint
         let isLastItem = selectedSegmentioIndex + 1 == segmentioItems.count
         endPointWithVerticalSeparator.x = endPoint.x - (isLastItem ? 0 : 1)
