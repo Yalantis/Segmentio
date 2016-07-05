@@ -32,7 +32,6 @@
 		1667ACAF5594F75E244C8E1B /* Pods-Segmentio_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Segmentio_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-Segmentio_Example/Pods-Segmentio_Example.release.xcconfig"; sourceTree = "<group>"; };
 		183F56A87F22C4DF4AB3CDCB /* Pods_Segmentio_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Segmentio_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F629976269F20B0601D695D /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
-		32090A941D2AA8420018C1A5 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		324015CB1D22C0ED0096E353 /* Hints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Hints.swift; sourceTree = "<group>"; };
 		324015CD1D22D40A0096E353 /* UIFont+ExampleFonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+ExampleFonts.swift"; sourceTree = "<group>"; };
 		324015CF1D22FCD50096E353 /* String+Convenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Convenience.swift"; sourceTree = "<group>"; };
@@ -50,6 +49,7 @@
 		327AF5CB1D1ABEC100534355 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		327AF5CC1D1ABEC100534355 /* SideMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideMenuViewController.swift; sourceTree = "<group>"; };
 		327AF6031D1AC0FE00534355 /* ColorPalette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPalette.swift; sourceTree = "<group>"; };
+		32C3A9241D2BB3B5004C0FC9 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* Segmentio_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Segmentio_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		74E8553D39ECFE4883F1D2CA /* Pods_Segmentio_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Segmentio_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -193,7 +193,7 @@
 		607FACF51AFB993E008FA782 /* Podspec Metadata */ = {
 			isa = PBXGroup;
 			children = (
-				32090A941D2AA8420018C1A5 /* README.md */,
+				32C3A9241D2BB3B5004C0FC9 /* README.md */,
 				7EBD99A4E34C02531B010FB7 /* Segmentio.podspec */,
 				2F629976269F20B0601D695D /* LICENSE */,
 			);
