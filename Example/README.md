@@ -15,7 +15,7 @@ iOS 8.x, Swift 2.2.x
 ```ruby
 use_frameworks! 
 
-# Swift 2.2
+# Swift 2.2.x
 pod 'Segmentio', '~> 0.1.1'
 ```
 

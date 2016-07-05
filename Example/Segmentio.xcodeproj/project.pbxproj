@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		320E4C1B1D2A880500A93C10 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 320E4C1A1D2A880500A93C10 /* README.md */; };
 		324015CC1D22C0ED0096E353 /* Hints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 324015CB1D22C0ED0096E353 /* Hints.swift */; };
 		324015CE1D22D40A0096E353 /* UIFont+ExampleFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 324015CD1D22D40A0096E353 /* UIFont+ExampleFonts.swift */; };
 		324015D01D22FCD50096E353 /* String+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 324015CF1D22FCD50096E353 /* String+Convenience.swift */; };
@@ -33,7 +32,7 @@
 		1667ACAF5594F75E244C8E1B /* Pods-Segmentio_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Segmentio_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-Segmentio_Example/Pods-Segmentio_Example.release.xcconfig"; sourceTree = "<group>"; };
 		183F56A87F22C4DF4AB3CDCB /* Pods_Segmentio_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Segmentio_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F629976269F20B0601D695D /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
-		320E4C1A1D2A880500A93C10 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		32090A941D2AA8420018C1A5 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		324015CB1D22C0ED0096E353 /* Hints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Hints.swift; sourceTree = "<group>"; };
 		324015CD1D22D40A0096E353 /* UIFont+ExampleFonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+ExampleFonts.swift"; sourceTree = "<group>"; };
 		324015CF1D22FCD50096E353 /* String+Convenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Convenience.swift"; sourceTree = "<group>"; };
@@ -194,7 +193,7 @@
 		607FACF51AFB993E008FA782 /* Podspec Metadata */ = {
 			isa = PBXGroup;
 			children = (
-				320E4C1A1D2A880500A93C10 /* README.md */,
+				32090A941D2AA8420018C1A5 /* README.md */,
 				7EBD99A4E34C02531B010FB7 /* Segmentio.podspec */,
 				2F629976269F20B0601D695D /* LICENSE */,
 			);
@@ -344,7 +343,6 @@
 				327AF5D01D1ABEC100534355 /* UIColor+RGB.swift in Sources */,
 				324015CE1D22D40A0096E353 /* UIFont+ExampleFonts.swift in Sources */,
 				327AF5E91D1ABEC100534355 /* ExampleViewController.swift in Sources */,
-				320E4C1B1D2A880500A93C10 /* README.md in Sources */,
 				324015D01D22FCD50096E353 /* String+Convenience.swift in Sources */,
 				327AF6041D1AC0FE00534355 /* ColorPalette.swift in Sources */,
 			);
