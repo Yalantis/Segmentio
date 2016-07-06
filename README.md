@@ -1,5 +1,5 @@
 ##Segmentio
-[![Platform](http://img.shields.io/badge/platform-iOS-blue.svg?style=flat)](http://cocoapods.org/?q=YALSideMenu) [![License](http://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://github.com/Yalantis/Segmentio/blob/master/LICENSE) ![Swift 2.2.x](https://img.shields.io/badge/Swift-2.2.x-orange.svg)
+[![Platform](http://img.shields.io/badge/platform-iOS-blue.svg?style=flat)](https://cocoapods.org/?q=segmentio) [![License](http://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://github.com/Yalantis/Segmentio/blob/master/LICENSE) ![Swift 2.2.x](https://img.shields.io/badge/Swift-2.2.x-orange.svg)
 
 Animated top/bottom segmented control written in Swift.
 
