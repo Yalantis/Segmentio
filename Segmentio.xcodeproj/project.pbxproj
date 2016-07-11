@@ -344,6 +344,7 @@
 				324B60471D33E43E0050B083 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
