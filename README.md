@@ -1,5 +1,5 @@
 ##Segmentio
-[![Platform](http://img.shields.io/badge/platform-iOS-blue.svg?style=flat)](https://cocoapods.org/?q=segmentio) [![License](http://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://github.com/Yalantis/Segmentio/blob/master/LICENSE) ![Swift 2.2.x](https://img.shields.io/badge/Swift-2.2.x-orange.svg)
+[![Platform](http://img.shields.io/badge/platform-iOS-blue.svg?style=flat)](https://cocoapods.org/?q=segmentio) [![License](http://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://github.com/Yalantis/Segmentio/blob/master/LICENSE) ![Swift 2.2.x](https://img.shields.io/badge/Swift-2.2.x-orange.svg) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
 Animated top/bottom segmented control written in Swift.
 
@@ -18,10 +18,15 @@ iOS 8.x, Swift 2.2.x
 use_frameworks! 
 
 # Swift 2.2
-pod 'Segmentio', '~> 0.1.1'
+pod 'Segmentio', '~> 0.1.2'
 ```
 
 *(CocoaPods v1.0.1 or later required. See [this blog post](http://blog.cocoapods.org/Pod-Authors-Guide-to-CocoaPods-Frameworks/) for details.)*
+
+####[Carthage](http://github.com/Carthage/Carthage)
+```ruby
+github "Yalantis/Segmentio" ~> 0.1.2
+```
 
 ##Usage
 ####Import `Segmentio` module
