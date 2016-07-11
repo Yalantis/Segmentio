@@ -18,14 +18,14 @@ iOS 8.x, Swift 2.2.x
 use_frameworks! 
 
 # Swift 2.2
-pod 'Segmentio', '~> 0.1.3'
+pod 'Segmentio', '~> 0.1.4'
 ```
 
 *(CocoaPods v1.0.1 or later required. See [this blog post](http://blog.cocoapods.org/Pod-Authors-Guide-to-CocoaPods-Frameworks/) for details.)*
 
 ####[Carthage](http://github.com/Carthage/Carthage)
 ```ruby
-github "Yalantis/Segmentio" ~> 0.1.3
+github "Yalantis/Segmentio" ~> 0.1.4
 ```
 
 ##Usage

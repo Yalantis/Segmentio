@@ -3,7 +3,7 @@
 //  Segmentio
 //
 //  Created by Dmitriy Demchenko on 7/11/16.
-//  Copyright © 2016 Yalantis Mobile. All rights reserved.
+//  Copyright © 2016 Yalantis. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

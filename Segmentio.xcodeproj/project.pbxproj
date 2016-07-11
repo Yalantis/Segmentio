@@ -7,19 +7,37 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		32984F5E1D33BEB400922089 /* Source in Resources */ = {isa = PBXBuildFile; fileRef = 32984F5D1D33BEB400922089 /* Source */; };
-		32F75A6D1D33C0EE00E3911B /* Segmentio.h in Headers */ = {isa = PBXBuildFile; fileRef = 32F75A6C1D33C0EE00E3911B /* Segmentio.h */; };
+		324B60431D33E43E0050B083 /* Segmentio.h in Headers */ = {isa = PBXBuildFile; fileRef = 324B60421D33E43E0050B083 /* Segmentio.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		324B60571D33E5200050B083 /* SegmentioCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 324B604C1D33E5200050B083 /* SegmentioCell.swift */; };
+		324B60581D33E5200050B083 /* SegmentioCellWithImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 324B604D1D33E5200050B083 /* SegmentioCellWithImage.swift */; };
+		324B60591D33E5200050B083 /* SegmentioCellWithImageAfterLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 324B604E1D33E5200050B083 /* SegmentioCellWithImageAfterLabel.swift */; };
+		324B605A1D33E5200050B083 /* SegmentioCellWithImageBeforeLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 324B604F1D33E5200050B083 /* SegmentioCellWithImageBeforeLabel.swift */; };
+		324B605B1D33E5200050B083 /* SegmentioCellWithImageOverLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 324B60501D33E5200050B083 /* SegmentioCellWithImageOverLabel.swift */; };
+		324B605C1D33E5200050B083 /* SegmentioCellWithImageUnderLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 324B60511D33E5200050B083 /* SegmentioCellWithImageUnderLabel.swift */; };
+		324B605D1D33E5200050B083 /* SegmentioCellWithLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 324B60521D33E5200050B083 /* SegmentioCellWithLabel.swift */; };
+		324B605E1D33E5200050B083 /* UIView+Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 324B60541D33E5200050B083 /* UIView+Appearance.swift */; };
+		324B605F1D33E5200050B083 /* Segmentio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 324B60551D33E5200050B083 /* Segmentio.swift */; };
+		324B60601D33E5200050B083 /* SegmentioOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 324B60561D33E5200050B083 /* SegmentioOptions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		32984F551D33BE6A00922089 /* Segmentio.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Segmentio.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		32984F591D33BE6A00922089 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		32984F5D1D33BEB400922089 /* Source */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Source; sourceTree = "<group>"; };
-		32F75A6C1D33C0EE00E3911B /* Segmentio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Segmentio.h; sourceTree = "<group>"; };
+		324B60401D33E43E0050B083 /* Segmentio.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Segmentio.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		324B60421D33E43E0050B083 /* Segmentio.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Segmentio.h; sourceTree = "<group>"; };
+		324B60441D33E43E0050B083 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		324B604C1D33E5200050B083 /* SegmentioCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentioCell.swift; sourceTree = "<group>"; };
+		324B604D1D33E5200050B083 /* SegmentioCellWithImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentioCellWithImage.swift; sourceTree = "<group>"; };
+		324B604E1D33E5200050B083 /* SegmentioCellWithImageAfterLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentioCellWithImageAfterLabel.swift; sourceTree = "<group>"; };
+		324B604F1D33E5200050B083 /* SegmentioCellWithImageBeforeLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentioCellWithImageBeforeLabel.swift; sourceTree = "<group>"; };
+		324B60501D33E5200050B083 /* SegmentioCellWithImageOverLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentioCellWithImageOverLabel.swift; sourceTree = "<group>"; };
+		324B60511D33E5200050B083 /* SegmentioCellWithImageUnderLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentioCellWithImageUnderLabel.swift; sourceTree = "<group>"; };
+		324B60521D33E5200050B083 /* SegmentioCellWithLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentioCellWithLabel.swift; sourceTree = "<group>"; };
+		324B60541D33E5200050B083 /* UIView+Appearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Appearance.swift"; sourceTree = "<group>"; };
+		324B60551D33E5200050B083 /* Segmentio.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Segmentio.swift; sourceTree = "<group>"; };
+		324B60561D33E5200050B083 /* SegmentioOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentioOptions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		32984F511D33BE6A00922089 /* Frameworks */ = {
+		324B603C1D33E43E0050B083 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -29,54 +47,87 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		32984F321D33BD6100922089 = {
+		324B601D1D33E3CC0050B083 = {
 			isa = PBXGroup;
 			children = (
-				32984F561D33BE6A00922089 /* Segmentio */,
-				32984F3C1D33BD6100922089 /* Products */,
+				324B60411D33E43E0050B083 /* Segmentio */,
+				324B60271D33E3CC0050B083 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		32984F3C1D33BD6100922089 /* Products */ = {
+		324B60271D33E3CC0050B083 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				32984F551D33BE6A00922089 /* Segmentio.framework */,
+				324B60401D33E43E0050B083 /* Segmentio.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		32984F561D33BE6A00922089 /* Segmentio */ = {
+		324B60411D33E43E0050B083 /* Segmentio */ = {
 			isa = PBXGroup;
 			children = (
-				32F75A6C1D33C0EE00E3911B /* Segmentio.h */,
-				32984F5D1D33BEB400922089 /* Source */,
-				32984F591D33BE6A00922089 /* Info.plist */,
+				324B604A1D33E5200050B083 /* Source */,
+				324B60421D33E43E0050B083 /* Segmentio.h */,
+				324B60441D33E43E0050B083 /* Info.plist */,
 			);
 			path = Segmentio;
+			sourceTree = "<group>";
+		};
+		324B604A1D33E5200050B083 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				324B604B1D33E5200050B083 /* Cells */,
+				324B60531D33E5200050B083 /* Extensions */,
+				324B60551D33E5200050B083 /* Segmentio.swift */,
+				324B60561D33E5200050B083 /* SegmentioOptions.swift */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		324B604B1D33E5200050B083 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				324B604C1D33E5200050B083 /* SegmentioCell.swift */,
+				324B604D1D33E5200050B083 /* SegmentioCellWithImage.swift */,
+				324B604E1D33E5200050B083 /* SegmentioCellWithImageAfterLabel.swift */,
+				324B604F1D33E5200050B083 /* SegmentioCellWithImageBeforeLabel.swift */,
+				324B60501D33E5200050B083 /* SegmentioCellWithImageOverLabel.swift */,
+				324B60511D33E5200050B083 /* SegmentioCellWithImageUnderLabel.swift */,
+				324B60521D33E5200050B083 /* SegmentioCellWithLabel.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		324B60531D33E5200050B083 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				324B60541D33E5200050B083 /* UIView+Appearance.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		32984F521D33BE6A00922089 /* Headers */ = {
+		324B603D1D33E43E0050B083 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				32F75A6D1D33C0EE00E3911B /* Segmentio.h in Headers */,
+				324B60431D33E43E0050B083 /* Segmentio.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		32984F541D33BE6A00922089 /* Segmentio */ = {
+		324B603F1D33E43E0050B083 /* Segmentio */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 32984F5A1D33BE6A00922089 /* Build configuration list for PBXNativeTarget "Segmentio" */;
+			buildConfigurationList = 324B60451D33E43E0050B083 /* Build configuration list for PBXNativeTarget "Segmentio" */;
 			buildPhases = (
-				32984F501D33BE6A00922089 /* Sources */,
-				32984F511D33BE6A00922089 /* Frameworks */,
-				32984F521D33BE6A00922089 /* Headers */,
-				32984F531D33BE6A00922089 /* Resources */,
+				324B603B1D33E43E0050B083 /* Sources */,
+				324B603C1D33E43E0050B083 /* Frameworks */,
+				324B603D1D33E43E0050B083 /* Headers */,
+				324B603E1D33E43E0050B083 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -84,25 +135,25 @@
 			);
 			name = Segmentio;
 			productName = Segmentio;
-			productReference = 32984F551D33BE6A00922089 /* Segmentio.framework */;
+			productReference = 324B60401D33E43E0050B083 /* Segmentio.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		32984F331D33BD6100922089 /* Project object */ = {
+		324B601E1D33E3CC0050B083 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
 				LastUpgradeCheck = 0730;
-				ORGANIZATIONNAME = "Dmitriy Demchenko";
+				ORGANIZATIONNAME = Yalantis;
 				TargetAttributes = {
-					32984F541D33BE6A00922089 = {
+					324B603F1D33E43E0050B083 = {
 						CreatedOnToolsVersion = 7.3.1;
 					};
 				};
 			};
-			buildConfigurationList = 32984F361D33BD6100922089 /* Build configuration list for PBXProject "Segmentio" */;
+			buildConfigurationList = 324B60211D33E3CC0050B083 /* Build configuration list for PBXProject "Segmentio" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -110,39 +161,48 @@
 				en,
 				Base,
 			);
-			mainGroup = 32984F321D33BD6100922089;
-			productRefGroup = 32984F3C1D33BD6100922089 /* Products */;
+			mainGroup = 324B601D1D33E3CC0050B083;
+			productRefGroup = 324B60271D33E3CC0050B083 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				32984F541D33BE6A00922089 /* Segmentio */,
+				324B603F1D33E43E0050B083 /* Segmentio */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		32984F531D33BE6A00922089 /* Resources */ = {
+		324B603E1D33E43E0050B083 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				32984F5E1D33BEB400922089 /* Source in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		32984F501D33BE6A00922089 /* Sources */ = {
+		324B603B1D33E43E0050B083 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				324B60601D33E5200050B083 /* SegmentioOptions.swift in Sources */,
+				324B605B1D33E5200050B083 /* SegmentioCellWithImageOverLabel.swift in Sources */,
+				324B60571D33E5200050B083 /* SegmentioCell.swift in Sources */,
+				324B60591D33E5200050B083 /* SegmentioCellWithImageAfterLabel.swift in Sources */,
+				324B605F1D33E5200050B083 /* Segmentio.swift in Sources */,
+				324B60581D33E5200050B083 /* SegmentioCellWithImage.swift in Sources */,
+				324B605A1D33E5200050B083 /* SegmentioCellWithImageBeforeLabel.swift in Sources */,
+				324B605C1D33E5200050B083 /* SegmentioCellWithImageUnderLabel.swift in Sources */,
+				324B605E1D33E5200050B083 /* UIView+Appearance.swift in Sources */,
+				324B605D1D33E5200050B083 /* SegmentioCellWithLabel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		32984F4B1D33BD6200922089 /* Debug */ = {
+		324B60361D33E3CC0050B083 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -188,7 +248,7 @@
 			};
 			name = Debug;
 		};
-		32984F4C1D33BD6200922089 /* Release */ = {
+		324B60371D33E3CC0050B083 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -227,7 +287,7 @@
 			};
 			name = Release;
 		};
-		32984F5B1D33BE6A00922089 /* Debug */ = {
+		324B60461D33E43E0050B083 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CURRENT_PROJECT_VERSION = 1;
@@ -246,7 +306,7 @@
 			};
 			name = Debug;
 		};
-		32984F5C1D33BE6A00922089 /* Release */ = {
+		324B60471D33E43E0050B083 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CURRENT_PROJECT_VERSION = 1;
@@ -268,25 +328,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		32984F361D33BD6100922089 /* Build configuration list for PBXProject "Segmentio" */ = {
+		324B60211D33E3CC0050B083 /* Build configuration list for PBXProject "Segmentio" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				32984F4B1D33BD6200922089 /* Debug */,
-				32984F4C1D33BD6200922089 /* Release */,
+				324B60361D33E3CC0050B083 /* Debug */,
+				324B60371D33E3CC0050B083 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		32984F5A1D33BE6A00922089 /* Build configuration list for PBXNativeTarget "Segmentio" */ = {
+		324B60451D33E43E0050B083 /* Build configuration list for PBXNativeTarget "Segmentio" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				32984F5B1D33BE6A00922089 /* Debug */,
-				32984F5C1D33BE6A00922089 /* Release */,
+				324B60461D33E43E0050B083 /* Debug */,
+				324B60471D33E43E0050B083 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 32984F331D33BD6100922089 /* Project object */;
+	rootObject = 324B601E1D33E3CC0050B083 /* Project object */;
 }
