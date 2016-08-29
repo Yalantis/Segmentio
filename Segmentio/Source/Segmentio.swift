@@ -469,7 +469,7 @@ public class Segmentio: UIView {
         
         if let collectionView = segmentioCollectionView {
             collectionViewWidth = collectionView.frame.width
-            let maxVisibleItems = CGFloat(segmentioOptions.maxVisibleItems)
+            let maxVisibleItems = segmentioOptions.maxVisibleItems > segmentioItems.count ? CGFloat(segmentioItems.count) : CGFloat(segmentioOptions.maxVisibleItems)
             cellWidth = floor(collectionViewWidth / maxVisibleItems)
             
             cellRect = CGRect(
@@ -573,8 +573,9 @@ extension Segmentio: UICollectionViewDelegate {
 extension Segmentio: UICollectionViewDelegateFlowLayout {
     
     public func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        let maxVisibleItems = segmentioOptions.maxVisibleItems > segmentioItems.count ? CGFloat(segmentioItems.count) : CGFloat(segmentioOptions.maxVisibleItems)
         return CGSize(
-            width: floor(collectionView.frame.width / CGFloat(segmentioOptions.maxVisibleItems)),
+            width: floor(collectionView.frame.width / maxVisibleItems),
             height: collectionView.frame.height
         )
     }
