@@ -192,12 +192,16 @@ public class Segmentio: UIView {
             }
         }
         
-        if let _ = segmentioOptions.horizontalSeparatorOptions {
-            setupHorizontalSeparator()
-        }
-        
         setupCellWithStyle(segmentioStyle)
         segmentioCollectionView?.reloadData()
+    }
+    
+    public override func didMoveToSuperview() {
+        super.didMoveToSuperview()
+        
+        if superview != nil && segmentioOptions.horizontalSeparatorOptions != nil {
+            setupHorizontalSeparator()
+        }
     }
     
     // MARK: Collection view setup
