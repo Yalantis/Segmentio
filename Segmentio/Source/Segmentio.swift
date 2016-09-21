@@ -192,6 +192,7 @@ public class Segmentio: UIView {
             }
         }
         
+        setupHorizontalSeparator()
         setupCellWithStyle(segmentioStyle)
         segmentioCollectionView?.reloadData()
     }
