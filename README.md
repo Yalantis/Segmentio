@@ -17,14 +17,14 @@ iOS 8.x, Swift 2.2.x
 ```ruby
 use_frameworks! 
 
-pod 'Segmentio', '~> 1.0'
+pod 'Segmentio', '~> 1.1'
 ```
 
 *(CocoaPods v1.0.1 or later required. See [this blog post](http://blog.cocoapods.org/Pod-Authors-Guide-to-CocoaPods-Frameworks/) for details.)*
 
 ####[Carthage](http://github.com/Carthage/Carthage)
 ```ruby
-github "Yalantis/Segmentio" ~> 1.0
+github "Yalantis/Segmentio" ~> 1.1
 ```
 
 ##Usage
