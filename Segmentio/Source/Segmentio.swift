@@ -192,7 +192,7 @@ public class Segmentio: UIView {
             }
         }
         
-        setupHorizontalSeparator()
+        setupHorizontalSeparatorIfPossible()
         setupCellWithStyle(segmentioStyle)
         segmentioCollectionView?.reloadData()
     }
@@ -200,9 +200,7 @@ public class Segmentio: UIView {
     public override func didMoveToSuperview() {
         super.didMoveToSuperview()
         
-        if superview != nil && segmentioOptions.horizontalSeparatorOptions != nil {
-            setupHorizontalSeparator()
-        }
+        setupHorizontalSeparatorIfPossible()
     }
     
     // MARK: Collection view setup
@@ -234,6 +232,12 @@ public class Segmentio: UIView {
     }
     
     // MARK: Horizontal separators setup
+    
+    private func setupHorizontalSeparatorIfPossible() {
+        if superview != nil && segmentioOptions.horizontalSeparatorOptions != nil {
+            setupHorizontalSeparator()
+        }
+    }
     
     private func setupHorizontalSeparator() {
         topSeparatorView?.removeFromSuperview()
