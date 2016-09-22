@@ -15,36 +15,26 @@ final class SegmentioCellWithLabel: SegmentioCell {
             return
         }
         
-        let views = ["segmentTitleLabel": segmentTitleLabel]
+        guard let containerView = containerView else {
+            return
+        }
+        
+        let views = ["containerView": containerView]
         
         // main constraints
         
         let segmentTitleLabelHorizontConstraint = NSLayoutConstraint.constraintsWithVisualFormat(
-            "|-(>=10)-[segmentTitleLabel]-(>=10)-|",
+            "|-[containerView]-|",
             options: [.AlignAllCenterX],
             metrics: nil,
-            views: [
-                "segmentTitleLabel": segmentTitleLabel
-            ]
+            views: views
         )
-        let segmentTitleLabelHorizontalCenterConstraint =
-            NSLayoutConstraint(
-                item: segmentTitleLabel,
-                attribute: .CenterX,
-                relatedBy: .Equal,
-                toItem: segmentTitleLabel.superview,
-                attribute: .CenterX,
-                multiplier: 1,
-                constant: 0.0
-        )
-        
-        addConstraint(segmentTitleLabelHorizontalCenterConstraint)
         NSLayoutConstraint.activateConstraints(segmentTitleLabelHorizontConstraint)
         
         // custom constraints
         
         topConstraint = NSLayoutConstraint(
-            item: segmentTitleLabel,
+            item: containerView,
             attribute: .Top,
             relatedBy: .Equal,
             toItem: contentView,
@@ -58,7 +48,7 @@ final class SegmentioCellWithLabel: SegmentioCell {
             item: contentView,
             attribute: .Bottom,
             relatedBy: .Equal,
-            toItem: segmentTitleLabel,
+            toItem: containerView,
             attribute: .Bottom,
             multiplier: 1,
             constant: padding

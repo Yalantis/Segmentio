@@ -16,6 +16,7 @@ class SegmentioCell: UICollectionViewCell {
     var verticalSeparatorView: UIView?
     var segmentTitleLabel: UILabel?
     var segmentImageView: UIImageView?
+    var containerView: UIView?
     
     var topConstraint: NSLayoutConstraint?
     var bottomConstraint: NSLayoutConstraint?
@@ -61,18 +62,25 @@ class SegmentioCell: UICollectionViewCell {
             contentView.addSubview(segmentImageView)
         }
         
+        containerView = UIView(frame: CGRectZero)
+        if let containerView = containerView {
+            contentView.addSubview(containerView)
+        }
+        
         segmentTitleLabel = UILabel(frame: CGRectZero)
-        if let segmentTitleLabel = segmentTitleLabel {
-            contentView.addSubview(segmentTitleLabel)
+        if let segmentTitleLabel = segmentTitleLabel, containerView = containerView {
+            containerView.addSubview(segmentTitleLabel)
         }
         
         segmentImageView?.translatesAutoresizingMaskIntoConstraints = false
         segmentTitleLabel?.translatesAutoresizingMaskIntoConstraints = false
+        containerView?.translatesAutoresizingMaskIntoConstraints = false
         
         segmentImageView?.layer.masksToBounds = true
         segmentTitleLabel?.font = UIFont.systemFontOfSize(UIFont.smallSystemFontSize())
         
         setupConstraintsForSubviews()
+        setupContainerConstraints()
         addVerticalSeparator()
     }
     
@@ -130,6 +138,39 @@ class SegmentioCell: UICollectionViewCell {
     }
     
     // MARK: - Private functions
+    
+    func setupContainerConstraints() {
+        guard let segmentTitleLabel = segmentTitleLabel else {
+            return
+        }
+        guard let containerView = containerView else {
+            return
+        }
+        
+        let segmentTitleLabelHorizontalCenterConstraint =
+            NSLayoutConstraint(
+                item: segmentTitleLabel,
+                attribute: .CenterX,
+                relatedBy: .Equal,
+                toItem: containerView,
+                attribute: .CenterX,
+                multiplier: 1,
+                constant: 0.0
+        )
+        
+        let segmentTitleLabelVerticalCenterConstraint =
+            NSLayoutConstraint(
+                item: segmentTitleLabel,
+                attribute: .CenterY,
+                relatedBy: .Equal,
+                toItem: containerView,
+                attribute: .CenterY,
+                multiplier: 1,
+                constant: 0.0
+        )
+        
+        addConstraints([segmentTitleLabelHorizontalCenterConstraint, segmentTitleLabelVerticalCenterConstraint])
+    }
     
     private func setupContent(content content: SegmentioItem) {
         if style.isWithImage() {

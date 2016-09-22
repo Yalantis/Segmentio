@@ -17,11 +17,14 @@ class SegmentioCellWithImageOverLabel: SegmentioCell {
         guard let segmentTitleLabel = segmentTitleLabel else {
             return
         }
+        guard let containerView = containerView else {
+            return
+        }
         
         let metrics = ["labelHeight": segmentTitleLabelHeight]
         let views = [
             "segmentImageView": segmentImageView,
-             "segmentTitleLabel": segmentTitleLabel
+            "containerView": containerView
         ]
         
         // main constraints
@@ -34,30 +37,17 @@ class SegmentioCellWithImageOverLabel: SegmentioCell {
         NSLayoutConstraint.activateConstraints(segmentImageViewHorizontConstraint)
         
         let segmentTitleLabelHorizontConstraint = NSLayoutConstraint.constraintsWithVisualFormat(
-            "|-(>=10)-[segmentTitleLabel]-(>=10)-|",
+            "|-[containerView]-|",
             options: [.AlignAllCenterX],
             metrics: nil,
-            views: [
-                "segmentTitleLabel": segmentTitleLabel
-            ]
+            views: views
         )
         
-        let segmentTitleLabelHorizontalCenterConstraint =
-            NSLayoutConstraint(
-                item: segmentTitleLabel,
-                attribute: .CenterX,
-                relatedBy: .Equal,
-                toItem: segmentTitleLabel.superview,
-                attribute: .CenterX,
-                multiplier: 1,
-                constant: 0.0
-        )
-        
-        addConstraint(segmentTitleLabelHorizontalCenterConstraint)
+       
         NSLayoutConstraint.activateConstraints(segmentTitleLabelHorizontConstraint)
         
         let contentViewVerticalConstraints = NSLayoutConstraint.constraintsWithVisualFormat(
-            "V:[segmentImageView]-[segmentTitleLabel(labelHeight)]",
+            "V:[segmentImageView]-[containerView(labelHeight)]",
             options: [],
             metrics: metrics,
             views: views)
@@ -80,7 +70,7 @@ class SegmentioCellWithImageOverLabel: SegmentioCell {
             item: contentView,
             attribute: .Bottom,
             relatedBy: .Equal,
-            toItem: segmentTitleLabel,
+            toItem: containerView,
             attribute: .Bottom,
             multiplier: 1,
             constant: padding
