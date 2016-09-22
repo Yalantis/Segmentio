@@ -203,6 +203,11 @@ public class Segmentio: UIView {
         setupHorizontalSeparatorIfPossible()
     }
     
+    public func setupBadgeAtIndex(index: Int, count: Int, image: UIImage) {
+        segmentioItems[index].setupBadgeWithCount(count)
+        segmentioCollectionView?.reloadData()
+    }
+    
     // MARK: Collection view setup
     
     private func setupCellWithStyle(style: SegmentioStyle) {
@@ -620,6 +625,7 @@ extension Segmentio: UIScrollViewDelegate {
 }
 
 extension Segmentio.Points {
+    
     init(context: Segmentio.Context, item: Segmentio.ItemInSuperview, pointY: CGFloat) {
         let cellWidth = item.cellFrameInSuperview.width
         

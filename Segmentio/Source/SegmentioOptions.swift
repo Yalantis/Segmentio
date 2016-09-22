@@ -13,10 +13,15 @@ import UIKit
 public struct SegmentioItem {
     var title: String?
     var image: UIImage?
+    var badgeCount: Int?
     
     public init(title: String?, image: UIImage?) {
         self.title = title
         self.image = image
+    }
+    
+    public mutating func setupBadgeWithCount(count: Int) {
+        self.badgeCount = count
     }
     
 }

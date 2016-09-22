@@ -144,6 +144,7 @@ class SegmentioCell: UICollectionViewCell {
             segmentTitleLabel?.font = defaultState.titleFont
             segmentTitleLabel?.text = content.title
         }
+        configurateBadgeWithCount(content.badgeCount)
     }
     
     private func setupConstraint(indicatorOptions indicatorOptions: SegmentioIndicatorOptions) {
@@ -152,6 +153,12 @@ class SegmentioCell: UICollectionViewCell {
             topConstraint?.constant = padding + indicatorOptions.height
         case .Bottom:
             bottomConstraint?.constant = padding + indicatorOptions.height
+        }
+    }
+    
+    private func configurateBadgeWithCount(count: Int?) {
+        if let count = count {
+            
         }
     }
     
