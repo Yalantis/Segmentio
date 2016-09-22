@@ -34,7 +34,7 @@ class SegmentioCellWithImageBeforeLabel: SegmentioCell {
         NSLayoutConstraint.activateConstraints(segmentImageViewVerticalConstraint)
         
         let contentViewHorizontalConstraints = NSLayoutConstraint.constraintsWithVisualFormat(
-            "|-[segmentImageView(labelHeight)]-[segmentTitleLabel]-|",
+            "|-[segmentImageView(labelHeight)]-[segmentTitleLabel]-(>=10)-|",
             options: [.AlignAllCenterY],
             metrics: metrics,
             views: views)
