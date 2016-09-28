@@ -25,6 +25,7 @@ class SegmentioCell: UICollectionViewCell {
     private var options = SegmentioOptions()
     private var style = SegmentioStyle.ImageOverLabel
     private let verticalSeparatorLayer = CAShapeLayer()
+    private let badgePresenter = BadgeViewPresenter()
     
     override var highlighted: Bool {
         get {
@@ -71,7 +72,7 @@ class SegmentioCell: UICollectionViewCell {
         if let segmentTitleLabel = segmentTitleLabel, containerView = containerView {
             containerView.addSubview(segmentTitleLabel)
         }
-        
+
         segmentImageView?.translatesAutoresizingMaskIntoConstraints = false
         segmentTitleLabel?.translatesAutoresizingMaskIntoConstraints = false
         containerView?.translatesAutoresizingMaskIntoConstraints = false
@@ -80,7 +81,6 @@ class SegmentioCell: UICollectionViewCell {
         segmentTitleLabel?.font = UIFont.systemFontOfSize(UIFont.smallSystemFontSize())
         
         setupConstraintsForSubviews()
-        setupContainerConstraints()
         addVerticalSeparator()
     }
     
@@ -109,7 +109,6 @@ class SegmentioCell: UICollectionViewCell {
         self.options = options
         self.style = style
         setupContent(content: content)
-        
         if let indicatorOptions = self.options.indicatorOptions {
             setupConstraint(indicatorOptions: indicatorOptions)
         }
@@ -133,13 +132,36 @@ class SegmentioCell: UICollectionViewCell {
         }
     }
     
-    func setupConstraintsForSubviews() {
-        return // implement in subclasses
+    func configurateBadgeWithCount(badgeCount: Int?, color: UIColor?) {
+        guard let badgeCount = badgeCount, color = color else {
+            return
+        }
+        
+        if style == .OnlyImage {
+            badgePresenter.addBadgeForContainerView(
+                segmentImageView!,
+                counterValue: badgeCount,
+                backgroundColor: color,
+                badgeSize: .Standard
+            )
+        } else {
+            badgePresenter.addBadgeForContainerView(
+                containerView!,
+                counterValue: badgeCount,
+                backgroundColor: color,
+                badgeSize: .Standard
+            )
+        }
     }
     
+    func setupConstraintsForSubviews() {
+        setupContainerConstraints()
+        return // implement in subclasses
+    }
+
     // MARK: - Private functions
     
-    func setupContainerConstraints() {
+    private func setupContainerConstraints() {
         guard let segmentTitleLabel = segmentTitleLabel else {
             return
         }
@@ -168,7 +190,6 @@ class SegmentioCell: UICollectionViewCell {
                 multiplier: 1,
                 constant: 0.0
         )
-        
         addConstraints([segmentTitleLabelHorizontalCenterConstraint, segmentTitleLabelVerticalCenterConstraint])
     }
     
@@ -185,7 +206,7 @@ class SegmentioCell: UICollectionViewCell {
             segmentTitleLabel?.font = defaultState.titleFont
             segmentTitleLabel?.text = content.title
         }
-        configurateBadgeWithCount(content.badgeCount)
+        configurateBadgeWithCount(content.badgeCount, color: content.badgeColor)
     }
     
     private func setupConstraint(indicatorOptions indicatorOptions: SegmentioIndicatorOptions) {
@@ -196,13 +217,7 @@ class SegmentioCell: UICollectionViewCell {
             bottomConstraint?.constant = padding + indicatorOptions.height
         }
     }
-    
-    private func configurateBadgeWithCount(count: Int?) {
-        if let count = count {
-            
-        }
-    }
-    
+
     // MARK: - Vertical separator
     
     private func addVerticalSeparator() {
@@ -253,8 +268,10 @@ class SegmentioCell: UICollectionViewCell {
         
         let topConstraint = NSLayoutConstraint(
             item: verticalSeparatorView,
-            attribute: .Top, relatedBy: .Equal,
-            toItem: contentView, attribute: .Top,
+            attribute: .Top,
+            relatedBy: .Equal,
+            toItem: contentView,
+            attribute: .Top,
             multiplier: 1,
             constant: 0
         )

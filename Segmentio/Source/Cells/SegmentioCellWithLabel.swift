@@ -11,10 +11,11 @@ import UIKit
 final class SegmentioCellWithLabel: SegmentioCell {
     
     override func setupConstraintsForSubviews() {
+        super.setupConstraintsForSubviews()
+        
         guard let segmentTitleLabel = segmentTitleLabel else {
             return
         }
-        
         guard let containerView = containerView else {
             return
         }

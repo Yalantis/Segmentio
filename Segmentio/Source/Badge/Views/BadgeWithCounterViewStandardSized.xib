@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view userInteractionEnabled="NO" contentMode="scaleToFill" id="iN0-l3-epB" customClass="BadgeWithCounterView" customModule="Segmentio">
+            <rect key="frame" x="0.0" y="0.0" width="30" height="18"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="d4V-GG-9pR" userLabel="Background Image View" customClass="RoundImageView" customModule="BroApp" customModuleProvider="target">
+                    <rect key="frame" x="-2" y="-1" width="32.5" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="18" id="Nld-O1-MJv"/>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" secondItem="d4V-GG-9pR" secondAttribute="height" id="cCQ-lW-OUm"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" text="99+" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.29999999999999999" translatesAutoresizingMaskIntoConstraints="NO" id="ech-Mu-YMM" userLabel="Counter Value Label">
+                    <rect key="frame" x="2.5" y="1" width="25" height="16"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="ech-Mu-YMM" firstAttribute="centerY" secondItem="d4V-GG-9pR" secondAttribute="centerY" id="3TE-QX-wNX"/>
+                <constraint firstItem="ech-Mu-YMM" firstAttribute="centerX" secondItem="d4V-GG-9pR" secondAttribute="centerX" id="QJJ-ap-dbB"/>
+                <constraint firstItem="d4V-GG-9pR" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="R7x-Ll-s8y"/>
+                <constraint firstItem="ech-Mu-YMM" firstAttribute="width" secondItem="d4V-GG-9pR" secondAttribute="width" constant="-7" id="Sz2-qr-fOS"/>
+                <constraint firstItem="d4V-GG-9pR" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="dFc-74-PeR"/>
+                <constraint firstItem="ech-Mu-YMM" firstAttribute="height" secondItem="d4V-GG-9pR" secondAttribute="height" constant="-4" id="uDs-Tl-0La"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="backgroundImageView" destination="d4V-GG-9pR" id="aJr-t4-PcZ"/>
+                <outlet property="counterValueLabel" destination="ech-Mu-YMM" id="7r3-jp-rZj"/>
+            </connections>
+            <point key="canvasLocation" x="398" y="446"/>
+        </view>
+    </objects>
+</document>

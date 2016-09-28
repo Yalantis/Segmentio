@@ -11,6 +11,7 @@ import UIKit
 class SegmentioCellWithImageUnderLabel: SegmentioCell {
     
     override func setupConstraintsForSubviews() {
+        super.setupConstraintsForSubviews()
         guard let segmentImageView = segmentImageView else {
             return
         }

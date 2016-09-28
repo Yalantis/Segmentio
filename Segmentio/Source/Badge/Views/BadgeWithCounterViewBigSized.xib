@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view userInteractionEnabled="NO" contentMode="scaleToFill" id="KcE-SS-9TU" customClass="BadgeWithCounterView" customModule="Segmentio">
+            <rect key="frame" x="0.0" y="0.0" width="38" height="20"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="v0J-W6-cSb" userLabel="Background Image View" customClass="RoundImageView" customModule="BroApp" customModuleProvider="target">
+                    <rect key="frame" x="-2" y="-1" width="40.5" height="22"/>
+                    <constraints>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="20" id="0LH-dc-4RL"/>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" secondItem="v0J-W6-cSb" secondAttribute="height" id="ofE-fK-2Pf"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" text="99+" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.30000001192092896" translatesAutoresizingMaskIntoConstraints="NO" id="aLy-ls-VfX" userLabel="Counter Value Label">
+                    <rect key="frame" x="6" y="2" width="25" height="16"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="v0J-W6-cSb" firstAttribute="centerX" secondItem="KcE-SS-9TU" secondAttribute="centerX" id="8mG-rK-NDa"/>
+                <constraint firstItem="aLy-ls-VfX" firstAttribute="width" secondItem="v0J-W6-cSb" secondAttribute="width" constant="-15" id="G78-cE-E4C"/>
+                <constraint firstItem="v0J-W6-cSb" firstAttribute="centerY" secondItem="KcE-SS-9TU" secondAttribute="centerY" id="ObE-ZA-xQJ"/>
+                <constraint firstItem="aLy-ls-VfX" firstAttribute="centerX" secondItem="v0J-W6-cSb" secondAttribute="centerX" id="Rvg-Jy-Cnd"/>
+                <constraint firstItem="aLy-ls-VfX" firstAttribute="centerY" secondItem="v0J-W6-cSb" secondAttribute="centerY" id="ibJ-Qo-25e"/>
+                <constraint firstItem="aLy-ls-VfX" firstAttribute="height" secondItem="v0J-W6-cSb" secondAttribute="height" constant="-6" id="kr5-0Q-aUM"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="backgroundImageView" destination="v0J-W6-cSb" id="F4i-xu-iDM"/>
+                <outlet property="counterValueLabel" destination="aLy-ls-VfX" id="uv7-Qn-Ucz"/>
+            </connections>
+            <point key="canvasLocation" x="398" y="446"/>
+        </view>
+    </objects>
+</document>

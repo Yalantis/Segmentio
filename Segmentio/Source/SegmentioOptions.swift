@@ -14,14 +14,16 @@ public struct SegmentioItem {
     var title: String?
     var image: UIImage?
     var badgeCount: Int?
+    var badgeColor: UIColor?
     
     public init(title: String?, image: UIImage?) {
         self.title = title
         self.image = image
     }
     
-    public mutating func setupBadgeWithCount(count: Int) {
+    public mutating func setupBadgeWithCount(count: Int, color: UIColor = .redColor()) {
         self.badgeCount = count
+        self.badgeColor = color
     }
     
 }

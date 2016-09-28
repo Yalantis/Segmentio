@@ -203,7 +203,7 @@ public class Segmentio: UIView {
         setupHorizontalSeparatorIfPossible()
     }
     
-    public func setupBadgeAtIndex(index: Int, count: Int, image: UIImage) {
+    public func setupBadgeAtIndex(index: Int, count: Int, color: UIColor) {
         segmentioItems[index].setupBadgeWithCount(count)
         segmentioCollectionView?.reloadData()
     }
