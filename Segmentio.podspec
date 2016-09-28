@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name = "Segmentio"
-  spec.version = "1.1.3.1"
+  spec.version = "1.1.2"
 
   spec.homepage = "https://github.com/Yalantis/Segmentio"
   spec.summary = "Animated top/bottom segmented control written in Swift!"
@@ -17,7 +17,7 @@ Pod::Spec.new do |spec|
 
   spec.source_files = 'Segmentio/Source/**/*.swift'
   spec.resources = 'Segmentio/Source/Badge/Views/**/*.xib'
-  
+
   spec.module_name  = 'Segmentio'
   spec.requires_arc = true
 end
