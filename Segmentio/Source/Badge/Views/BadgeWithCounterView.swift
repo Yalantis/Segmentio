@@ -17,9 +17,14 @@ class BadgeWithCounterView: UIView {
     
     class func instanceFromNib(size size: CounterBadgeSize) -> BadgeWithCounterView {
         let nibName = nibNameForSize(size)
-        return UINib(nibName: nibName, bundle: nil).instantiateWithOwner(nil, options: nil)[0] as! BadgeWithCounterView
+        let podBundle = NSBundle(forClass: self.classForCoder())
+        
+        if let bundleURL = podBundle.URLForResource("Segmentio", withExtension: "bundle"), bundle = NSBundle(URL: bundleURL) {
+            return UINib(nibName: nibName, bundle: bundle).instantiateWithOwner(nil, options: nil)[0] as! BadgeWithCounterView
+        }
+        return BadgeWithCounterView(frame: CGRectZero)
     }
-    
+
     func setBadgeCounterValue(counterValue: Int) {
         var counterText: String!
         if counterValue > BadgeCounterMaxValue {
