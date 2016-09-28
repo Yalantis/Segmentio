@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name = "Segmentio"
-  spec.version = "1.1.2"
+  spec.version = "1.1.3"
 
   spec.homepage = "https://github.com/Yalantis/Segmentio"
   spec.summary = "Animated top/bottom segmented control written in Swift!"
@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   spec.source       = { :git => "https://github.com/Yalantis/Segmentio.git", :tag => spec.version }
 
   spec.source_files = 'Segmentio/Source/**/*.swift'
-  spec.source_files.resource_bundles = {
+  spec.resource_bundles = {
     'Segmentio' => ['Pod/**/*.{storyboard,xib,xcassets,json,imageset,png}']
   }
   spec.module_name  = 'Segmentio'
