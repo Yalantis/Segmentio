@@ -16,8 +16,8 @@ Pod::Spec.new do |spec|
   spec.source       = { :git => "https://github.com/Yalantis/Segmentio.git", :tag => spec.version }
 
   spec.source_files = 'Segmentio/Source/**/*.swift'
-  spec.resource_bundles = 'Segmentio/Source/**/*.xib'
-  }
+  spec.resources = 'Segmentio/Source/Badge/Views/**/*.xib'
+  
   spec.module_name  = 'Segmentio'
   spec.requires_arc = true
 end
