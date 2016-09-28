@@ -15,9 +15,6 @@ class SegmentioCellWithImageBeforeLabel: SegmentioCell {
         guard let segmentImageView = segmentImageView else {
             return
         }
-        guard let segmentTitleLabel = segmentTitleLabel else {
-            return
-        }
         guard let containerView = containerView else {
             return
         }

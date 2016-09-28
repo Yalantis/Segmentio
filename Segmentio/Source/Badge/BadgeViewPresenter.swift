@@ -16,7 +16,7 @@ class BadgeViewPresenter {
         backgroundColor: UIColor = .redColor(),
         badgeSize: CounterBadgeSize = .Standard
         ) {
-        var badgeView: BadgeWithCounterView?
+        var badgeView: BadgeWithCounterView!
         for view in containerView.subviews {
             if view is BadgeWithCounterView {
                 badgeView = view as! BadgeWithCounterView
@@ -30,10 +30,9 @@ class BadgeViewPresenter {
                 backgroundColor: backgroundColor,
                 size: badgeSize
             )
-            containerView.addSubview(badgeView!)
-            setupBadgeConstraints(containerView, badgeView: badgeView!)
+            containerView.addSubview(badgeView)
+            setupBadgeConstraints(containerView, badgeView: badgeView)
         }
-        
     }
     
     func removeBadgeFromContainerView(containerView: UIView) {
