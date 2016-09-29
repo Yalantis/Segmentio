@@ -17,7 +17,7 @@ Pod::Spec.new do |spec|
 
   spec.source_files = 'Segmentio/Source/**/*.swift'
   spec.resources = 'Segmentio/Source/Badge/Views/**/*.xib'
-
+  spec.resource_bundle = { 'Segmentio' => 'Segmentio/Source/Badge/Views/*.xib' }
   spec.module_name  = 'Segmentio'
   spec.requires_arc = true
 end
