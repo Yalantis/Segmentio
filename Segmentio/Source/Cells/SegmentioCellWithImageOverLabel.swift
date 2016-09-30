@@ -12,7 +12,7 @@ class SegmentioCellWithImageOverLabel: SegmentioCell {
     
     override func setupConstraintsForSubviews() {
         super.setupConstraintsForSubviews()
-        guard let segmentImageView = segmentImageView else {
+        guard let imageContainerView = imageContainerView else {
             return
         }
         guard let containerView = containerView else {
@@ -21,14 +21,14 @@ class SegmentioCellWithImageOverLabel: SegmentioCell {
         
         let metrics = ["labelHeight": segmentTitleLabelHeight]
         let views = [
-            "segmentImageView": segmentImageView,
+            "imageContainerView": imageContainerView,
             "containerView": containerView
         ]
         
         // main constraints
         
         let segmentImageViewHorizontConstraint = NSLayoutConstraint.constraintsWithVisualFormat(
-            "|-[segmentImageView]-|",
+            "|-[imageContainerView]-|",
             options: [],
             metrics: nil,
             views: views)
@@ -45,7 +45,7 @@ class SegmentioCellWithImageOverLabel: SegmentioCell {
         NSLayoutConstraint.activateConstraints(segmentTitleLabelHorizontConstraint)
         
         let contentViewVerticalConstraints = NSLayoutConstraint.constraintsWithVisualFormat(
-            "V:[segmentImageView]-[containerView(labelHeight)]",
+            "V:[imageContainerView]-[containerView(labelHeight)]",
             options: [],
             metrics: metrics,
             views: views)
@@ -54,7 +54,7 @@ class SegmentioCellWithImageOverLabel: SegmentioCell {
         // custom constraints
         
         topConstraint = NSLayoutConstraint(
-            item: segmentImageView,
+            item: imageContainerView,
             attribute: .Top,
             relatedBy: .Equal,
             toItem: contentView,

@@ -26,6 +26,11 @@ public struct SegmentioItem {
         self.badgeColor = color
     }
     
+    public mutating func removeBadge() {
+        self.badgeCount = nil
+        self.badgeColor = nil
+    }
+    
 }
 
 // MARK: - Content view

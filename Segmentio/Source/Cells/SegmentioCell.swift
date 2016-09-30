@@ -17,6 +17,7 @@ class SegmentioCell: UICollectionViewCell {
     var segmentTitleLabel: UILabel?
     var segmentImageView: UIImageView?
     var containerView: UIView?
+    var imageContainerView: UIView?
     
     var topConstraint: NSLayoutConstraint?
     var bottomConstraint: NSLayoutConstraint?
@@ -57,10 +58,14 @@ class SegmentioCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+        imageContainerView = UIView(frame: CGRectZero)
+        if let imageContainerView = imageContainerView {
+            contentView.addSubview(imageContainerView)
+        }
+
         segmentImageView = UIImageView(frame: CGRectZero)
-        if let segmentImageView = segmentImageView {
-            contentView.addSubview(segmentImageView)
+        if let segmentImageView = segmentImageView, imageContainerView = imageContainerView {
+            imageContainerView.addSubview(segmentImageView)
         }
         
         containerView = UIView(frame: CGRectZero)
@@ -76,6 +81,7 @@ class SegmentioCell: UICollectionViewCell {
         segmentImageView?.translatesAutoresizingMaskIntoConstraints = false
         segmentTitleLabel?.translatesAutoresizingMaskIntoConstraints = false
         containerView?.translatesAutoresizingMaskIntoConstraints = false
+        imageContainerView?.translatesAutoresizingMaskIntoConstraints = false
         
         segmentImageView?.layer.masksToBounds = true
         segmentTitleLabel?.font = UIFont.systemFontOfSize(UIFont.smallSystemFontSize())
@@ -94,10 +100,13 @@ class SegmentioCell: UICollectionViewCell {
         
         switch style {
         case .OnlyLabel:
+            badgePresenter.removeBadgeFromContainerView(containerView!)
             segmentTitleLabel?.text = nil
         case .OnlyImage:
+            badgePresenter.removeBadgeFromContainerView(imageContainerView!)
             segmentImageView?.image = nil
         default:
+            badgePresenter.removeBadgeFromContainerView(containerView!)
             segmentTitleLabel?.text = nil
             segmentImageView?.image = nil
         }
@@ -118,6 +127,7 @@ class SegmentioCell: UICollectionViewCell {
                 setupVerticalSeparators()
             }
         }
+        configurateBadgeWithCount(content.badgeCount, color: content.badgeColor)
     }
     
     func configure(selected selected: Bool) {
@@ -139,7 +149,7 @@ class SegmentioCell: UICollectionViewCell {
         
         if style == .OnlyImage {
             badgePresenter.addBadgeForContainerView(
-                segmentImageView!,
+                imageContainerView!,
                 counterValue: badgeCount,
                 backgroundColor: color,
                 badgeSize: .Standard
@@ -156,6 +166,7 @@ class SegmentioCell: UICollectionViewCell {
     
     func setupConstraintsForSubviews() {
         setupContainerConstraints()
+        setupImageContainerConstraints()
         return // implement in subclasses
     }
 
@@ -193,6 +204,61 @@ class SegmentioCell: UICollectionViewCell {
         addConstraints([segmentTitleLabelHorizontalCenterConstraint, segmentTitleLabelVerticalCenterConstraint])
     }
     
+    private func setupImageContainerConstraints() {
+        guard let segmentImageView = segmentImageView else {
+            return
+        }
+        guard let imageContainerView = imageContainerView else {
+            return
+        }
+        
+        let segmentImageViewTopConstraint =
+            NSLayoutConstraint(
+                item: segmentImageView,
+                attribute: .Top,
+                relatedBy: .Equal,
+                toItem: imageContainerView,
+                attribute: .Top,
+                multiplier: 1,
+                constant: 0.0
+        )
+        
+        let segmentImageViewLeadingConstraint =
+            NSLayoutConstraint(
+                item: segmentImageView,
+                attribute: .Leading,
+                relatedBy: .Equal,
+                toItem: imageContainerView,
+                attribute: .Leading,
+                multiplier: 1,
+                constant: 0.0
+        )
+        
+        let segmentImageViewTrailingConstraint =
+            NSLayoutConstraint(
+                item: segmentImageView,
+                attribute: .Trailing,
+                relatedBy: .Equal,
+                toItem: imageContainerView,
+                attribute: .Trailing,
+                multiplier: 1,
+                constant: 0.0
+        )
+        
+        let segmentImageViewBottomConstraint =
+            NSLayoutConstraint(
+                item: segmentImageView,
+                attribute: .Bottom,
+                relatedBy: .Equal,
+                toItem: imageContainerView,
+                attribute: .Bottom,
+                multiplier: 1,
+                constant: 0.0
+        )
+        addConstraints([segmentImageViewBottomConstraint, segmentImageViewTrailingConstraint, segmentImageViewLeadingConstraint, segmentImageViewTopConstraint])
+    }
+
+    
     private func setupContent(content content: SegmentioItem) {
         if style.isWithImage() {
             segmentImageView?.contentMode = options.imageContentMode
@@ -206,7 +272,6 @@ class SegmentioCell: UICollectionViewCell {
             segmentTitleLabel?.font = defaultState.titleFont
             segmentTitleLabel?.text = content.title
         }
-        configurateBadgeWithCount(content.badgeCount, color: content.badgeColor)
     }
     
     private func setupConstraint(indicatorOptions indicatorOptions: SegmentioIndicatorOptions) {

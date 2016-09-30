@@ -48,7 +48,7 @@ class ExampleViewController: UIViewController {
         super.viewDidAppear(animated)
         setupSegmentioView()
         setupScrollView()
-        setupBadgeCountForIndex()
+        setupBadgeCountForIndex(1)
     }
     
     private func setupSegmentioView() {
@@ -71,8 +71,12 @@ class ExampleViewController: UIViewController {
         }
     }
     
-    private func setupBadgeCountForIndex() {
-        segmentioView.setupBadgeAtIndex(1, count: 3, color: ColorPalette.WhiteSmokeColor)
+    private func setupBadgeCountForIndex(index: Int) {
+        segmentioView.setupBadgeAtIndex(
+            index,
+            count: 10,
+            color: ColorPalette.CoralColor
+        )
     }
     
     private func segmentioContent() -> [SegmentioItem] {

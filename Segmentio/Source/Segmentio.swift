@@ -204,7 +204,12 @@ public class Segmentio: UIView {
     }
     
     public func setupBadgeAtIndex(index: Int, count: Int, color: UIColor) {
-        segmentioItems[index].setupBadgeWithCount(count)
+        segmentioItems[index].setupBadgeWithCount(count, color: color)
+        segmentioCollectionView?.reloadData()
+    }
+    
+    public func removeBadgeAtIndex(index: Int) {
+        segmentioItems[index].removeBadge()
         segmentioCollectionView?.reloadData()
     }
     

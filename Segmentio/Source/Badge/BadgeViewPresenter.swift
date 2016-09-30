@@ -30,8 +30,10 @@ class BadgeViewPresenter {
                 backgroundColor: backgroundColor,
                 size: badgeSize
             )
+            badgeView.translatesAutoresizingMaskIntoConstraints = false
             containerView.addSubview(badgeView)
-            setupBadgeConstraints(containerView, badgeView: badgeView)
+            containerView.bringSubviewToFront(badgeView)
+            setupBadgeConstraints(badgeView, counterValue: counterValue)
         }
     }
     
@@ -43,18 +45,20 @@ class BadgeViewPresenter {
         }
     }
     
-    
-    private func setupBadgeConstraints(containerView: UIView, badgeView: BadgeWithCounterView) {
-        
+    private func setupBadgeConstraints(badgeView: BadgeWithCounterView, counterValue: Int) {
+        var constraintConstant:CGFloat = -5.0
+        if counterValue > 9 {
+            constraintConstant = -10.0
+        }
         let segmentTitleLabelHorizontalCenterConstraint =
             NSLayoutConstraint(
                 item: badgeView,
                 attribute: .Top,
                 relatedBy: .Equal,
-                toItem: containerView,
+                toItem: badgeView.superview,
                 attribute: .Top,
                 multiplier: 1,
-                constant: 1.0
+                constant: 6.0
         )
         
         let segmentTitleLabelVerticalCenterConstraint =
@@ -62,13 +66,13 @@ class BadgeViewPresenter {
                 item: badgeView,
                 attribute: .Trailing,
                 relatedBy: .Equal,
-                toItem: containerView,
+                toItem: badgeView.superview,
                 attribute: .Trailing,
                 multiplier: 1,
-                constant: 1.0
+                constant: constraintConstant
         )
-        containerView.addConstraints([segmentTitleLabelHorizontalCenterConstraint, segmentTitleLabelVerticalCenterConstraint])
-        
+        segmentTitleLabelHorizontalCenterConstraint.active = true
+        segmentTitleLabelVerticalCenterConstraint.active = true
     }
     
 }

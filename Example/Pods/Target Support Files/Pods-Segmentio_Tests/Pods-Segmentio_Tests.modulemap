@@ -1,6 +1,0 @@
-framework module Pods_Segmentio_Tests {
-  umbrella header "Pods-Segmentio_Tests-umbrella.h"
-
-  export *
-  module * { export * }
-}
