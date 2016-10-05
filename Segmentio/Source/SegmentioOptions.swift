@@ -21,7 +21,7 @@ public struct SegmentioItem {
         self.image = image
     }
     
-    public mutating func setupBadgeWithCount(count: Int, color: UIColor = .redColor()) {
+    public mutating func setupBadgeWithCount(_ count: Int, color: UIColor = .red) {
         self.badgeCount = count
         self.badgeColor = color
     }
@@ -41,9 +41,9 @@ public struct SegmentioState {
     var titleTextColor: UIColor
     
     public init(
-        backgroundColor: UIColor = UIColor.clearColor(),
-        titleFont: UIFont = UIFont.systemFontOfSize(UIFont.smallSystemFontSize()),
-        titleTextColor: UIColor = UIColor.blackColor()) {
+        backgroundColor: UIColor = UIColor.clear,
+        titleFont: UIFont = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize),
+        titleTextColor: UIColor = UIColor.black) {
         self.backgroundColor = backgroundColor
         self.titleFont = titleFont
         self.titleTextColor = titleTextColor
@@ -54,7 +54,7 @@ public struct SegmentioState {
 // MARK: - Horizontal separator
 
 public enum SegmentioHorizontalSeparatorType {
-    case Top, Bottom, TopAndBottom
+    case top, bottom, topAndBottom
 }
 
 public struct SegmentioHorizontalSeparatorOptions {
@@ -63,9 +63,9 @@ public struct SegmentioHorizontalSeparatorOptions {
     var color: UIColor
     
     public init(
-        type: SegmentioHorizontalSeparatorType = .TopAndBottom,
+        type: SegmentioHorizontalSeparatorType = .topAndBottom,
         height: CGFloat = 1.0,
-        color: UIColor = UIColor.darkGrayColor()) {
+        color: UIColor = UIColor.darkGray) {
         self.type = type
         self.height = height
         self.color = color
@@ -79,7 +79,7 @@ public struct SegmentioVerticalSeparatorOptions {
     var ratio: CGFloat
     var color: UIColor
     
-    public init(ratio: CGFloat = 1.0, color: UIColor = UIColor.darkGrayColor()) {
+    public init(ratio: CGFloat = 1.0, color: UIColor = UIColor.darkGray) {
         self.ratio = ratio
         self.color = color
     }
@@ -89,7 +89,7 @@ public struct SegmentioVerticalSeparatorOptions {
 // MARK: - Indicator
 
 public enum SegmentioIndicatorType {
-    case Top, Bottom
+    case top, bottom
 }
 
 public struct SegmentioIndicatorOptions {
@@ -99,10 +99,10 @@ public struct SegmentioIndicatorOptions {
     var color: UIColor
     
     public init(
-        type: SegmentioIndicatorType = .Bottom,
+        type: SegmentioIndicatorType = .bottom,
         ratio: CGFloat = 1.0,
         height: CGFloat = 2.0,
-        color: UIColor = UIColor.orangeColor()) {
+        color: UIColor = UIColor.orange) {
         self.type = type
         self.ratio = ratio
         self.height = height
@@ -158,7 +158,7 @@ public struct SegmentioOptions {
     var states: SegmentioStates
     
     public init() {
-        self.backgroundColor = UIColor.lightGrayColor()
+        self.backgroundColor = UIColor.lightGray
         self.maxVisibleItems = 4
         self.scrollEnabled = true
         
@@ -167,8 +167,8 @@ public struct SegmentioOptions {
         
         self.indicatorOptions = SegmentioIndicatorOptions()
         
-        self.imageContentMode = .Center
-        self.labelTextAlignment = .Center
+        self.imageContentMode = .center
+        self.labelTextAlignment = .center
         
         self.states = SegmentioStates(
             defaultState: SegmentioState(),

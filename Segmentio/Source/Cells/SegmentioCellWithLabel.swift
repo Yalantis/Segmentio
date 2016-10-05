@@ -21,37 +21,37 @@ final class SegmentioCellWithLabel: SegmentioCell {
         
         // main constraints
         
-        let segmentTitleLabelHorizontConstraint = NSLayoutConstraint.constraintsWithVisualFormat(
-            "|-[containerView]-|",
-            options: [.AlignAllCenterX],
+        let segmentTitleLabelHorizontConstraint = NSLayoutConstraint.constraints(
+            withVisualFormat: "|-[containerView]-|",
+            options: [.alignAllCenterX],
             metrics: nil,
             views: views
         )
-        NSLayoutConstraint.activateConstraints(segmentTitleLabelHorizontConstraint)
+        NSLayoutConstraint.activate(segmentTitleLabelHorizontConstraint)
         
         // custom constraints
         
         topConstraint = NSLayoutConstraint(
             item: containerView,
-            attribute: .Top,
-            relatedBy: .Equal,
+            attribute: .top,
+            relatedBy: .equal,
             toItem: contentView,
-            attribute: .Top,
+            attribute: .top,
             multiplier: 1,
             constant: padding
         )
-        topConstraint?.active = true
+        topConstraint?.isActive = true
         
         bottomConstraint = NSLayoutConstraint(
             item: contentView,
-            attribute: .Bottom,
-            relatedBy: .Equal,
+            attribute: .bottom,
+            relatedBy: .equal,
             toItem: containerView,
-            attribute: .Bottom,
+            attribute: .bottom,
             multiplier: 1,
             constant: padding
         )
-        bottomConstraint?.active = true
+        bottomConstraint?.isActive = true
     }
 
 }

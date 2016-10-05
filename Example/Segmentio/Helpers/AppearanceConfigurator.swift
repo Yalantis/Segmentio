@@ -11,10 +11,10 @@ import UIKit
 class AppearanceConfigurator {
     
     class func configureNavigationBar() {
-        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
+        UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
         
         UINavigationBar.appearance().barTintColor = ColorPalette.WhiteColor
-        UINavigationBar.appearance().translucent = false
+        UINavigationBar.appearance().isTranslucent = false
         UINavigationBar.appearance().tintColor = ColorPalette.BlackColor
         let attributes = [
             NSFontAttributeName : UIFont.exampleAvenirMediumWithSize(17),

@@ -20,36 +20,36 @@ final class SegmentioCellWithImage: SegmentioCell {
         
         // main constraints
         
-        let segmentImageViewlHorizontConstraint = NSLayoutConstraint.constraintsWithVisualFormat(
-            "|-[imageContainerView]-|",
+        let segmentImageViewlHorizontConstraint = NSLayoutConstraint.constraints(
+            withVisualFormat: "|-[imageContainerView]-|",
             options: [],
             metrics: nil,
             views: views)
-        NSLayoutConstraint.activateConstraints(segmentImageViewlHorizontConstraint)
+        NSLayoutConstraint.activate(segmentImageViewlHorizontConstraint)
         
         // custom constraints
         
         topConstraint = NSLayoutConstraint(
             item: imageContainerView,
-            attribute: .Top,
-            relatedBy: .Equal,
+            attribute: .top,
+            relatedBy: .equal,
             toItem: contentView,
-            attribute: .Top,
+            attribute: .top,
             multiplier: 1,
             constant: padding
         )
-        topConstraint?.active = true
+        topConstraint?.isActive = true
         
         bottomConstraint = NSLayoutConstraint(
             item: contentView,
-            attribute: .Bottom,
-            relatedBy: .Equal,
+            attribute: .bottom,
+            relatedBy: .equal,
             toItem: imageContainerView,
-            attribute: .Bottom,
+            attribute: .bottom,
             multiplier: 1,
             constant: padding
         )
-        bottomConstraint?.active = true
+        bottomConstraint?.isActive = true
     }
     
 }

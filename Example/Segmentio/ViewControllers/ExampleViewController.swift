@@ -13,12 +13,12 @@ class ExampleViewController: UIViewController {
     
     var segmentioStyle = SegmentioStyle.ImageOverLabel
     
-    @IBOutlet private weak var segmentViewHeightConstraint: NSLayoutConstraint!
-    @IBOutlet private weak var segmentioView: Segmentio!
-    @IBOutlet private weak var containerView: UIView!
-    @IBOutlet private weak var scrollView: UIScrollView!
+    @IBOutlet fileprivate weak var segmentViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet fileprivate weak var segmentioView: Segmentio!
+    @IBOutlet fileprivate weak var containerView: UIView!
+    @IBOutlet fileprivate weak var scrollView: UIScrollView!
     
-    private lazy var viewControllers: [UIViewController] = {
+    fileprivate lazy var viewControllers: [UIViewController] = {
         return self.preparedViewControllers()
     }()
     
@@ -26,7 +26,7 @@ class ExampleViewController: UIViewController {
     
     class func create() -> ExampleViewController {
         let board = UIStoryboard(name: "Main", bundle: nil)
-        return board.instantiateViewControllerWithIdentifier(String(self)) as! ExampleViewController
+        return board.instantiateViewController(withIdentifier: String(describing: self)) as! ExampleViewController
     }
     
     // MARK: - Lifecycle
@@ -44,14 +44,14 @@ class ExampleViewController: UIViewController {
         }
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         setupSegmentioView()
         setupScrollView()
         setupBadgeCountForIndex(1)
     }
     
-    private func setupSegmentioView() {
+    fileprivate func setupSegmentioView() {
         segmentioView.setup(
             content: segmentioContent(),
             style: segmentioStyle,
@@ -71,7 +71,7 @@ class ExampleViewController: UIViewController {
         }
     }
     
-    private func setupBadgeCountForIndex(index: Int) {
+    fileprivate func setupBadgeCountForIndex(_ index: Int) {
         segmentioView.setupBadgeAtIndex(
             index,
             count: 10,
@@ -79,7 +79,7 @@ class ExampleViewController: UIViewController {
         )
     }
     
-    private func segmentioContent() -> [SegmentioItem] {
+    fileprivate func segmentioContent() -> [SegmentioItem] {
         return [
             SegmentioItem(title: "Tornado", image: UIImage(named: "tornado")),
             SegmentioItem(title: "Earthquakes", image: UIImage(named: "earthquakes")),
@@ -90,11 +90,11 @@ class ExampleViewController: UIViewController {
         ]
     }
     
-    private func segmentioOptions() -> SegmentioOptions {
-        var imageContentMode = UIViewContentMode.Center
+    fileprivate func segmentioOptions() -> SegmentioOptions {
+        var imageContentMode = UIViewContentMode.center
         switch segmentioStyle {
         case .ImageBeforeLabel, .ImageAfterLabel:
-            imageContentMode = .ScaleAspectFit
+            imageContentMode = .scaleAspectFit
         default:
             break
         }
@@ -107,21 +107,21 @@ class ExampleViewController: UIViewController {
             horizontalSeparatorOptions: segmentioHorizontalSeparatorOptions(),
             verticalSeparatorOptions: segmentioVerticalSeparatorOptions(),
             imageContentMode: imageContentMode,
-            labelTextAlignment: .Center,
+            labelTextAlignment: .center,
             segmentStates: segmentioStates()
         )
     }
     
-    private func segmentioStates() -> SegmentioStates {
+    fileprivate func segmentioStates() -> SegmentioStates {
         let font = UIFont.exampleAvenirMediumWithSize(13)
         return SegmentioStates(
             defaultState: segmentioState(
-                backgroundColor: UIColor.clearColor(),
+                backgroundColor: UIColor.clear,
                 titleFont: font,
                 titleTextColor: ColorPalette.GrayChateauColor
             ),
             selectedState: segmentioState(
-                backgroundColor: UIColor.clearColor(),
+                backgroundColor: UIColor.clear,
                 titleFont: font,
                 titleTextColor: ColorPalette.BlackColor
             ),
@@ -133,28 +133,28 @@ class ExampleViewController: UIViewController {
         )
     }
     
-    private func segmentioState(backgroundColor backgroundColor: UIColor, titleFont: UIFont, titleTextColor: UIColor) -> SegmentioState {
+    fileprivate func segmentioState(backgroundColor: UIColor, titleFont: UIFont, titleTextColor: UIColor) -> SegmentioState {
         return SegmentioState(backgroundColor: backgroundColor, titleFont: titleFont, titleTextColor: titleTextColor)
     }
     
-    private func segmentioIndicatorOptions() -> SegmentioIndicatorOptions {
+    fileprivate func segmentioIndicatorOptions() -> SegmentioIndicatorOptions {
         return SegmentioIndicatorOptions(
-            type: .Bottom,
+            type: .bottom,
             ratio: 1,
             height: 5,
             color: ColorPalette.CoralColor
         )
     }
     
-    private func segmentioHorizontalSeparatorOptions() -> SegmentioHorizontalSeparatorOptions {
+    fileprivate func segmentioHorizontalSeparatorOptions() -> SegmentioHorizontalSeparatorOptions {
         return SegmentioHorizontalSeparatorOptions(
-            type: .TopAndBottom,
+            type: .topAndBottom,
             height: 1,
             color: ColorPalette.WhiteSmokeColor
         )
     }
     
-    private func segmentioVerticalSeparatorOptions() -> SegmentioVerticalSeparatorOptions {
+    fileprivate func segmentioVerticalSeparatorOptions() -> SegmentioVerticalSeparatorOptions {
         return SegmentioVerticalSeparatorOptions(
             ratio: 1,
             color: ColorPalette.WhiteSmokeColor
@@ -163,7 +163,7 @@ class ExampleViewController: UIViewController {
     
     // Example viewControllers
     
-    private func preparedViewControllers() -> [ContentViewController] {
+    fileprivate func preparedViewControllers() -> [ContentViewController] {
         let tornadoController = ContentViewController.create()
         tornadoController.disaster = Disaster(cardName: "Before tornado", hints: Hints.Tornado)
         
@@ -192,35 +192,35 @@ class ExampleViewController: UIViewController {
         ]
     }
     
-    private func selectedSegmentioIndex() -> Int {
+    fileprivate func selectedSegmentioIndex() -> Int {
         return 0
     }
 
     
     // MARK: - Setup container view
     
-    private func setupScrollView() {
+    fileprivate func setupScrollView() {
         scrollView.contentSize = CGSize(
-            width: UIScreen.mainScreen().bounds.width * CGFloat(viewControllers.count),
+            width: UIScreen.main.bounds.width * CGFloat(viewControllers.count),
             height: containerView.frame.height
         )
         
-        for (index, viewController) in viewControllers.enumerate() {
+        for (index, viewController) in viewControllers.enumerated() {
             viewController.view.frame = CGRect(
-                x: UIScreen.mainScreen().bounds.width * CGFloat(index),
+                x: UIScreen.main.bounds.width * CGFloat(index),
                 y: 0,
                 width: scrollView.frame.width,
                 height: scrollView.frame.height
             )
             addChildViewController(viewController)
             scrollView.addSubview(viewController.view, options: .UseAutoresize) // module's extension
-            viewController.didMoveToParentViewController(self)
+            viewController.didMove(toParentViewController: self)
         }
     }
     
     // MARK: - Actions
     
-    private func goToControllerAtIndex(index: Int) {
+    fileprivate func goToControllerAtIndex(_ index: Int) {
         segmentioView.selectedSegmentioIndex = index
     }
     
@@ -228,12 +228,12 @@ class ExampleViewController: UIViewController {
 
 extension ExampleViewController: UIScrollViewDelegate {
     
-    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         let currentPage = floor(scrollView.contentOffset.x / scrollView.frame.width)
         segmentioView.selectedSegmentioIndex = Int(currentPage)
     }
     
-    func scrollViewDidScroll(scrollView: UIScrollView) {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         scrollView.contentSize = CGSize(width: scrollView.contentSize.width, height: 0)
     }
     

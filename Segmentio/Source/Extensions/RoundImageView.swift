@@ -15,7 +15,7 @@ class RoundImageView: UIImageView {
         updateCornerRadiusValue()
     }
     
-    private func updateCornerRadiusValue() {
+    fileprivate func updateCornerRadiusValue() {
         let cornerRadius = min(bounds.size.height, bounds.size.width) / 2
         layer.cornerRadius = cornerRadius
     }

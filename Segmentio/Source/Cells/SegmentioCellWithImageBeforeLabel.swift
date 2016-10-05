@@ -27,43 +27,43 @@ class SegmentioCellWithImageBeforeLabel: SegmentioCell {
         
         // main constraints
         
-        let segmentImageViewVerticalConstraint = NSLayoutConstraint.constraintsWithVisualFormat(
-            "V:[imageContainerView(labelHeight)]",
-            options: [.AlignAllCenterY],
+        let segmentImageViewVerticalConstraint = NSLayoutConstraint.constraints(
+            withVisualFormat: "V:[imageContainerView(labelHeight)]",
+            options: [.alignAllCenterY],
             metrics: metrics,
             views: views)
-        NSLayoutConstraint.activateConstraints(segmentImageViewVerticalConstraint)
+        NSLayoutConstraint.activate(segmentImageViewVerticalConstraint)
         
-        let contentViewHorizontalConstraints = NSLayoutConstraint.constraintsWithVisualFormat(
-            "|-[imageContainerView(labelHeight)]-[containerView]-|",
-            options: [.AlignAllCenterY],
+        let contentViewHorizontalConstraints = NSLayoutConstraint.constraints(
+            withVisualFormat: "|-[imageContainerView(labelHeight)]-[containerView]-|",
+            options: [.alignAllCenterY],
             metrics: metrics,
             views: views)
-        NSLayoutConstraint.activateConstraints(contentViewHorizontalConstraints)
+        NSLayoutConstraint.activate(contentViewHorizontalConstraints)
         
         // custom constraints
         
         topConstraint = NSLayoutConstraint(
             item: containerView,
-            attribute: .Top,
-            relatedBy: .Equal,
+            attribute: .top,
+            relatedBy: .equal,
             toItem: contentView,
-            attribute: .Top,
+            attribute: .top,
             multiplier: 1,
             constant: padding
         )
-        topConstraint?.active = true
+        topConstraint?.isActive = true
         
         bottomConstraint = NSLayoutConstraint(
             item: contentView,
-            attribute: .Bottom,
-            relatedBy: .Equal,
+            attribute: .bottom,
+            relatedBy: .equal,
             toItem: containerView,
-            attribute: .Bottom,
+            attribute: .bottom,
             multiplier: 1,
             constant: padding
         )
-        bottomConstraint?.active = true
+        bottomConstraint?.isActive = true
     }
     
 }

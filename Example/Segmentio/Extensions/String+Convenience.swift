@@ -12,16 +12,16 @@ extension String {
     
     func stringFromCamelCase() -> String {
         var string = self
-        string = string.stringByReplacingOccurrencesOfString(
-            "([a-z])([A-Z])",
-            withString: "$1 $2",
-            options: .RegularExpressionSearch,
-            range: Range<String.Index>(string.startIndex..<string.endIndex)
+        string = string.replacingOccurrences(
+            of: "([a-z])([A-Z])",
+            with: "$1 $2",
+            options: .regularExpression,
+            range: nil
         )
         
-        string.replaceRange(startIndex...startIndex, with: String(self[startIndex]))
+        string.replaceSubrange(startIndex...startIndex, with: String(self[startIndex]))
         
-        return String(string.characters.prefix(1)).capitalizedString + String(string.lowercaseString.characters.dropFirst())
+        return String(string.characters.prefix(1)).capitalized + String(string.lowercased().characters.dropFirst())
     }
     
 }
