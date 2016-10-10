@@ -18,6 +18,10 @@
 		324B605E1D33E5200050B083 /* UIView+Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 324B60541D33E5200050B083 /* UIView+Appearance.swift */; };
 		324B605F1D33E5200050B083 /* Segmentio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 324B60551D33E5200050B083 /* Segmentio.swift */; };
 		324B60601D33E5200050B083 /* SegmentioOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 324B60561D33E5200050B083 /* SegmentioOptions.swift */; };
+		C5514DD81DAB5B82008F14AA /* BadgeViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5514DD31DAB5B82008F14AA /* BadgeViewPresenter.swift */; };
+		C5514DD91DAB5B82008F14AA /* BadgeWithCounterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5514DD51DAB5B82008F14AA /* BadgeWithCounterView.swift */; };
+		C5514DDA1DAB5B82008F14AA /* BadgeWithCounterViewBigSized.xib in Resources */ = {isa = PBXBuildFile; fileRef = C5514DD61DAB5B82008F14AA /* BadgeWithCounterViewBigSized.xib */; };
+		C5514DDB1DAB5B82008F14AA /* BadgeWithCounterViewStandardSized.xib in Resources */ = {isa = PBXBuildFile; fileRef = C5514DD71DAB5B82008F14AA /* BadgeWithCounterViewStandardSized.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +38,10 @@
 		324B60541D33E5200050B083 /* UIView+Appearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Appearance.swift"; sourceTree = "<group>"; };
 		324B60551D33E5200050B083 /* Segmentio.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Segmentio.swift; sourceTree = "<group>"; };
 		324B60561D33E5200050B083 /* SegmentioOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentioOptions.swift; sourceTree = "<group>"; };
+		C5514DD31DAB5B82008F14AA /* BadgeViewPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BadgeViewPresenter.swift; sourceTree = "<group>"; };
+		C5514DD51DAB5B82008F14AA /* BadgeWithCounterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BadgeWithCounterView.swift; sourceTree = "<group>"; };
+		C5514DD61DAB5B82008F14AA /* BadgeWithCounterViewBigSized.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BadgeWithCounterViewBigSized.xib; sourceTree = "<group>"; };
+		C5514DD71DAB5B82008F14AA /* BadgeWithCounterViewStandardSized.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BadgeWithCounterViewStandardSized.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +84,7 @@
 		324B604A1D33E5200050B083 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				C5514DD21DAB5B82008F14AA /* Badge */,
 				324B604B1D33E5200050B083 /* Cells */,
 				324B60531D33E5200050B083 /* Extensions */,
 				324B60551D33E5200050B083 /* Segmentio.swift */,
@@ -104,6 +113,25 @@
 				324B60541D33E5200050B083 /* UIView+Appearance.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		C5514DD21DAB5B82008F14AA /* Badge */ = {
+			isa = PBXGroup;
+			children = (
+				C5514DD31DAB5B82008F14AA /* BadgeViewPresenter.swift */,
+				C5514DD41DAB5B82008F14AA /* Views */,
+			);
+			path = Badge;
+			sourceTree = "<group>";
+		};
+		C5514DD41DAB5B82008F14AA /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				C5514DD51DAB5B82008F14AA /* BadgeWithCounterView.swift */,
+				C5514DD61DAB5B82008F14AA /* BadgeWithCounterViewBigSized.xib */,
+				C5514DD71DAB5B82008F14AA /* BadgeWithCounterViewStandardSized.xib */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -150,6 +178,7 @@
 				TargetAttributes = {
 					324B603F1D33E43E0050B083 = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -176,6 +205,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C5514DDB1DAB5B82008F14AA /* BadgeWithCounterViewStandardSized.xib in Resources */,
+				C5514DDA1DAB5B82008F14AA /* BadgeWithCounterViewBigSized.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -189,6 +220,8 @@
 				324B60601D33E5200050B083 /* SegmentioOptions.swift in Sources */,
 				324B605B1D33E5200050B083 /* SegmentioCellWithImageOverLabel.swift in Sources */,
 				324B60571D33E5200050B083 /* SegmentioCell.swift in Sources */,
+				C5514DD91DAB5B82008F14AA /* BadgeWithCounterView.swift in Sources */,
+				C5514DD81DAB5B82008F14AA /* BadgeViewPresenter.swift in Sources */,
 				324B60591D33E5200050B083 /* SegmentioCellWithImageAfterLabel.swift in Sources */,
 				324B605F1D33E5200050B083 /* Segmentio.swift in Sources */,
 				324B60581D33E5200050B083 /* SegmentioCellWithImage.swift in Sources */,
@@ -301,6 +334,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.yalantismobile.Segmentio;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -320,6 +354,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.yalantismobile.Segmentio;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};

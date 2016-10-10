@@ -11,8 +11,8 @@ import Segmentio
 
 class HomeViewController: UIViewController {
     
-    private var currentStyle = SegmentioStyle.OnlyImage
-    private var containerViewController: EmbedContainerViewController?
+    fileprivate var currentStyle = SegmentioStyle.onlyImage
+    fileprivate var containerViewController: EmbedContainerViewController?
     
     // MARK: - Lifecycle
     
@@ -20,26 +20,26 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
     }
     
-    override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         return true
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == String(EmbedContainerViewController.self) {
-            containerViewController = segue.destinationViewController as? EmbedContainerViewController
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == String(describing: EmbedContainerViewController.self) {
+            containerViewController = segue.destination as? EmbedContainerViewController
             containerViewController?.style = currentStyle
         }
     }
     
     // MARK: - Actions
     
-    @IBAction private func showMenu(sender: UIBarButtonItem) {
+    @IBAction fileprivate func showMenu(_ sender: UIBarButtonItem) {
         SideMenuViewController.create().showSideMenu(
             viewController: self,
             currentStyle: currentStyle,
             sideMenuDidHide: { [weak self] style in
-                self?.dismissViewControllerAnimated(
-                    false,
+                self?.dismiss(
+                    animated: false,
                     completion: {
                         if self?.currentStyle != style {
                             self?.currentStyle = style

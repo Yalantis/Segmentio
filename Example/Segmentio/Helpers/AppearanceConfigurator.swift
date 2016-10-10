@@ -11,14 +11,14 @@ import UIKit
 class AppearanceConfigurator {
     
     class func configureNavigationBar() {
-        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
+        UIApplication.shared.statusBarStyle = .lightContent
         
-        UINavigationBar.appearance().barTintColor = ColorPalette.WhiteColor
-        UINavigationBar.appearance().translucent = false
-        UINavigationBar.appearance().tintColor = ColorPalette.BlackColor
+        UINavigationBar.appearance().barTintColor = ColorPalette.white
+        UINavigationBar.appearance().isTranslucent = false
+        UINavigationBar.appearance().tintColor = ColorPalette.black
         let attributes = [
-            NSFontAttributeName : UIFont.exampleAvenirMediumWithSize(17),
-            NSForegroundColorAttributeName : ColorPalette.BlackColor
+            NSFontAttributeName : UIFont.exampleAvenirMedium(ofSize: 17),
+            NSForegroundColorAttributeName : ColorPalette.black
         ]
         UINavigationBar.appearance().titleTextAttributes = attributes
     }

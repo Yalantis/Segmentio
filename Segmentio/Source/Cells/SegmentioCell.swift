@@ -23,19 +23,19 @@ class SegmentioCell: UICollectionViewCell {
     var bottomConstraint: NSLayoutConstraint?
     var cellSelected = false
     
-    private var options = SegmentioOptions()
-    private var style = SegmentioStyle.ImageOverLabel
-    private let verticalSeparatorLayer = CAShapeLayer()
-    private let badgePresenter = BadgeViewPresenter()
+    fileprivate var options = SegmentioOptions()
+    fileprivate var style = SegmentioStyle.imageOverLabel
+    fileprivate let verticalSeparatorLayer = CAShapeLayer()
+    fileprivate let badgePresenter = BadgeViewPresenter()
     
-    override var highlighted: Bool {
+    override var isHighlighted: Bool {
         get {
-            return super.highlighted
+            return super.isHighlighted
         }
         
         set {
-            if newValue != highlighted {
-                super.highlighted = newValue
+            if newValue != isHighlighted {
+                super.isHighlighted = newValue
                 
                 let highlightedState = options.states.highlightedState
                 let defaultState = options.states.defaultState
@@ -45,11 +45,11 @@ class SegmentioCell: UICollectionViewCell {
                     let highlightedTitleTextColor = cellSelected ? selectedState.titleTextColor : defaultState.titleTextColor
                     let highlightedTitleFont = cellSelected ? selectedState.titleFont : defaultState.titleFont
                     
-                    segmentTitleLabel?.textColor = highlighted ? highlightedState.titleTextColor : highlightedTitleTextColor
-                    segmentTitleLabel?.font = highlighted ? highlightedState.titleFont : highlightedTitleFont
+                    segmentTitleLabel?.textColor = isHighlighted ? highlightedState.titleTextColor : highlightedTitleTextColor
+                    segmentTitleLabel?.font = isHighlighted ? highlightedState.titleFont : highlightedTitleFont
                 }
                 
-                backgroundColor = highlighted ? highlightedState.backgroundColor : defaultState.backgroundColor
+                backgroundColor = isHighlighted ? highlightedState.backgroundColor : defaultState.backgroundColor
             }
         }
     }
@@ -58,23 +58,23 @@ class SegmentioCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        imageContainerView = UIView(frame: CGRectZero)
+        imageContainerView = UIView(frame: CGRect.zero)
         if let imageContainerView = imageContainerView {
             contentView.addSubview(imageContainerView)
         }
 
-        segmentImageView = UIImageView(frame: CGRectZero)
-        if let segmentImageView = segmentImageView, imageContainerView = imageContainerView {
+        segmentImageView = UIImageView(frame: CGRect.zero)
+        if let segmentImageView = segmentImageView, let imageContainerView = imageContainerView {
             imageContainerView.addSubview(segmentImageView)
         }
         
-        containerView = UIView(frame: CGRectZero)
+        containerView = UIView(frame: CGRect.zero)
         if let containerView = containerView {
             contentView.addSubview(containerView)
         }
         
-        segmentTitleLabel = UILabel(frame: CGRectZero)
-        if let segmentTitleLabel = segmentTitleLabel, containerView = containerView {
+        segmentTitleLabel = UILabel(frame: CGRect.zero)
+        if let segmentTitleLabel = segmentTitleLabel, let containerView = containerView {
             containerView.addSubview(segmentTitleLabel)
         }
 
@@ -84,7 +84,7 @@ class SegmentioCell: UICollectionViewCell {
         imageContainerView?.translatesAutoresizingMaskIntoConstraints = false
         
         segmentImageView?.layer.masksToBounds = true
-        segmentTitleLabel?.font = UIFont.systemFontOfSize(UIFont.smallSystemFontSize())
+        segmentTitleLabel?.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
         
         setupConstraintsForSubviews()
         addVerticalSeparator()
@@ -99,10 +99,10 @@ class SegmentioCell: UICollectionViewCell {
         super.prepareForReuse()
         
         switch style {
-        case .OnlyLabel:
+        case .onlyLabel:
             badgePresenter.removeBadgeFromContainerView(containerView!)
             segmentTitleLabel?.text = nil
-        case .OnlyImage:
+        case .onlyImage:
             badgePresenter.removeBadgeFromContainerView(imageContainerView!)
             segmentImageView?.image = nil
         default:
@@ -114,7 +114,7 @@ class SegmentioCell: UICollectionViewCell {
     
     // MARK: - Configure
     
-    func configure(content content: SegmentioItem, style: SegmentioStyle, options: SegmentioOptions, isLastCell: Bool) {
+    func configure(content: SegmentioItem, style: SegmentioStyle, options: SegmentioOptions, isLastCell: Bool) {
         self.options = options
         self.style = style
         setupContent(content: content)
@@ -130,7 +130,7 @@ class SegmentioCell: UICollectionViewCell {
         configurateBadgeWithCount(content.badgeCount, color: content.badgeColor)
     }
     
-    func configure(selected selected: Bool) {
+    func configure(selected: Bool) {
         cellSelected = selected
         
         let selectedState = options.states.selectedState
@@ -142,24 +142,24 @@ class SegmentioCell: UICollectionViewCell {
         }
     }
     
-    func configurateBadgeWithCount(badgeCount: Int?, color: UIColor?) {
-        guard let badgeCount = badgeCount, color = color else {
+    func configurateBadgeWithCount(_ badgeCount: Int?, color: UIColor?) {
+        guard let badgeCount = badgeCount, let color = color else {
             return
         }
         
-        if style == .OnlyImage {
+        if style == .onlyImage {
             badgePresenter.addBadgeForContainerView(
                 imageContainerView!,
                 counterValue: badgeCount,
                 backgroundColor: color,
-                badgeSize: .Standard
+                badgeSize: .standard
             )
         } else {
             badgePresenter.addBadgeForContainerView(
                 containerView!,
                 counterValue: badgeCount,
                 backgroundColor: color,
-                badgeSize: .Standard
+                badgeSize: .standard
             )
         }
     }
@@ -172,7 +172,7 @@ class SegmentioCell: UICollectionViewCell {
 
     // MARK: - Private functions
     
-    private func setupContainerConstraints() {
+    fileprivate func setupContainerConstraints() {
         guard let segmentTitleLabel = segmentTitleLabel else {
             return
         }
@@ -183,10 +183,10 @@ class SegmentioCell: UICollectionViewCell {
         let segmentTitleLabelHorizontalCenterConstraint =
             NSLayoutConstraint(
                 item: segmentTitleLabel,
-                attribute: .CenterX,
-                relatedBy: .Equal,
+                attribute: .centerX,
+                relatedBy: .equal,
                 toItem: containerView,
-                attribute: .CenterX,
+                attribute: .centerX,
                 multiplier: 1,
                 constant: 0.0
         )
@@ -194,17 +194,17 @@ class SegmentioCell: UICollectionViewCell {
         let segmentTitleLabelVerticalCenterConstraint =
             NSLayoutConstraint(
                 item: segmentTitleLabel,
-                attribute: .CenterY,
-                relatedBy: .Equal,
+                attribute: .centerY,
+                relatedBy: .equal,
                 toItem: containerView,
-                attribute: .CenterY,
+                attribute: .centerY,
                 multiplier: 1,
                 constant: 0.0
         )
         addConstraints([segmentTitleLabelHorizontalCenterConstraint, segmentTitleLabelVerticalCenterConstraint])
     }
     
-    private func setupImageContainerConstraints() {
+    fileprivate func setupImageContainerConstraints() {
         guard let segmentImageView = segmentImageView else {
             return
         }
@@ -215,10 +215,10 @@ class SegmentioCell: UICollectionViewCell {
         let segmentImageViewTopConstraint =
             NSLayoutConstraint(
                 item: segmentImageView,
-                attribute: .Top,
-                relatedBy: .Equal,
+                attribute: .top,
+                relatedBy: .equal,
                 toItem: imageContainerView,
-                attribute: .Top,
+                attribute: .top,
                 multiplier: 1,
                 constant: 0.0
         )
@@ -226,10 +226,10 @@ class SegmentioCell: UICollectionViewCell {
         let segmentImageViewLeadingConstraint =
             NSLayoutConstraint(
                 item: segmentImageView,
-                attribute: .Leading,
-                relatedBy: .Equal,
+                attribute: .leading,
+                relatedBy: .equal,
                 toItem: imageContainerView,
-                attribute: .Leading,
+                attribute: .leading,
                 multiplier: 1,
                 constant: 0.0
         )
@@ -237,10 +237,10 @@ class SegmentioCell: UICollectionViewCell {
         let segmentImageViewTrailingConstraint =
             NSLayoutConstraint(
                 item: segmentImageView,
-                attribute: .Trailing,
-                relatedBy: .Equal,
+                attribute: .trailing,
+                relatedBy: .equal,
                 toItem: imageContainerView,
-                attribute: .Trailing,
+                attribute: .trailing,
                 multiplier: 1,
                 constant: 0.0
         )
@@ -248,10 +248,10 @@ class SegmentioCell: UICollectionViewCell {
         let segmentImageViewBottomConstraint =
             NSLayoutConstraint(
                 item: segmentImageView,
-                attribute: .Bottom,
-                relatedBy: .Equal,
+                attribute: .bottom,
+                relatedBy: .equal,
                 toItem: imageContainerView,
-                attribute: .Bottom,
+                attribute: .bottom,
                 multiplier: 1,
                 constant: 0.0
         )
@@ -259,7 +259,7 @@ class SegmentioCell: UICollectionViewCell {
     }
 
     
-    private func setupContent(content content: SegmentioItem) {
+    fileprivate func setupContent(content: SegmentioItem) {
         if style.isWithImage() {
             segmentImageView?.contentMode = options.imageContentMode
             segmentImageView?.image = content.image
@@ -274,18 +274,18 @@ class SegmentioCell: UICollectionViewCell {
         }
     }
     
-    private func setupConstraint(indicatorOptions indicatorOptions: SegmentioIndicatorOptions) {
+    fileprivate func setupConstraint(indicatorOptions: SegmentioIndicatorOptions) {
         switch indicatorOptions.type {
-        case .Top:
+        case .top:
             topConstraint?.constant = padding + indicatorOptions.height
-        case .Bottom:
+        case .bottom:
             bottomConstraint?.constant = padding + indicatorOptions.height
         }
     }
 
     // MARK: - Vertical separator
     
-    private func addVerticalSeparator() {
+    fileprivate func addVerticalSeparator() {
         let contentViewWidth = contentView.bounds.width
         let rect = CGRect(
             x: contentView.bounds.width - 1,
@@ -311,50 +311,50 @@ class SegmentioCell: UICollectionViewCell {
         
         let widthConstraint = NSLayoutConstraint(
             item: verticalSeparatorView,
-            attribute: .Width,
-            relatedBy: .Equal,
+            attribute: .width,
+            relatedBy: .equal,
             toItem: nil,
-            attribute: .NotAnAttribute,
+            attribute: .notAnAttribute,
             multiplier: 1,
             constant: 1
         )
-        widthConstraint.active = true
+        widthConstraint.isActive = true
         
         let trailingConstraint = NSLayoutConstraint(
             item: verticalSeparatorView,
-            attribute: .Trailing,
-            relatedBy: .Equal,
+            attribute: .trailing,
+            relatedBy: .equal,
             toItem: contentView,
-            attribute: .Trailing,
+            attribute: .trailing,
             multiplier: 1,
             constant: 0
         )
-        trailingConstraint.active = true
+        trailingConstraint.isActive = true
         
         let topConstraint = NSLayoutConstraint(
             item: verticalSeparatorView,
-            attribute: .Top,
-            relatedBy: .Equal,
+            attribute: .top,
+            relatedBy: .equal,
             toItem: contentView,
-            attribute: .Top,
+            attribute: .top,
             multiplier: 1,
             constant: 0
         )
-        topConstraint.active = true
+        topConstraint.isActive = true
         
         let bottomConstraint = NSLayoutConstraint(
             item: contentView,
-            attribute: .Bottom,
-            relatedBy: .Equal,
+            attribute: .bottom,
+            relatedBy: .equal,
             toItem: verticalSeparatorView,
-            attribute: .Bottom,
+            attribute: .bottom,
             multiplier: 1,
             constant: 0
         )
-        bottomConstraint.active = true
+        bottomConstraint.isActive = true
     }
     
-    private func setupVerticalSeparators() {
+    fileprivate func setupVerticalSeparators() {
         guard let verticalSeparatorOptions = options.verticalSeparatorOptions else {
             return
         }
@@ -370,13 +370,13 @@ class SegmentioCell: UICollectionViewCell {
         let endY = bounds.height - difference
         
         let path = UIBezierPath()
-        path.moveToPoint(CGPoint(x: verticalSeparatorView.frame.width / 2, y: startY))
-        path.addLineToPoint(CGPoint(x: verticalSeparatorView.frame.width / 2, y: endY))
+        path.move(to: CGPoint(x: verticalSeparatorView.frame.width / 2, y: startY))
+        path.addLine(to: CGPoint(x: verticalSeparatorView.frame.width / 2, y: endY))
         
-        verticalSeparatorLayer.path = path.CGPath
+        verticalSeparatorLayer.path = path.cgPath
         verticalSeparatorLayer.lineWidth = 1
-        verticalSeparatorLayer.strokeColor = verticalSeparatorOptions.color.CGColor
-        verticalSeparatorLayer.fillColor = verticalSeparatorOptions.color.CGColor
+        verticalSeparatorLayer.strokeColor = verticalSeparatorOptions.color.cgColor
+        verticalSeparatorLayer.fillColor = verticalSeparatorOptions.color.cgColor
         
         verticalSeparatorView.layer.addSublayer(verticalSeparatorLayer)
     }

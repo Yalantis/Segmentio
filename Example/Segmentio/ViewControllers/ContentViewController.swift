@@ -9,29 +9,29 @@
 import UIKit
 
 private func yal_isPhone6() -> Bool {
-    let size = UIScreen.mainScreen().bounds.size
+    let size = UIScreen.main.bounds.size
     let minSide = min(size.height, size.width)
     let maxSide = max(size.height, size.width)
     return (fabs(minSide - 375.0) < 0.01) && (fabs(maxSide - 667.0) < 0.01)
 }
 
 class ExampleTableViewCell: UITableViewCell {
-    @IBOutlet private weak var hintLabel: UILabel!
+    @IBOutlet fileprivate weak var hintLabel: UILabel!
 }
 
 class ContentViewController: UIViewController {
     
-    @IBOutlet private weak var cardNameLabel: UILabel!
-    @IBOutlet private weak var hintTableView: UITableView!
-    @IBOutlet private weak var bottomCardConstraint: NSLayoutConstraint!
-    @IBOutlet private weak var heightConstraint: NSLayoutConstraint!
+    @IBOutlet fileprivate weak var cardNameLabel: UILabel!
+    @IBOutlet fileprivate weak var hintTableView: UITableView!
+    @IBOutlet fileprivate weak var bottomCardConstraint: NSLayoutConstraint!
+    @IBOutlet fileprivate weak var heightConstraint: NSLayoutConstraint!
     
     var disaster: Disaster?
-    private var hints: [String]?
+    fileprivate var hints: [String]?
     
     class func create() -> ContentViewController {
         let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        return mainStoryboard.instantiateViewControllerWithIdentifier(String(self)) as! ContentViewController
+        return mainStoryboard.instantiateViewController(withIdentifier: String(describing: self)) as! ContentViewController
     }
     
     // MARK: - Lifecycle
@@ -60,12 +60,12 @@ class ContentViewController: UIViewController {
 
 extension ContentViewController: UITableViewDataSource {
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return hints?.count ?? 0
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! ExampleTableViewCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! ExampleTableViewCell
         cell.hintLabel?.text = hints?[indexPath.row]
         return cell
     }

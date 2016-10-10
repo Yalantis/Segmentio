@@ -28,13 +28,13 @@ private var flatAssociatedObjectKey: UInt8 = 0
         set {
             if (newValue) {
                 let void = UIImage()
-                setBackgroundImage(void, forBarPosition: .Any, barMetrics: .Default)
+                setBackgroundImage(void, for: .any, barMetrics: .default)
                 shadowImage = void
             } else {
-                setBackgroundImage(nil, forBarPosition: .Any, barMetrics: .Default)
+                setBackgroundImage(nil, for: .any, barMetrics: .default)
                 shadowImage = nil
             }
-            objc_setAssociatedObject(self, &flatAssociatedObjectKey, NSNumber(bool: newValue),
+            objc_setAssociatedObject(self, &flatAssociatedObjectKey, NSNumber(value: newValue as Bool),
                                      objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }

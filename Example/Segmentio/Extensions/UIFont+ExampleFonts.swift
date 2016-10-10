@@ -10,12 +10,12 @@ import UIKit
 
 extension UIFont {
     
-    class func exampleAvenirMediumWithSize(size: CGFloat) -> UIFont {
-        return UIFont(name: "Avenir-Book", size: size) ?? UIFont.systemFontOfSize(size)
+    class func exampleAvenirMedium(ofSize size: CGFloat) -> UIFont {
+        return UIFont(name: "Avenir-Book", size: size) ?? UIFont.systemFont(ofSize: size)
     }
     
-    class func exampleAvenirLightWithSize(size: CGFloat) -> UIFont {
-        return UIFont(name: "Avenir-Light", size: size) ?? UIFont.systemFontOfSize(size)
+    class func exampleAvenirLight(ofSize size: CGFloat) -> UIFont {
+        return UIFont(name: "Avenir-Light", size: size) ?? UIFont.systemFont(ofSize: size)
     }
 
 }

@@ -5,27 +5,29 @@ private let BadgeCounterOverMaxValueText = "99+"
 private let standardSizedNibName = "BadgeWithCounterViewStandardSized"
 private let bigSizedNibName = "BadgeWithCounterViewBigSized"
 
-enum CounterBadgeSize {
-    case Standard
-    case Big
+enum BadgeSize {
+    
+    case standard
+    case big
+    
 }
 
 class BadgeWithCounterView: UIView {
     
-    @IBOutlet private weak var counterValueLabel: UILabel!
-    @IBOutlet private weak var backgroundImageView: UIImageView!
+    @IBOutlet fileprivate weak var counterValueLabel: UILabel!
+    @IBOutlet fileprivate weak var backgroundImageView: UIImageView!
     
-    class func instanceFromNib(size size: CounterBadgeSize) -> BadgeWithCounterView {
+    class func instanceFromNib(size: BadgeSize) -> BadgeWithCounterView {
         let nibName = nibNameForSize(size)
-        let podBundle = NSBundle(forClass: self.classForCoder())
+        let podBundle = Bundle(for: self.classForCoder())
         
-        if let bundleURL = podBundle.URLForResource("Segmentio", withExtension: "bundle"), bundle = NSBundle(URL: bundleURL) {
-            return UINib(nibName: nibName, bundle: bundle).instantiateWithOwner(nil, options: nil)[0] as! BadgeWithCounterView
+        if let bundleURL = podBundle.url(forResource: "Segmentio", withExtension: "bundle"), let bundle = Bundle(url: bundleURL) {
+            return UINib(nibName: nibName, bundle: bundle).instantiate(withOwner: nil, options: nil)[0] as! BadgeWithCounterView
         }
-        return BadgeWithCounterView(frame: CGRectZero)
+        return BadgeWithCounterView(frame: .zero)
     }
 
-    func setBadgeCounterValue(counterValue: Int) {
+    func setBadgeCounterValue(_ counterValue: Int) {
         var counterText: String!
         if counterValue > BadgeCounterMaxValue {
             counterText = BadgeCounterOverMaxValueText
@@ -35,12 +37,11 @@ class BadgeWithCounterView: UIView {
         counterValueLabel.text = counterText
     }
     
-    func setBadgeBackgroundColor(color: UIColor) {
+    func setBadgeBackgroundColor(_ color: UIColor) {
         backgroundImageView.backgroundColor = color
     }
     
-    private class func nibNameForSize(size: CounterBadgeSize) -> String {
-        return (size == .Standard) ? standardSizedNibName : bigSizedNibName
+    fileprivate class func nibNameForSize(_ size: BadgeSize) -> String {
+        return size == .standard ? standardSizedNibName : bigSizedNibName
     }
-    
 }

@@ -9,13 +9,13 @@
 import UIKit
 import Segmentio
 
-private let animateDuration: NSTimeInterval = 0.6
+private let animateDuration: TimeInterval = 0.6
 
 class EmbedContainerViewController: UIViewController {
     
-    var style = SegmentioStyle.OnlyImage
+    var style = SegmentioStyle.onlyImage
     
-    private var currentViewController: UIViewController?
+    fileprivate var currentViewController: UIViewController?
     
     // MARK: - Lifecycle
     
@@ -26,7 +26,7 @@ class EmbedContainerViewController: UIViewController {
     
     // MARK: - Private functions
     
-    private func presentController(controller: UIViewController) {
+    fileprivate func presentController(_ controller: UIViewController) {
         if let _ = currentViewController {
             removeCurrentViewController()
         }
@@ -34,29 +34,29 @@ class EmbedContainerViewController: UIViewController {
         addChildViewController(controller)
         view.addSubview(controller.view)
         currentViewController = controller
-        controller.didMoveToParentViewController(self)
+        controller.didMove(toParentViewController: self)
     }
     
-    private func controller(style: SegmentioStyle) -> ExampleViewController {
+    fileprivate func controller(_ style: SegmentioStyle) -> ExampleViewController {
         let controller = ExampleViewController.create()
         controller.segmentioStyle = style
         controller.view.frame = view.bounds
         return controller
     }
     
-    private func removeCurrentViewController() {
-        currentViewController?.willMoveToParentViewController(nil)
+    fileprivate func removeCurrentViewController() {
+        currentViewController?.willMove(toParentViewController: nil)
         currentViewController?.view.removeFromSuperview()
         currentViewController?.removeFromParentViewController()
     }
     
-    private func swapCurrentController(controller: UIViewController) {
-        currentViewController?.willMoveToParentViewController(nil)
+    fileprivate func swapCurrentController(_ controller: UIViewController) {
+        currentViewController?.willMove(toParentViewController: nil)
         addChildViewController(controller)
         view.addSubview(controller.view)
         
-        UIView.animateWithDuration(
-            animateDuration,
+        UIView.animate(
+            withDuration: animateDuration,
             animations: {
                 controller.view.alpha = 1
                 self.currentViewController?.view.alpha = 0
@@ -65,14 +65,14 @@ class EmbedContainerViewController: UIViewController {
                 self.currentViewController?.view.removeFromSuperview()
                 self.currentViewController?.removeFromParentViewController()
                 self.currentViewController = controller
-                self.currentViewController?.didMoveToParentViewController(self)
+                self.currentViewController?.didMove(toParentViewController: self)
             }
         )
     }
     
     // MARK: - Public functions
     
-    func swapViewControllers(style: SegmentioStyle) {
+    func swapViewControllers(_ style: SegmentioStyle) {
         swapCurrentController(controller(style))
     }
     

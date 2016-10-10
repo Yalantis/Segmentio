@@ -9,7 +9,9 @@ Check this <a href="https://dribbble.com/shots/2820372-Segmentio-Component">proj
 
 ##Requirements
 
-iOS 8.x, Swift 2.2.x
+- Xcode 8
+- iOS 8.x+
+- Swift 3
 
 ##Installation
 
@@ -17,14 +19,14 @@ iOS 8.x, Swift 2.2.x
 ```ruby
 use_frameworks! 
 
-pod 'Segmentio', '~> 1.1.1'
+pod 'Segmentio', '~> 2.0'
 ```
 
-*(CocoaPods v1.0.1 or later required. See [this blog post](http://blog.cocoapods.org/Pod-Authors-Guide-to-CocoaPods-Frameworks/) for details.)*
+*CocoaPods v1.1.0 or later required*
 
 ####[Carthage](http://github.com/Carthage/Carthage)
 ```ruby
-github "Yalantis/Segmentio" ~> 1.1.1
+github "Yalantis/Segmentio" ~> 2.0
 ```
 
 ##Usage
@@ -35,6 +37,7 @@ import Segmentio
 
 ####Init
 You can initialize a `Segmentio` instance from code:
+
 ```swift
 var segmentioView: Segmentio!
 
@@ -42,9 +45,11 @@ let segmentioViewRect = CGRect(x: 0, y: 0, width: UIScreen.mainScreen().bounds.w
 segmentioView = Segmentio(frame: segmentioViewRect)
 view.addSubview(segmentioView)
 ```
+
 or
 
 add a `UIView` instance in your .storyboard or .xib, set `Segmentio` class and connect `IBOutlet`:
+
 ```swift
 @IBOutlet weak var segmentioView: Segmentio!
 ```
@@ -71,6 +76,7 @@ segmentioView.setupContent(
 
 ####Configuring items 
 In order to set items you need to create an array of `SegmentioItem` instances:
+
 ```swift
 var content = [SegmentioItem]()
 
@@ -83,11 +89,13 @@ content.append(tornadoItem)
 
 ####Handling selection
 You can specify selected item manually:
+
 ```swift
 segmentioView.selectedSegmentIndex = 0
 ```
 
 ####Handling callback
+
 ```swift
 segmentioView.valueDidChange = { segmentio, segmentIndex in
 	print("Selected item: ", segmentIndex)
@@ -96,6 +104,7 @@ segmentioView.valueDidChange = { segmentio, segmentIndex in
 
 ####Customization
 `Segmentio` can be customized by passing an instance of `SegmentioOptions` struct:
+
 ```swift
 SegmentioOptions(
 	backgroundColor: UIColor.whiteColor(),
@@ -111,6 +120,7 @@ SegmentioOptions(
 ```
 
 Selection indicator can be customized by passing an instance of `SegmentioIndicatorOptions`:
+
 ```swift
 SegmentioIndicatorOptions(
 	type: .Bottom,
@@ -121,6 +131,7 @@ SegmentioIndicatorOptions(
 ```
 
 Horizontal borders can be customized by passing an instance of `SegmentioHorizontalSeparatorOptions`:
+
 ```swift
 SegmentioHorizontalSeparatorOptions(
 	type: SegmentioHorizontalSeparatorType.TopAndBottom, // Top, Bottom, TopAndBottom
@@ -130,6 +141,7 @@ SegmentioHorizontalSeparatorOptions(
 ```
 
 Separators between segments can be customized by passing an instance of  `SegmentioVerticalSeparatorOptions`:
+
 ```swift
 SegmentioVerticalSeparatorOptions(
 	ratio: 0.6 // from 0.1 to 1
@@ -138,6 +150,7 @@ SegmentioVerticalSeparatorOptions(
 ```
 
 In order to set `SegmentioStates` you need to create a tuple of `SegmentioState` instances:
+
 ```swift
 SegmentioStates(
 	defaultState: segmentioState(
