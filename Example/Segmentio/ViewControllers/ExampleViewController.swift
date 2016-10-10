@@ -11,7 +11,7 @@ import Segmentio
 
 class ExampleViewController: UIViewController {
     
-    var segmentioStyle = SegmentioStyle.ImageOverLabel
+    var segmentioStyle = SegmentioStyle.imageOverLabel
     
     @IBOutlet fileprivate weak var segmentViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet fileprivate weak var segmentioView: Segmentio!
@@ -35,9 +35,9 @@ class ExampleViewController: UIViewController {
         super.viewDidLoad()
         
         switch segmentioStyle {
-        case .OnlyLabel, .ImageBeforeLabel, .ImageAfterLabel:
+        case .onlyLabel, .imageBeforeLabel, .imageAfterLabel:
             segmentViewHeightConstraint.constant = 50
-        case .OnlyImage:
+        case .onlyImage:
             segmentViewHeightConstraint.constant = 100
         default:
             break
@@ -63,20 +63,13 @@ class ExampleViewController: UIViewController {
         segmentioView.valueDidChange = { [weak self] _, segmentIndex in
             if let scrollViewWidth = self?.scrollView.frame.width {
                 let contentOffsetX = scrollViewWidth * CGFloat(segmentIndex)
-                self?.scrollView.setContentOffset(
-                    CGPoint(x: contentOffsetX, y: 0),
-                    animated: true
-                )
+                self?.scrollView.setContentOffset(CGPoint(x: contentOffsetX, y: 0), animated: true)
             }
         }
     }
     
     fileprivate func setupBadgeCountForIndex(_ index: Int) {
-        segmentioView.setupBadgeAtIndex(
-            index,
-            count: 10,
-            color: ColorPalette.CoralColor
-        )
+        segmentioView.addBadge(at: index, count: 10, color: ColorPalette.coral)
     }
     
     fileprivate func segmentioContent() -> [SegmentioItem] {
@@ -93,14 +86,14 @@ class ExampleViewController: UIViewController {
     fileprivate func segmentioOptions() -> SegmentioOptions {
         var imageContentMode = UIViewContentMode.center
         switch segmentioStyle {
-        case .ImageBeforeLabel, .ImageAfterLabel:
+        case .imageBeforeLabel, .imageAfterLabel:
             imageContentMode = .scaleAspectFit
         default:
             break
         }
         
         return SegmentioOptions(
-            backgroundColor: ColorPalette.WhiteColor,
+            backgroundColor: ColorPalette.white,
             maxVisibleItems: 3,
             scrollEnabled: true,
             indicatorOptions: segmentioIndicatorOptions(),
@@ -113,22 +106,22 @@ class ExampleViewController: UIViewController {
     }
     
     fileprivate func segmentioStates() -> SegmentioStates {
-        let font = UIFont.exampleAvenirMediumWithSize(13)
+        let font = UIFont.exampleAvenirMedium(ofSize: 13)
         return SegmentioStates(
             defaultState: segmentioState(
-                backgroundColor: UIColor.clear,
+                backgroundColor: .clear,
                 titleFont: font,
-                titleTextColor: ColorPalette.GrayChateauColor
+                titleTextColor: ColorPalette.grayChateau
             ),
             selectedState: segmentioState(
-                backgroundColor: UIColor.clear,
+                backgroundColor: .clear,
                 titleFont: font,
-                titleTextColor: ColorPalette.BlackColor
+                titleTextColor: ColorPalette.black
             ),
             highlightedState: segmentioState(
-                backgroundColor: ColorPalette.WhiteSmokeColor,
+                backgroundColor: ColorPalette.whiteSmoke,
                 titleFont: font,
-                titleTextColor: ColorPalette.GrayChateauColor
+                titleTextColor: ColorPalette.grayChateau
             )
         )
     }
@@ -138,49 +131,37 @@ class ExampleViewController: UIViewController {
     }
     
     fileprivate func segmentioIndicatorOptions() -> SegmentioIndicatorOptions {
-        return SegmentioIndicatorOptions(
-            type: .bottom,
-            ratio: 1,
-            height: 5,
-            color: ColorPalette.CoralColor
-        )
+        return SegmentioIndicatorOptions(type: .bottom, ratio: 1, height: 5, color: ColorPalette.coral)
     }
     
     fileprivate func segmentioHorizontalSeparatorOptions() -> SegmentioHorizontalSeparatorOptions {
-        return SegmentioHorizontalSeparatorOptions(
-            type: .topAndBottom,
-            height: 1,
-            color: ColorPalette.WhiteSmokeColor
-        )
+        return SegmentioHorizontalSeparatorOptions(type: .topAndBottom, height: 1, color: ColorPalette.whiteSmoke)
     }
     
     fileprivate func segmentioVerticalSeparatorOptions() -> SegmentioVerticalSeparatorOptions {
-        return SegmentioVerticalSeparatorOptions(
-            ratio: 1,
-            color: ColorPalette.WhiteSmokeColor
-        )
+        return SegmentioVerticalSeparatorOptions(ratio: 1, color: ColorPalette.whiteSmoke)
     }
     
     // Example viewControllers
     
     fileprivate func preparedViewControllers() -> [ContentViewController] {
         let tornadoController = ContentViewController.create()
-        tornadoController.disaster = Disaster(cardName: "Before tornado", hints: Hints.Tornado)
+        tornadoController.disaster = Disaster(cardName: "Before tornado", hints: Hints.tornado)
         
         let earthquakesController = ContentViewController.create()
-        earthquakesController.disaster = Disaster(cardName: "Before earthquakes", hints: Hints.Earthquakes)
+        earthquakesController.disaster = Disaster(cardName: "Before earthquakes", hints: Hints.earthquakes)
         
         let extremeHeatController = ContentViewController.create()
-        extremeHeatController.disaster = Disaster(cardName: "Before extreme heat", hints: Hints.ExtremeHeat)
+        extremeHeatController.disaster = Disaster(cardName: "Before extreme heat", hints: Hints.extremeHeat)
         
         let eruptionController = ContentViewController.create()
-        eruptionController.disaster = Disaster(cardName: "Before eruption", hints: Hints.Eruption)
+        eruptionController.disaster = Disaster(cardName: "Before eruption", hints: Hints.eruption)
         
         let floodsController = ContentViewController.create()
-        floodsController.disaster = Disaster(cardName: "Before floods", hints: Hints.Floods)
+        floodsController.disaster = Disaster(cardName: "Before floods", hints: Hints.floods)
         
         let wildfiresController = ContentViewController.create()
-        wildfiresController.disaster = Disaster(cardName: "Before wildfires", hints: Hints.Wildfires)
+        wildfiresController.disaster = Disaster(cardName: "Before wildfires", hints: Hints.wildfires)
         
         return [
             tornadoController,
@@ -195,7 +176,6 @@ class ExampleViewController: UIViewController {
     fileprivate func selectedSegmentioIndex() -> Int {
         return 0
     }
-
     
     // MARK: - Setup container view
     
@@ -213,7 +193,7 @@ class ExampleViewController: UIViewController {
                 height: scrollView.frame.height
             )
             addChildViewController(viewController)
-            scrollView.addSubview(viewController.view, options: .UseAutoresize) // module's extension
+            scrollView.addSubview(viewController.view, options: .useAutoresize) // module's extension
             viewController.didMove(toParentViewController: self)
         }
     }
@@ -223,7 +203,7 @@ class ExampleViewController: UIViewController {
     fileprivate func goToControllerAtIndex(_ index: Int) {
         segmentioView.selectedSegmentioIndex = index
     }
-    
+
 }
 
 extension ExampleViewController: UIScrollViewDelegate {

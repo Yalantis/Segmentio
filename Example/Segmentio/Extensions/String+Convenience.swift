@@ -18,7 +18,6 @@ extension String {
             options: .regularExpression,
             range: nil
         )
-        
         string.replaceSubrange(startIndex...startIndex, with: String(self[startIndex]))
         
         return String(string.characters.prefix(1)).capitalized + String(string.lowercased().characters.dropFirst())

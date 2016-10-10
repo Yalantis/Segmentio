@@ -10,12 +10,7 @@ import UIKit
 
 class BadgeViewPresenter {
     
-    func addBadgeForContainerView(
-        _ containerView: UIView,
-        counterValue: Int,
-        backgroundColor: UIColor = .red,
-        badgeSize: CounterBadgeSize = .standard
-        ) {
+    func addBadgeForContainerView(_ containerView: UIView, counterValue: Int, backgroundColor: UIColor = .red, badgeSize: BadgeSize = .standard) {
         var badgeView: BadgeWithCounterView!
         for view in containerView.subviews {
             if view is BadgeWithCounterView {
@@ -25,11 +20,7 @@ class BadgeViewPresenter {
             }
         }
         if badgeView == nil {
-            badgeView = badgeViewForCounterValue(
-                counterValue,
-                backgroundColor: backgroundColor,
-                size: badgeSize
-            )
+            badgeView = badgeViewForCounterValue(counterValue, backgroundColor: backgroundColor, size: badgeSize)
             badgeView.translatesAutoresizingMaskIntoConstraints = false
             containerView.addSubview(badgeView)
             containerView.bringSubview(toFront: badgeView)
@@ -77,15 +68,25 @@ class BadgeViewPresenter {
     
 }
 
+enum Separator {
+    
+    case top
+    case bottom
+    case topAndBottom
+}
+
+
+
 // MARK: Badges views creation
 
 extension BadgeViewPresenter {
     
-    fileprivate func badgeViewForCounterValue(_ counter: Int, backgroundColor: UIColor, size: CounterBadgeSize) -> BadgeWithCounterView {
+    fileprivate func badgeViewForCounterValue(_ counter: Int, backgroundColor: UIColor, size: BadgeSize) -> BadgeWithCounterView {
         let view = BadgeWithCounterView.instanceFromNib(size: size)
         view.setBadgeBackgroundColor(backgroundColor)
         view.setBadgeCounterValue(counter)
         return view
+        
     }
     
 }

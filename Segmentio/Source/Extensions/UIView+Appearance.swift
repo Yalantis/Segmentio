@@ -11,18 +11,24 @@ import UIKit
 private typealias SubviewTreeModifier = ((Void) -> UIView)
 
 public struct AppearanceOptions: OptionSet {
+    
+    public static let overlay = AppearanceOptions(rawValue: 1 << 0)
+    public static let useAutoresize = AppearanceOptions(rawValue: 1 << 1)
+    
     public let rawValue: UInt
-    public init(rawValue: UInt) { self.rawValue = rawValue }
-    public static let Overlay = AppearanceOptions(rawValue: 1 << 0)
-    public static let UseAutoresize = AppearanceOptions(rawValue: 1 << 1)
+    
+    public init(rawValue: UInt) {
+        self.rawValue = rawValue
+    }
+    
 }
 
 extension UIView {
     
     fileprivate func addSubviewUsingOptions(_ options: AppearanceOptions, modifier: SubviewTreeModifier) {
         let subview = modifier()
-        if options.union(.Overlay) == .Overlay {
-            if options.union(.UseAutoresize) != .UseAutoresize {
+        if options.union(.overlay) == .overlay {
+            if options.union(.useAutoresize) != .useAutoresize {
                 subview.translatesAutoresizingMaskIntoConstraints = false
                 let views = dictionaryOfNames([subview])
                 
@@ -49,7 +55,7 @@ extension UIView {
         }
     }
     
-    fileprivate func dictionaryOfNames(_ views:[UIView]) -> [String: UIView] {
+    fileprivate func dictionaryOfNames(_ views: [UIView]) -> [String: UIView] {
         var container = [String: UIView]()
         for (_, value) in views.enumerated() {
             container["subview"] = value

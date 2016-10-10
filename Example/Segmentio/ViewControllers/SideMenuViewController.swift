@@ -24,12 +24,13 @@ class SideMenuViewController: UIViewController {
     @IBOutlet fileprivate weak var menuTableViewWidthConstraint: NSLayoutConstraint!
     
     fileprivate var menuItems = SegmentioStyle.allStyles
-    fileprivate var currentStyle = SegmentioStyle.OnlyImage
+    fileprivate var currentStyle = SegmentioStyle.onlyImage
     
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         menuTableView.isHidden = true
         view.isHidden = true
         menuTableViewWidthConstraint.constant = UIScreen.main.bounds.width * 0.7
@@ -46,8 +47,9 @@ class SideMenuViewController: UIViewController {
     func showSideMenu(viewController: UIViewController, currentStyle: SegmentioStyle, sideMenuDidHide: SideMenuHandler?) {
         self.currentStyle = currentStyle
         self.sideMenuDidHide = sideMenuDidHide
-        self.modalPresentationStyle = .overCurrentContext
+        modalPresentationStyle = .overCurrentContext
         let size = view.frame.size
+        
         viewController.present(self, animated: false) { [weak self] in
             self?.view.isHidden = false
             self?.menuTableView.frame.origin = CGPoint(x: -size.width, y: 0)
@@ -55,7 +57,7 @@ class SideMenuViewController: UIViewController {
                 withDuration: animationDuration,
                 animations: {
                     self?.view.backgroundColor = UIColor.black.withAlphaComponent(0.63)
-                    self?.slideAnimationToPoint(CGPoint.zero)
+                    self?.slideAnimationToPoint(.zero)
                     self?.menuTableView.isHidden = false
                 }
             )
@@ -65,37 +67,31 @@ class SideMenuViewController: UIViewController {
     // MARK: - Private functions
     
     fileprivate func setupGestureRecognizers() {
-        let dissmisSideMenuSelector = #selector(SideMenuViewController.dissmisSideMenu)
+        let dissmisSideMenuSelector = #selector(SideMenuViewController.dismissSideMenu)
         
-        let tapRecognizer = UITapGestureRecognizer(
-            target: self,
-            action: dissmisSideMenuSelector
-        )
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: dissmisSideMenuSelector)
         tapRecognizer.delegate = self
         shadowView.addGestureRecognizer(tapRecognizer)
         
-        let swipeRecognizer = UISwipeGestureRecognizer(
-            target: self,
-            action: dissmisSideMenuSelector
-        )
+        let swipeRecognizer = UISwipeGestureRecognizer(target: self, action: dissmisSideMenuSelector)
         swipeRecognizer.direction = .left
         swipeRecognizer.delegate = self
         view.addGestureRecognizer(swipeRecognizer)
     }
     
-    fileprivate func didSelectItemAtIndexPath(_ indexPath: IndexPath) {
-        currentStyle = SegmentioStyle.allStyles[(indexPath as NSIndexPath).row]
-        dissmisSideMenu()
+    fileprivate func didSelectItem(at indexPath: IndexPath) {
+        currentStyle = SegmentioStyle.allStyles[indexPath.row]
+        dismissSideMenu()
     }
     
-    @objc fileprivate func dissmisSideMenu() {
+    @objc fileprivate func dismissSideMenu() {
         let size = view.frame.size
         
         UIView.animate(
             withDuration: animationDuration,
             animations: {
                 self.slideAnimationToPoint(CGPoint(x: -size.width, y: 0))
-                self.view.backgroundColor = UIColor.clear
+                self.view.backgroundColor = .clear
             },
             completion: { _ in
                 self.view.isHidden = true
@@ -106,9 +102,9 @@ class SideMenuViewController: UIViewController {
     }
     
     fileprivate func slideAnimationToPoint(_ point: CGPoint) {
-        UIView.animate(withDuration: animationDuration, animations: {
+        UIView.animate(withDuration: animationDuration) {
             self.menuTableView.frame.origin = point
-        }) 
+        }
     }
     
     fileprivate func uncheckCurrentStyle() {
@@ -116,10 +112,7 @@ class SideMenuViewController: UIViewController {
             return
         }
         
-        let activeIndexPath = IndexPath(
-            row: currentStyleIndex,
-            section: menuTableView.numberOfSections - 1
-        )
+        let activeIndexPath = IndexPath(row: currentStyleIndex, section: menuTableView.numberOfSections - 1)
         
         let activeCell = menuTableView.cellForRow(at: activeIndexPath)
         activeCell?.imageView?.image = defaultCheckboxImage
@@ -130,19 +123,17 @@ class SideMenuViewController: UIViewController {
 extension SideMenuViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return menuItems.count ?? 0
+        return menuItems.count
     }
     
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let reuseIdentifier = "Cell"
-        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier)
-        let isCurrentStyle = currentStyle == menuItems[(indexPath as NSIndexPath).row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell")!
+        let isCurrentStyle = currentStyle == menuItems[indexPath.row]
         
-        cell!.textLabel?.text = menuItems[(indexPath as NSIndexPath).row].rawValue.stringFromCamelCase()
-        cell!.imageView?.image = isCurrentStyle ? selectedCheckboxImage : defaultCheckboxImage
+        cell.textLabel?.text = menuItems[indexPath.row].rawValue.stringFromCamelCase()
+        cell.imageView?.image = isCurrentStyle ? selectedCheckboxImage : defaultCheckboxImage
         
-        return cell!
+        return cell
     }
     
 }
@@ -152,11 +143,11 @@ extension SideMenuViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath)
         
-        if currentStyle != menuItems[(indexPath as NSIndexPath).row] {
+        if currentStyle != menuItems[indexPath.row] {
             uncheckCurrentStyle()
             cell?.imageView?.image = selectedCheckboxImage
         }
-        didSelectItemAtIndexPath(indexPath)
+        didSelectItem(at: indexPath)
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
@@ -166,6 +157,7 @@ extension SideMenuViewController: UITableViewDelegate {
 }
 
 extension SideMenuViewController: UIGestureRecognizerDelegate {
+    
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
     }

@@ -49,7 +49,7 @@ open class Segmentio: UIView {
     fileprivate var segmentioCollectionView: UICollectionView?
     fileprivate var segmentioItems = [SegmentioItem]()
     fileprivate var segmentioOptions = SegmentioOptions()
-    fileprivate var segmentioStyle = SegmentioStyle.ImageOverLabel
+    fileprivate var segmentioStyle = SegmentioStyle.imageOverLabel
     fileprivate var isPerformingScrollAnimation = false
     
     fileprivate var topSeparatorView: UIView?
@@ -110,12 +110,12 @@ open class Segmentio: UIView {
         collectionView.showsVerticalScrollIndicator = false
         collectionView.bounces = true
         collectionView.isScrollEnabled = segmentioOptions.scrollEnabled
-        collectionView.backgroundColor = UIColor.clear
+        collectionView.backgroundColor = .clear
         
         segmentioCollectionView = collectionView
         
         if let segmentioCollectionView = segmentioCollectionView {
-            addSubview(segmentioCollectionView, options: .Overlay)
+            addSubview(segmentioCollectionView, options: .overlay)
         }
     }
     
@@ -168,7 +168,7 @@ open class Segmentio: UIView {
             backgroundColor = options.backgroundColor
         }
         
-        if segmentioOptions.states.selectedState.backgroundColor != UIColor.clear {
+        if segmentioOptions.states.selectedState.backgroundColor != .clear {
             selectedLayer = CAShapeLayer()
             if let selectedLayer = selectedLayer, let sublayer = segmentioCollectionView?.layer {
                 setupShapeLayer(
@@ -203,12 +203,12 @@ open class Segmentio: UIView {
         setupHorizontalSeparatorIfPossible()
     }
     
-    open func setupBadgeAtIndex(_ index: Int, count: Int, color: UIColor) {
-        segmentioItems[index].setupBadgeWithCount(count, color: color)
+    open func addBadge(at index: Int, count: Int, color: UIColor = .red) {
+        segmentioItems[index].addBadge(count, color: color)
         segmentioCollectionView?.reloadData()
     }
     
-    open func removeBadgeAtIndex(_ index: Int) {
+    open func removeBadge(at index: Int) {
         segmentioItems[index].removeBadge()
         segmentioCollectionView?.reloadData()
     }
@@ -218,17 +218,17 @@ open class Segmentio: UIView {
     fileprivate func setupCellWithStyle(_ style: SegmentioStyle) {
         var cellClass: SegmentioCell.Type {
             switch style {
-            case .OnlyLabel:
+            case .onlyLabel:
                 return SegmentioCellWithLabel.self
-            case .OnlyImage:
+            case .onlyImage:
                 return SegmentioCellWithImage.self
-            case .ImageOverLabel:
+            case .imageOverLabel:
                 return SegmentioCellWithImageOverLabel.self
-            case .ImageUnderLabel:
+            case .imageUnderLabel:
                 return SegmentioCellWithImageUnderLabel.self
-            case .ImageBeforeLabel:
+            case .imageBeforeLabel:
                 return SegmentioCellWithImageBeforeLabel.self
-            case .ImageAfterLabel:
+            case .imageAfterLabel:
                 return SegmentioCellWithImageAfterLabel.self
             }
         }
@@ -547,7 +547,7 @@ open class Segmentio: UIView {
 extension Segmentio: UICollectionViewDataSource {
     
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return segmentioItems.count ?? 0
+        return segmentioItems.count
     }
     
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -556,13 +556,13 @@ extension Segmentio: UICollectionViewDataSource {
             for: indexPath) as! SegmentioCell
         
         cell.configure(
-            content: segmentioItems[(indexPath as NSIndexPath).row],
+            content: segmentioItems[indexPath.row],
             style: segmentioStyle,
             options: segmentioOptions,
-            isLastCell: (indexPath as NSIndexPath).row == segmentioItems.count - 1
+            isLastCell: indexPath.row == segmentioItems.count - 1
         )
         
-        cell.configure(selected: ((indexPath as NSIndexPath).row == selectedSegmentioIndex))
+        cell.configure(selected: (indexPath.row == selectedSegmentioIndex))
         
         return cell
     }
@@ -578,7 +578,7 @@ extension Segmentio: UICollectionViewDelegate {
     }
     
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        selectedSegmentioIndex = (indexPath as NSIndexPath).row
+        selectedSegmentioIndex = indexPath.row
     }
     
 }
@@ -589,10 +589,7 @@ extension Segmentio: UICollectionViewDelegateFlowLayout {
     
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let maxVisibleItems = segmentioOptions.maxVisibleItems > segmentioItems.count ? CGFloat(segmentioItems.count) : CGFloat(segmentioOptions.maxVisibleItems)
-        return CGSize(
-            width: floor(collectionView.frame.width / maxVisibleItems),
-            height: collectionView.frame.height
-        )
+        return CGSize( width: floor(collectionView.frame.width / maxVisibleItems), height: collectionView.frame.height)
     }
     
 }
@@ -602,7 +599,7 @@ extension Segmentio: UICollectionViewDelegateFlowLayout {
 extension Segmentio: UIScrollViewDelegate {
 
     public func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if isPerformingScrollAnimation == true {
+        if isPerformingScrollAnimation {
             return
         }
         

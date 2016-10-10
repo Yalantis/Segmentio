@@ -66,7 +66,7 @@ extension ContentViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! ExampleTableViewCell
-        cell.hintLabel?.text = hints?[(indexPath as NSIndexPath).row]
+        cell.hintLabel?.text = hints?[indexPath.row]
         return cell
     }
     

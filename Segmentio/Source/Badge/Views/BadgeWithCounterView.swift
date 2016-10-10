@@ -5,9 +5,11 @@ private let BadgeCounterOverMaxValueText = "99+"
 private let standardSizedNibName = "BadgeWithCounterViewStandardSized"
 private let bigSizedNibName = "BadgeWithCounterViewBigSized"
 
-enum CounterBadgeSize {
+enum BadgeSize {
+    
     case standard
     case big
+    
 }
 
 class BadgeWithCounterView: UIView {
@@ -15,14 +17,14 @@ class BadgeWithCounterView: UIView {
     @IBOutlet fileprivate weak var counterValueLabel: UILabel!
     @IBOutlet fileprivate weak var backgroundImageView: UIImageView!
     
-    class func instanceFromNib(size: CounterBadgeSize) -> BadgeWithCounterView {
+    class func instanceFromNib(size: BadgeSize) -> BadgeWithCounterView {
         let nibName = nibNameForSize(size)
         let podBundle = Bundle(for: self.classForCoder())
         
         if let bundleURL = podBundle.url(forResource: "Segmentio", withExtension: "bundle"), let bundle = Bundle(url: bundleURL) {
             return UINib(nibName: nibName, bundle: bundle).instantiate(withOwner: nil, options: nil)[0] as! BadgeWithCounterView
         }
-        return BadgeWithCounterView(frame: CGRect.zero)
+        return BadgeWithCounterView(frame: .zero)
     }
 
     func setBadgeCounterValue(_ counterValue: Int) {
@@ -39,8 +41,7 @@ class BadgeWithCounterView: UIView {
         backgroundImageView.backgroundColor = color
     }
     
-    fileprivate class func nibNameForSize(_ size: CounterBadgeSize) -> String {
-        return (size == .standard) ? standardSizedNibName : bigSizedNibName
+    fileprivate class func nibNameForSize(_ size: BadgeSize) -> String {
+        return size == .standard ? standardSizedNibName : bigSizedNibName
     }
-    
 }

@@ -24,7 +24,7 @@ class SegmentioCell: UICollectionViewCell {
     var cellSelected = false
     
     fileprivate var options = SegmentioOptions()
-    fileprivate var style = SegmentioStyle.ImageOverLabel
+    fileprivate var style = SegmentioStyle.imageOverLabel
     fileprivate let verticalSeparatorLayer = CAShapeLayer()
     fileprivate let badgePresenter = BadgeViewPresenter()
     
@@ -99,10 +99,10 @@ class SegmentioCell: UICollectionViewCell {
         super.prepareForReuse()
         
         switch style {
-        case .OnlyLabel:
+        case .onlyLabel:
             badgePresenter.removeBadgeFromContainerView(containerView!)
             segmentTitleLabel?.text = nil
-        case .OnlyImage:
+        case .onlyImage:
             badgePresenter.removeBadgeFromContainerView(imageContainerView!)
             segmentImageView?.image = nil
         default:
@@ -147,7 +147,7 @@ class SegmentioCell: UICollectionViewCell {
             return
         }
         
-        if style == .OnlyImage {
+        if style == .onlyImage {
             badgePresenter.addBadgeForContainerView(
                 imageContainerView!,
                 counterValue: badgeCount,

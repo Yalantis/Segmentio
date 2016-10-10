@@ -13,7 +13,7 @@ private let animateDuration: TimeInterval = 0.6
 
 class EmbedContainerViewController: UIViewController {
     
-    var style = SegmentioStyle.OnlyImage
+    var style = SegmentioStyle.onlyImage
     
     fileprivate var currentViewController: UIViewController?
     
