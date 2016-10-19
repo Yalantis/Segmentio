@@ -162,7 +162,9 @@ public struct SegmentioOptions {
     var indicatorOptions: SegmentioIndicatorOptions?
     var imageContentMode: UIViewContentMode
     var labelTextAlignment: NSTextAlignment
+    var labelTextNumberOfLines: Int
     var states: SegmentioStates
+    var animationDuration: CFTimeInterval
     
     public init() {
         self.backgroundColor = .lightGray
@@ -176,15 +178,17 @@ public struct SegmentioOptions {
         
         self.imageContentMode = .center
         self.labelTextAlignment = .center
+        self.labelTextNumberOfLines = 0
         
         self.states = SegmentioStates(
             defaultState: SegmentioState(),
             selectedState: SegmentioState(),
             highlightedState: SegmentioState()
         )
+        self.animationDuration = 0.1
     }
     
-    public init(backgroundColor: UIColor, maxVisibleItems: Int, scrollEnabled: Bool, indicatorOptions: SegmentioIndicatorOptions?, horizontalSeparatorOptions: SegmentioHorizontalSeparatorOptions?, verticalSeparatorOptions: SegmentioVerticalSeparatorOptions?, imageContentMode: UIViewContentMode, labelTextAlignment: NSTextAlignment, segmentStates: SegmentioStates) {
+    public init(backgroundColor: UIColor, maxVisibleItems: Int, scrollEnabled: Bool, indicatorOptions: SegmentioIndicatorOptions?, horizontalSeparatorOptions: SegmentioHorizontalSeparatorOptions?, verticalSeparatorOptions: SegmentioVerticalSeparatorOptions?, imageContentMode: UIViewContentMode, labelTextAlignment: NSTextAlignment, labelTextNumberOfLines: Int, segmentStates: SegmentioStates, animationDuration: CFTimeInterval) {
         self.backgroundColor = backgroundColor
         self.maxVisibleItems = maxVisibleItems
         self.scrollEnabled = scrollEnabled
@@ -193,7 +197,9 @@ public struct SegmentioOptions {
         self.verticalSeparatorOptions = verticalSeparatorOptions
         self.imageContentMode = imageContentMode
         self.labelTextAlignment = labelTextAlignment
+        self.labelTextNumberOfLines = labelTextNumberOfLines
         self.states = segmentStates
+        self.animationDuration = animationDuration
     }
     
 }
