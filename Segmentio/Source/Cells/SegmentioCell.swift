@@ -267,6 +267,7 @@ class SegmentioCell: UICollectionViewCell {
         
         if style.isWithText() {
             segmentTitleLabel?.textAlignment = options.labelTextAlignment
+            segmentTitleLabel?.numberOfLines = options.labelTextNumberOfLines
             let defaultState = options.states.defaultState
             segmentTitleLabel?.textColor = defaultState.titleTextColor
             segmentTitleLabel?.font = defaultState.titleFont

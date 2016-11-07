@@ -114,8 +114,10 @@ SegmentioOptions(
 	horizontalSeparatorOptions: SegmentioHorizontalSeparatorOptions,
 	verticalSeparatorOptions: SegmentioVerticalSeparatorOptions,
 	imageContentMode: UIViewContentMode.Center,
+	labelTextNumberOfLines: 1,
 	labelTextAlignment: NSTextAlignment.Center,
-	segmentStates: SegmentioStates // tuple of SegmentioState (defaultState, selectState, highlightedState)
+	segmentStates: SegmentioStates, // tuple of SegmentioState (defaultState, selectState, highlightedState)
+	animationDuration: 0.1
 )
 ```
 

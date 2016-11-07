@@ -11,8 +11,6 @@ import QuartzCore
 
 public typealias SegmentioSelectionCallback = ((_ segmentio: Segmentio, _ selectedSegmentioIndex: Int) -> Void)
 
-private let animationDuration: CFTimeInterval = 0.3
-
 open class Segmentio: UIView {
     
     internal struct Points {
@@ -438,7 +436,7 @@ open class Segmentio: UIView {
             let animation = CABasicAnimation(keyPath: "path")
             animation.fromValue = shapeLayer.path
             animation.toValue = shapeLayerPath.cgPath
-            animation.duration = animationDuration
+            animation.duration = segmentioOptions.animationDuration
             CATransaction.setCompletionBlock() {
                 self.isPerformingScrollAnimation = false
                 self.isUserInteractionEnabled = true
