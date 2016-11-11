@@ -51,6 +51,14 @@ class ExampleViewController: UIViewController {
         setupBadgeCountForIndex(1)
     }
     
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        
+        coordinator.animate(alongsideTransition: { [weak self] _ in
+            self?.segmentioView.interfaceOrientationDidChange()
+        }, completion: nil)
+    }
+    
     fileprivate func setupSegmentioView() {
         segmentioView.setup(
             content: segmentioContent(),
@@ -116,7 +124,7 @@ class ExampleViewController: UIViewController {
                 titleTextColor: ColorPalette.grayChateau
             ),
             selectedState: segmentioState(
-                backgroundColor: .clear,
+                backgroundColor: .cyan,
                 titleFont: font,
                 titleTextColor: ColorPalette.black
             ),

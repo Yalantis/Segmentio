@@ -55,19 +55,7 @@ open class Segmentio: UIView {
     fileprivate var indicatorLayer: CAShapeLayer?
     fileprivate var selectedLayer: CAShapeLayer?
     
-    fileprivate var cachedOrientation: UIInterfaceOrientation? = UIApplication.shared.statusBarOrientation {
-        didSet {
-            if cachedOrientation != oldValue {
-                reloadSegmentio()
-            }
-        }
-    }
-    
     // MARK: - Lifecycle
-    
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
     
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -81,12 +69,6 @@ open class Segmentio: UIView {
     
     fileprivate func commonInit() {
         setupSegmentedCollectionView()
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(Segmentio.handleOrientationNotification),
-            name: NSNotification.Name.UIDeviceOrientationDidChange,
-            object: nil
-        )
     }
     
     fileprivate func setupSegmentedCollectionView() {
@@ -142,12 +124,6 @@ open class Segmentio: UIView {
             width: bounds.width,
             height: bounds.height - separatorsHeight
         )
-    }
-    
-    // MARK: - Handle orientation notification
-    
-    @objc fileprivate func handleOrientationNotification() {
-         cachedOrientation = UIApplication.shared.statusBarOrientation
     }
     
     // MARK: - Setups:
@@ -209,6 +185,12 @@ open class Segmentio: UIView {
     open func removeBadge(at index: Int) {
         segmentioItems[index].removeBadge()
         segmentioCollectionView?.reloadData()
+    }
+    
+    open func interfaceOrientationDidChange() {
+        segmentioCollectionView?.collectionViewLayout.invalidateLayout()
+        scrollToItemAtContext()
+        moveShapeLayerAtContext()
     }
     
     // MARK: Collection view setup
@@ -341,7 +323,8 @@ open class Segmentio: UIView {
     // MARK: - Actions:
     // MARK: Reload segmentio
     public func reloadSegmentio() {
-        segmentioCollectionView?.reloadData()
+//         segmentioCollectionView?.reloadData()
+        segmentioCollectionView?.collectionViewLayout.invalidateLayout()
         scrollToItemAtContext()
         moveShapeLayerAtContext()
     }
