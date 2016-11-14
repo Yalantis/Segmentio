@@ -67,6 +67,11 @@ open class Segmentio: UIView {
         commonInit()
     }
     
+    open override func layoutSubviews() {
+        super.layoutSubviews()
+        reloadSegmentio()
+    }
+    
     fileprivate func commonInit() {
         setupSegmentedCollectionView()
     }
@@ -185,12 +190,6 @@ open class Segmentio: UIView {
     open func removeBadge(at index: Int) {
         segmentioItems[index].removeBadge()
         segmentioCollectionView?.reloadData()
-    }
-    
-    open func interfaceOrientationDidChange() {
-        segmentioCollectionView?.collectionViewLayout.invalidateLayout()
-        scrollToItemAtContext()
-        moveShapeLayerAtContext()
     }
     
     // MARK: Collection view setup
@@ -323,7 +322,6 @@ open class Segmentio: UIView {
     // MARK: - Actions:
     // MARK: Reload segmentio
     public func reloadSegmentio() {
-//         segmentioCollectionView?.reloadData()
         segmentioCollectionView?.collectionViewLayout.invalidateLayout()
         scrollToItemAtContext()
         moveShapeLayerAtContext()
@@ -389,9 +387,10 @@ open class Segmentio: UIView {
             )
         }
         
-        if context.isFirstOrSecondVisibleCell == true {
+        if context.isFirstOrSecondVisibleCell == true && selectedSegmentioIndex != -1 {
             let newIndex = selectedSegmentioIndex - (context.isFirstIndex ? 1 : 0)
             let newIndexPath = IndexPath(item: newIndex, section: numberOfSections - 1)
+            
             segmentioCollectionView?.scrollToItem(
                 at: newIndexPath,
                 at: UICollectionViewScrollPosition(),
