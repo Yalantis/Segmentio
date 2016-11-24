@@ -188,7 +188,7 @@ class SegmentioCell: UICollectionViewCell {
                 toItem: containerView,
                 attribute: .centerX,
                 multiplier: 1,
-                constant: 0.0
+                constant: 0
         )
         
         let segmentTitleLabelVerticalCenterConstraint =
@@ -199,9 +199,12 @@ class SegmentioCell: UICollectionViewCell {
                 toItem: containerView,
                 attribute: .centerY,
                 multiplier: 1,
-                constant: 0.0
+                constant: 0
         )
-        addConstraints([segmentTitleLabelHorizontalCenterConstraint, segmentTitleLabelVerticalCenterConstraint])
+        addConstraints([
+            segmentTitleLabelHorizontalCenterConstraint,
+            segmentTitleLabelVerticalCenterConstraint
+            ])
     }
     
     fileprivate func setupImageContainerConstraints() {
@@ -220,7 +223,7 @@ class SegmentioCell: UICollectionViewCell {
                 toItem: imageContainerView,
                 attribute: .top,
                 multiplier: 1,
-                constant: 0.0
+                constant: 0
         )
         
         let segmentImageViewLeadingConstraint =
@@ -231,7 +234,7 @@ class SegmentioCell: UICollectionViewCell {
                 toItem: imageContainerView,
                 attribute: .leading,
                 multiplier: 1,
-                constant: 0.0
+                constant: 0
         )
         
         let segmentImageViewTrailingConstraint =
@@ -242,7 +245,7 @@ class SegmentioCell: UICollectionViewCell {
                 toItem: imageContainerView,
                 attribute: .trailing,
                 multiplier: 1,
-                constant: 0.0
+                constant: 0
         )
         
         let segmentImageViewBottomConstraint =
@@ -253,9 +256,14 @@ class SegmentioCell: UICollectionViewCell {
                 toItem: imageContainerView,
                 attribute: .bottom,
                 multiplier: 1,
-                constant: 0.0
+                constant: 0
         )
-        addConstraints([segmentImageViewBottomConstraint, segmentImageViewTrailingConstraint, segmentImageViewLeadingConstraint, segmentImageViewTopConstraint])
+        addConstraints([
+            segmentImageViewBottomConstraint,
+            segmentImageViewTrailingConstraint,
+            segmentImageViewLeadingConstraint,
+            segmentImageViewTopConstraint
+            ])
     }
 
     

@@ -24,6 +24,7 @@
 		327AF5EA1D1ABEC100534355 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 327AF5CB1D1ABEC100534355 /* HomeViewController.swift */; };
 		327AF5EB1D1ABEC100534355 /* SideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 327AF5CC1D1ABEC100534355 /* SideMenuViewController.swift */; };
 		327AF6041D1AC0FE00534355 /* ColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 327AF6031D1AC0FE00534355 /* ColorPalette.swift */; };
+		32C3706C1DD9C4FA001A39CB /* SegmentioBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C3706B1DD9C4FA001A39CB /* SegmentioBuilder.swift */; };
 		5B9491B14F42A77448746E9B /* Pods_Segmentio_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74E8553D39ECFE4883F1D2CA /* Pods_Segmentio_Example.framework */; };
 /* End PBXBuildFile section */
 
@@ -49,6 +50,7 @@
 		327AF5CB1D1ABEC100534355 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		327AF5CC1D1ABEC100534355 /* SideMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideMenuViewController.swift; sourceTree = "<group>"; };
 		327AF6031D1AC0FE00534355 /* ColorPalette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPalette.swift; sourceTree = "<group>"; };
+		32C3706B1DD9C4FA001A39CB /* SegmentioBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentioBuilder.swift; sourceTree = "<group>"; };
 		32C3A9241D2BB3B5004C0FC9 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* Segmentio_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Segmentio_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -136,6 +138,14 @@
 			path = ViewControllers;
 			sourceTree = "<group>";
 		};
+		32C3706A1DD9C4EC001A39CB /* Builders */ = {
+			isa = PBXGroup;
+			children = (
+				32C3706B1DD9C4FA001A39CB /* SegmentioBuilder.swift */,
+			);
+			path = Builders;
+			sourceTree = "<group>";
+		};
 		45CA913E13914443DB2552B6 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -169,6 +179,7 @@
 		607FACD21AFB9204008FA782 /* Example for Segmentio */ = {
 			isa = PBXGroup;
 			children = (
+				32C3706A1DD9C4EC001A39CB /* Builders */,
 				327AF5A71D1ABEC100534355 /* Application */,
 				327AF5A91D1ABEC100534355 /* Extensions */,
 				327AF5AD1D1ABEC100534355 /* Helpers */,
@@ -239,7 +250,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0720;
-				LastUpgradeCheck = 0720;
+				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = CocoaPods;
 				TargetAttributes = {
 					607FACCF1AFB9204008FA782 = {
@@ -337,6 +348,7 @@
 				327AF5CF1D1ABEC100534355 /* AppDelegate.swift in Sources */,
 				327AF5EB1D1ABEC100534355 /* SideMenuViewController.swift in Sources */,
 				327AF5E81D1ABEC100534355 /* EmbedContainerViewController.swift in Sources */,
+				32C3706C1DD9C4FA001A39CB /* SegmentioBuilder.swift in Sources */,
 				327AF5D41D1ABEC100534355 /* Disaster.swift in Sources */,
 				327AF5D31D1ABEC100534355 /* AppearanceConfigurator.swift in Sources */,
 				327AF5EA1D1ABEC100534355 /* HomeViewController.swift in Sources */,
@@ -365,8 +377,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -410,8 +424,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -430,6 +446,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -438,6 +455,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 031FB43EDAB25B02B2FB7406 /* Pods-Segmentio_Example.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -460,6 +478,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 1667ACAF5594F75E244C8E1B /* Pods-Segmentio_Example.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";

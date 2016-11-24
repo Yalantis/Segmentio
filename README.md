@@ -1,5 +1,5 @@
 ##Segmentio
-[![Platform](http://img.shields.io/badge/platform-iOS-blue.svg?style=flat)](https://cocoapods.org/?q=segmentio) [![License](http://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://github.com/Yalantis/Segmentio/blob/master/LICENSE) ![Swift 2.2.x](https://img.shields.io/badge/Swift-2.2.x-orange.svg) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+[![Platform](http://img.shields.io/badge/platform-iOS-blue.svg?style=flat)](https://cocoapods.org/?q=segmentio) [![License](http://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://github.com/Yalantis/Segmentio/blob/master/LICENSE) ![Swift 3.x](https://img.shields.io/badge/Swift-3.0-orange.svg) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
 Animated top/bottom segmented control written in Swift.
 
@@ -19,14 +19,14 @@ Check this <a href="https://dribbble.com/shots/2820372-Segmentio-Component">proj
 ```ruby
 use_frameworks! 
 
-pod 'Segmentio', '~> 2.0'
+pod 'Segmentio', '~> 2.1'
 ```
 
 *CocoaPods v1.1.0 or later required*
 
 ####[Carthage](http://github.com/Carthage/Carthage)
 ```ruby
-github "Yalantis/Segmentio" ~> 2.0
+github "Yalantis/Segmentio" ~> 2.1
 ```
 
 ##Usage

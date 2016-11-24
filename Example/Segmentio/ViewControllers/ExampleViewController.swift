@@ -46,122 +46,65 @@ class ExampleViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        setupSegmentioView()
         setupScrollView()
-        setupBadgeCountForIndex(1)
-    }
-    
-    fileprivate func setupSegmentioView() {
-        segmentioView.setup(
-            content: segmentioContent(),
-            style: segmentioStyle,
-            options: segmentioOptions()
+        
+        SegmentioBuilder.buildSegmentioView(
+            segmentioView: segmentioView,
+            segmentioStyle: segmentioStyle
         )
+        SegmentioBuilder.setupBadgeCountForIndex(segmentioView, index: 1)
         
         segmentioView.selectedSegmentioIndex = selectedSegmentioIndex()
         
         segmentioView.valueDidChange = { [weak self] _, segmentIndex in
             if let scrollViewWidth = self?.scrollView.frame.width {
                 let contentOffsetX = scrollViewWidth * CGFloat(segmentIndex)
-                self?.scrollView.setContentOffset(CGPoint(x: contentOffsetX, y: 0), animated: true)
+                self?.scrollView.setContentOffset(
+                    CGPoint(x: contentOffsetX, y: 0),
+                    animated: true
+                )
             }
         }
-    }
-    
-    fileprivate func setupBadgeCountForIndex(_ index: Int) {
-        segmentioView.addBadge(at: index, count: 10, color: ColorPalette.coral)
-    }
-    
-    fileprivate func segmentioContent() -> [SegmentioItem] {
-        return [
-            SegmentioItem(title: "Tornado", image: UIImage(named: "tornado")),
-            SegmentioItem(title: "Earthquakes", image: UIImage(named: "earthquakes")),
-            SegmentioItem(title: "Extreme heat", image: UIImage(named: "heat")),
-            SegmentioItem(title: "Eruption", image: UIImage(named: "eruption")),
-            SegmentioItem(title: "Floods", image: UIImage(named: "floods")),
-            SegmentioItem(title: "Wildfires", image: UIImage(named: "wildfires"))
-        ]
-    }
-    
-    fileprivate func segmentioOptions() -> SegmentioOptions {
-        var imageContentMode = UIViewContentMode.center
-        switch segmentioStyle {
-        case .imageBeforeLabel, .imageAfterLabel:
-            imageContentMode = .scaleAspectFit
-        default:
-            break
-        }
-        
-        return SegmentioOptions(
-            backgroundColor: ColorPalette.white,
-            maxVisibleItems: 3,
-            scrollEnabled: true,
-            indicatorOptions: segmentioIndicatorOptions(),
-            horizontalSeparatorOptions: segmentioHorizontalSeparatorOptions(),
-            verticalSeparatorOptions: segmentioVerticalSeparatorOptions(),
-            imageContentMode: imageContentMode,
-            labelTextAlignment: .center,
-            segmentStates: segmentioStates()
-        )
-    }
-    
-    fileprivate func segmentioStates() -> SegmentioStates {
-        let font = UIFont.exampleAvenirMedium(ofSize: 13)
-        return SegmentioStates(
-            defaultState: segmentioState(
-                backgroundColor: .clear,
-                titleFont: font,
-                titleTextColor: ColorPalette.grayChateau
-            ),
-            selectedState: segmentioState(
-                backgroundColor: .clear,
-                titleFont: font,
-                titleTextColor: ColorPalette.black
-            ),
-            highlightedState: segmentioState(
-                backgroundColor: ColorPalette.whiteSmoke,
-                titleFont: font,
-                titleTextColor: ColorPalette.grayChateau
-            )
-        )
-    }
-    
-    fileprivate func segmentioState(backgroundColor: UIColor, titleFont: UIFont, titleTextColor: UIColor) -> SegmentioState {
-        return SegmentioState(backgroundColor: backgroundColor, titleFont: titleFont, titleTextColor: titleTextColor)
-    }
-    
-    fileprivate func segmentioIndicatorOptions() -> SegmentioIndicatorOptions {
-        return SegmentioIndicatorOptions(type: .bottom, ratio: 1, height: 5, color: ColorPalette.coral)
-    }
-    
-    fileprivate func segmentioHorizontalSeparatorOptions() -> SegmentioHorizontalSeparatorOptions {
-        return SegmentioHorizontalSeparatorOptions(type: .topAndBottom, height: 1, color: ColorPalette.whiteSmoke)
-    }
-    
-    fileprivate func segmentioVerticalSeparatorOptions() -> SegmentioVerticalSeparatorOptions {
-        return SegmentioVerticalSeparatorOptions(ratio: 1, color: ColorPalette.whiteSmoke)
     }
     
     // Example viewControllers
     
     fileprivate func preparedViewControllers() -> [ContentViewController] {
         let tornadoController = ContentViewController.create()
-        tornadoController.disaster = Disaster(cardName: "Before tornado", hints: Hints.tornado)
+        tornadoController.disaster = Disaster(
+            cardName: "Before tornado",
+            hints: Hints.tornado
+        )
         
         let earthquakesController = ContentViewController.create()
-        earthquakesController.disaster = Disaster(cardName: "Before earthquakes", hints: Hints.earthquakes)
+        earthquakesController.disaster = Disaster(
+            cardName: "Before earthquakes",
+            hints: Hints.earthquakes
+        )
         
         let extremeHeatController = ContentViewController.create()
-        extremeHeatController.disaster = Disaster(cardName: "Before extreme heat", hints: Hints.extremeHeat)
+        extremeHeatController.disaster = Disaster(
+            cardName: "Before extreme heat",
+            hints: Hints.extremeHeat
+        )
         
         let eruptionController = ContentViewController.create()
-        eruptionController.disaster = Disaster(cardName: "Before eruption", hints: Hints.eruption)
+        eruptionController.disaster = Disaster(
+            cardName: "Before eruption",
+            hints: Hints.eruption
+        )
         
         let floodsController = ContentViewController.create()
-        floodsController.disaster = Disaster(cardName: "Before floods", hints: Hints.floods)
+        floodsController.disaster = Disaster(
+            cardName: "Before floods",
+            hints: Hints.floods
+        )
         
         let wildfiresController = ContentViewController.create()
-        wildfiresController.disaster = Disaster(cardName: "Before wildfires", hints: Hints.wildfires)
+        wildfiresController.disaster = Disaster(
+            cardName: "Before wildfires",
+            hints: Hints.wildfires
+        )
         
         return [
             tornadoController,

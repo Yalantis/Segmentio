@@ -55,19 +55,7 @@ open class Segmentio: UIView {
     fileprivate var indicatorLayer: CAShapeLayer?
     fileprivate var selectedLayer: CAShapeLayer?
     
-    fileprivate var cachedOrientation: UIInterfaceOrientation? = UIApplication.shared.statusBarOrientation {
-        didSet {
-            if cachedOrientation != oldValue {
-                reloadSegmentio()
-            }
-        }
-    }
-    
     // MARK: - Lifecycle
-    
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
     
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -79,14 +67,13 @@ open class Segmentio: UIView {
         commonInit()
     }
     
+    open override func layoutSubviews() {
+        super.layoutSubviews()
+        reloadSegmentio()
+    }
+    
     fileprivate func commonInit() {
         setupSegmentedCollectionView()
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(Segmentio.handleOrientationNotification),
-            name: NSNotification.Name.UIDeviceOrientationDidChange,
-            object: nil
-        )
     }
     
     fileprivate func setupSegmentedCollectionView() {
@@ -142,12 +129,6 @@ open class Segmentio: UIView {
             width: bounds.width,
             height: bounds.height - separatorsHeight
         )
-    }
-    
-    // MARK: - Handle orientation notification
-    
-    @objc fileprivate func handleOrientationNotification() {
-         cachedOrientation = UIApplication.shared.statusBarOrientation
     }
     
     // MARK: - Setups:
@@ -341,7 +322,7 @@ open class Segmentio: UIView {
     // MARK: - Actions:
     // MARK: Reload segmentio
     public func reloadSegmentio() {
-        segmentioCollectionView?.reloadData()
+        segmentioCollectionView?.collectionViewLayout.invalidateLayout()
         scrollToItemAtContext()
         moveShapeLayerAtContext()
     }
@@ -406,9 +387,10 @@ open class Segmentio: UIView {
             )
         }
         
-        if context.isFirstOrSecondVisibleCell == true {
+        if context.isFirstOrSecondVisibleCell == true && selectedSegmentioIndex != -1 {
             let newIndex = selectedSegmentioIndex - (context.isFirstIndex ? 1 : 0)
             let newIndexPath = IndexPath(item: newIndex, section: numberOfSections - 1)
+            
             segmentioCollectionView?.scrollToItem(
                 at: newIndexPath,
                 at: UICollectionViewScrollPosition(),

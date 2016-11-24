@@ -84,7 +84,7 @@ public struct SegmentioVerticalSeparatorOptions {
     var ratio: CGFloat
     var color: UIColor
     
-    public init(ratio: CGFloat = 1.0, color: UIColor = .darkGray) {
+    public init(ratio: CGFloat = 1, color: UIColor = .darkGray) {
         self.ratio = ratio
         self.color = color
     }
@@ -107,7 +107,7 @@ public struct SegmentioIndicatorOptions {
     var height: CGFloat
     var color: UIColor
     
-    public init(type: SegmentioIndicatorType = .bottom, ratio: CGFloat = 1.0, height: CGFloat = 2.0, color: UIColor = .orange) {
+    public init(type: SegmentioIndicatorType = .bottom, ratio: CGFloat = 1, height: CGFloat = 2, color: UIColor = .orange) {
         self.type = type
         self.ratio = ratio
         self.height = height
