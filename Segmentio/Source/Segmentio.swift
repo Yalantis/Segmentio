@@ -44,8 +44,8 @@ open class Segmentio: UIView {
         }
     }
     
+    open fileprivate(set) var segmentioItems = [SegmentioItem]()
     fileprivate var segmentioCollectionView: UICollectionView?
-    fileprivate var segmentioItems = [SegmentioItem]()
     fileprivate var segmentioOptions = SegmentioOptions()
     fileprivate var segmentioStyle = SegmentioStyle.imageOverLabel
     fileprivate var isPerformingScrollAnimation = false
