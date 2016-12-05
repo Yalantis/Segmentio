@@ -12,11 +12,11 @@ import UIKit
 
 public struct SegmentioItem {
     
-    var title: String?
-    var image: UIImage?
-    var badgeCount: Int?
-    var badgeColor: UIColor?
-    
+    private(set) public var title: String?
+    private(set) public var image: UIImage?
+    private(set) public var badgeCount: Int?
+    private(set) public var badgeColor: UIColor?
+
     public init(title: String?, image: UIImage?) {
         self.title = title
         self.image = image
