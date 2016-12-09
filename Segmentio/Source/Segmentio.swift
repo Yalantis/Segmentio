@@ -43,7 +43,7 @@ open class Segmentio: UIView {
             }
         }
     }
-    
+
     open fileprivate(set) var segmentioItems = [SegmentioItem]()
     fileprivate var segmentioCollectionView: UICollectionView?
     fileprivate var segmentioOptions = SegmentioOptions()
@@ -323,6 +323,7 @@ open class Segmentio: UIView {
     // MARK: Reload segmentio
     public func reloadSegmentio() {
         segmentioCollectionView?.collectionViewLayout.invalidateLayout()
+        segmentioCollectionView?.reloadData()
         scrollToItemAtContext()
         moveShapeLayerAtContext()
     }
