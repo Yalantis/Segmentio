@@ -16,6 +16,12 @@ public struct SegmentioItem {
     public var image: UIImage?
     public var badgeCount: Int?
     public var badgeColor: UIColor?
+    public var intrinsicWidth: CGFloat {
+        let label = UILabel()
+        label.text = self.title
+        label.sizeToFit()
+        return label.intrinsicContentSize.width
+    }
 
     public init(title: String?, image: UIImage?) {
         self.title = title
@@ -116,6 +122,13 @@ public struct SegmentioIndicatorOptions {
     
 }
 
+// MARK: - Position
+
+public enum SegmentioPosition {
+    case dynamic
+    case fixed(maxVisibleItems: Int)
+}
+
 // MARK: - Control options
 
 public enum SegmentioStyle: String {
@@ -155,7 +168,7 @@ public typealias SegmentioStates = (defaultState: SegmentioState, selectedState:
 public struct SegmentioOptions {
     
     var backgroundColor: UIColor
-    var maxVisibleItems: Int
+    var segmentPosition: SegmentioPosition
     var scrollEnabled: Bool
     var horizontalSeparatorOptions: SegmentioHorizontalSeparatorOptions?
     var verticalSeparatorOptions: SegmentioVerticalSeparatorOptions?
@@ -168,7 +181,7 @@ public struct SegmentioOptions {
     
     public init() {
         self.backgroundColor = .lightGray
-        self.maxVisibleItems = 4
+        self.segmentPosition = .fixed(maxVisibleItems: 4)
         self.scrollEnabled = true
         
         self.horizontalSeparatorOptions = SegmentioHorizontalSeparatorOptions()
@@ -188,9 +201,9 @@ public struct SegmentioOptions {
         self.animationDuration = 0.1
     }
     
-    public init(backgroundColor: UIColor, maxVisibleItems: Int, scrollEnabled: Bool, indicatorOptions: SegmentioIndicatorOptions?, horizontalSeparatorOptions: SegmentioHorizontalSeparatorOptions?, verticalSeparatorOptions: SegmentioVerticalSeparatorOptions?, imageContentMode: UIViewContentMode, labelTextAlignment: NSTextAlignment, labelTextNumberOfLines: Int, segmentStates: SegmentioStates, animationDuration: CFTimeInterval) {
+    public init(backgroundColor: UIColor, segmentPosition: SegmentioPosition, scrollEnabled: Bool, indicatorOptions: SegmentioIndicatorOptions?, horizontalSeparatorOptions: SegmentioHorizontalSeparatorOptions?, verticalSeparatorOptions: SegmentioVerticalSeparatorOptions?, imageContentMode: UIViewContentMode, labelTextAlignment: NSTextAlignment, labelTextNumberOfLines: Int, segmentStates: SegmentioStates, animationDuration: CFTimeInterval) {
         self.backgroundColor = backgroundColor
-        self.maxVisibleItems = maxVisibleItems
+        self.segmentPosition = segmentPosition
         self.scrollEnabled = scrollEnabled
         self.indicatorOptions = indicatorOptions
         self.horizontalSeparatorOptions = horizontalSeparatorOptions

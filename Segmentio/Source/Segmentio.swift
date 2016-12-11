@@ -334,12 +334,8 @@ open class Segmentio: UIView {
         if let indicatorLayer = indicatorLayer, let options = segmentioOptions.indicatorOptions {
             let item = itemInSuperview(ratio: options.ratio)
             let context = contextForItem(item)
-            
-            let points = Points(
-                context: context,
-                item: item,
-                pointY: indicatorPointY()
-            )
+
+            let points = Points(context: context, item: item, atIndex: selectedSegmentioIndex, allItems: segmentioItems, pointY: indicatorPointY(), position: segmentioOptions.segmentPosition)
             
             moveShapeLayer(
                 indicatorLayer,
@@ -352,12 +348,8 @@ open class Segmentio: UIView {
         if let selectedLayer = selectedLayer {
             let item = itemInSuperview()
             let context = contextForItem(item)
-            
-            let points = Points(
-                context: context,
-                item: item,
-                pointY: bounds.midY
-            )
+
+            let points = Points(context: context, item: item, atIndex: selectedSegmentioIndex, allItems: segmentioItems, pointY: bounds.midY, position: segmentioOptions.segmentPosition)
             
             moveShapeLayer(
                 selectedLayer,
@@ -378,7 +370,7 @@ open class Segmentio: UIView {
         let item = itemInSuperview()
         let context = contextForItem(item)
         
-        if context.isLastOrPrelastVisibleCell == true {
+        if context.isLastOrPrelastVisibleCell == true && selectedSegmentioIndex != -1 {
             let newIndex = selectedSegmentioIndex + (context.isLastCell ? 0 : 1)
             let newIndexPath = IndexPath(item: newIndex, section: numberOfSections - 1)
             segmentioCollectionView?.scrollToItem(
@@ -465,13 +457,24 @@ open class Segmentio: UIView {
         
         if let collectionView = segmentioCollectionView {
             collectionViewWidth = collectionView.frame.width
-            let maxVisibleItems = segmentioOptions.maxVisibleItems > segmentioItems.count ? CGFloat(segmentioItems.count) : CGFloat(segmentioOptions.maxVisibleItems)
-            cellWidth = floor(collectionViewWidth / maxVisibleItems)
-            
+            cellWidth = segmentWidth(for: IndexPath(row: selectedSegmentioIndex, section: 0))
+            var x: CGFloat = 0
+            switch segmentioOptions.segmentPosition {
+            case .fixed:
+                x = floor(CGFloat(selectedSegmentioIndex) * cellWidth - collectionView.contentOffset.x)
+            case .dynamic:
+                guard selectedSegmentioIndex != -1 else {
+                    break
+                }
+                for i in 0..<selectedSegmentioIndex {
+                    x += segmentWidth(for: IndexPath(item: i, section: 0))
+                }
+                x -= collectionView.contentOffset.x
+            }
             cellRect = CGRect(
-                x: floor(CGFloat(selectedSegmentioIndex) * cellWidth - collectionView.contentOffset.x),
+                x: x,
                 y: 0,
-                width: floor(collectionViewWidth / maxVisibleItems),
+                width: cellWidth,
                 height: collectionView.frame.height
             )
             
@@ -485,6 +488,30 @@ open class Segmentio: UIView {
             startX: floor(cellRect.midX - (shapeLayerWidth / 2)),
             endX: floor(cellRect.midX + (shapeLayerWidth / 2))
         )
+    }
+
+    // MARK: - Segment Width
+
+    fileprivate func segmentWidth(for indexPath: IndexPath) -> CGFloat {
+        var width: CGFloat = 0
+        if let collectionView = segmentioCollectionView {
+            let collectionViewWidth = collectionView.frame.width
+            switch segmentioOptions.segmentPosition {
+            case .fixed(let maxVisibleItems):
+                let maxItems = maxVisibleItems > segmentioItems.count ? CGFloat(segmentioItems.count) : CGFloat(maxVisibleItems)
+                width = maxItems == 0 ? 0 : floor(collectionViewWidth / CGFloat(maxItems))
+            case .dynamic:
+                if segmentioItems.count == 0 {
+                    break
+                }
+                var dynamicWidth: CGFloat = 0
+                for item in segmentioItems {
+                    dynamicWidth += item.intrinsicWidth
+                }
+                width = dynamicWidth > collectionViewWidth ? segmentioItems[indexPath.row].intrinsicWidth : segmentioItems[indexPath.row].intrinsicWidth + ((collectionViewWidth - dynamicWidth) / CGFloat(segmentioItems.count))
+            }
+        }
+        return width
     }
     
     // MARK: - Indicator point Y
@@ -526,6 +553,10 @@ open class Segmentio: UIView {
 // MARK: - UICollectionViewDataSource
 
 extension Segmentio: UICollectionViewDataSource {
+
+    public func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
     
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return segmentioItems.count
@@ -569,8 +600,7 @@ extension Segmentio: UICollectionViewDelegate {
 extension Segmentio: UICollectionViewDelegateFlowLayout {
     
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let maxVisibleItems = segmentioOptions.maxVisibleItems > segmentioItems.count ? CGFloat(segmentioItems.count) : CGFloat(segmentioOptions.maxVisibleItems)
-        return CGSize( width: floor(collectionView.frame.width / maxVisibleItems), height: collectionView.frame.height)
+        return CGSize(width: segmentWidth(for: indexPath), height: collectionView.frame.height)
     }
     
 }
@@ -583,7 +613,7 @@ extension Segmentio: UIScrollViewDelegate {
         if isPerformingScrollAnimation {
             return
         }
-        
+
         if let options = segmentioOptions.indicatorOptions, let indicatorLayer = indicatorLayer {
             let item = itemInSuperview(ratio: options.ratio)
             moveShapeLayer(
@@ -609,36 +639,71 @@ extension Segmentio: UIScrollViewDelegate {
 
 extension Segmentio.Points {
     
-    init(context: Segmentio.Context, item: Segmentio.ItemInSuperview, pointY: CGFloat) {
+    init(context: Segmentio.Context, item: Segmentio.ItemInSuperview, atIndex index: Int, allItems: [SegmentioItem], pointY: CGFloat, position: SegmentioPosition) {
         let cellWidth = item.cellFrameInSuperview.width
         
         var startX = item.startX
         var endX = item.endX
-        
-        if context.isFirstCell == false && context.isLastCell == false {
-            if context.isLastOrPrelastVisibleCell == true {
-                let updatedStartX = item.collectionViewWidth - (cellWidth * 2) + ((cellWidth - item.shapeLayerWidth) / 2)
-                startX = updatedStartX
-                let updatedEndX = updatedStartX + item.shapeLayerWidth
-                endX = updatedEndX
+
+        switch position {
+        case .fixed(_):
+            if context.isFirstCell == false && context.isLastCell == false {
+                if context.isLastOrPrelastVisibleCell == true {
+                    let updatedStartX = item.collectionViewWidth - (cellWidth * 2) + ((cellWidth - item.shapeLayerWidth) / 2)
+                    startX = updatedStartX
+                    let updatedEndX = updatedStartX + item.shapeLayerWidth
+                    endX = updatedEndX
+                }
+    
+                if context.isFirstOrSecondVisibleCell == true {
+                    let updatedEndX = (cellWidth * 2) - ((cellWidth - item.shapeLayerWidth) / 2)
+                    endX = updatedEndX
+                    let updatedStartX = updatedEndX - item.shapeLayerWidth
+                    startX = updatedStartX
+                }
+
+                if context.isFirstCell == true {
+                    startX = (cellWidth - item.shapeLayerWidth) / 2
+                    endX = startX + item.shapeLayerWidth
+                }
+
+                if context.isLastCell == true {
+                    startX = item.collectionViewWidth - cellWidth + (cellWidth - item.shapeLayerWidth) / 2
+                    endX = startX + item.shapeLayerWidth
+                }
             }
-            
-            if context.isFirstOrSecondVisibleCell == true {
-                let updatedEndX = (cellWidth * 2) - ((cellWidth - item.shapeLayerWidth) / 2)
-                endX = updatedEndX
-                let updatedStartX = updatedEndX - item.shapeLayerWidth
-                startX = updatedStartX
+        case .dynamic:
+            // If the collection content view is not completely visible...
+            // We have to calculate the final position of the item
+            var dynamicWidth: CGFloat = 0
+            for item in allItems {
+                dynamicWidth += item.intrinsicWidth
             }
-        }
-        
-        if context.isFirstCell == true {
-            startX = (cellWidth - item.shapeLayerWidth) / 2
-            endX = startX + item.shapeLayerWidth
-        }
-        
-        if context.isLastCell == true {
-            startX = item.collectionViewWidth - cellWidth + (cellWidth - item.shapeLayerWidth) / 2
-            endX = startX + item.shapeLayerWidth
+            if item.collectionViewWidth < dynamicWidth {
+                startX = 0
+                endX = 0
+                var spaceBefore: CGFloat = 0
+                var spaceAfter: CGFloat = 0
+                var i = 0
+                for item in allItems {
+                    if i < index {
+                        spaceBefore += item.intrinsicWidth
+                    } else if i > index {
+                        spaceAfter += item.intrinsicWidth
+                    }
+                    i += 1
+                }
+                // Cell will try to position itself in the middle, unless it can't because
+                // the collection view has reached the beginning or end
+                if spaceBefore < (item.collectionViewWidth - cellWidth) / 2 {
+                    startX = spaceBefore
+                } else if spaceAfter < (item.collectionViewWidth - cellWidth) / 2 {
+                    startX = item.collectionViewWidth - spaceAfter - item.cellFrameInSuperview.width
+                } else {
+                    startX = (item.collectionViewWidth / 2) - (cellWidth / 2 )
+                }
+                endX = startX + cellWidth
+            }
         }
         
         startPoint = CGPoint(x: startX, y: pointY)
