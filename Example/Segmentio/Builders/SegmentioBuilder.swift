@@ -49,7 +49,7 @@ struct SegmentioBuilder {
         
         return SegmentioOptions(
             backgroundColor: ColorPalette.white,
-            maxVisibleItems: 3,
+            segmentPosition: .fixed(maxVisibleItems: 3),
             scrollEnabled: true,
             indicatorOptions: segmentioIndicatorOptions(),
             horizontalSeparatorOptions: segmentioHorizontalSeparatorOptions(),
