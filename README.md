@@ -41,7 +41,7 @@ You can initialize a `Segmentio` instance from code:
 ```swift
 var segmentioView: Segmentio!
 
-let segmentioViewRect = CGRect(x: 0, y: 0, width: UIScreen.mainScreen().bounds.width, height: 125)
+let segmentioViewRect = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 125)
 segmentioView = Segmentio(frame: segmentioViewRect)
 view.addSubview(segmentioView)
 ```
@@ -56,7 +56,7 @@ add a `UIView` instance in your .storyboard or .xib, set `Segmentio` class and c
 
 ####Setup `Segmentio`
 ```swift
-segmentioView.setupContent(
+segmentioView.setup(
 	content: [SegmentioItem],
 	style: SegmentioStyle,
 	options: SegmentioOptions?
@@ -66,7 +66,7 @@ segmentioView.setupContent(
 To start with default options you can just pass `nil` to the `options` parameter.
 
 ```swift
-segmentioView.setupContent(
+segmentioView.setup(
 	content: [SegmentioItem],
 	style: SegmentioStyle,
 	options: nil
@@ -91,7 +91,7 @@ content.append(tornadoItem)
 You can specify selected item manually:
 
 ```swift
-segmentioView.selectedSegmentIndex = 0
+segmentioView.selectedSegmentioIndex = 0
 ```
 
 ####Handling callback
@@ -107,17 +107,15 @@ segmentioView.valueDidChange = { segmentio, segmentIndex in
 
 ```swift
 SegmentioOptions(
-	backgroundColor: UIColor.whiteColor(),
-	maxVisibleItems: 3,
-	scrollEnabled: true,
-	indicatorOptions: SegmentioIndicatorOptions,
-	horizontalSeparatorOptions: SegmentioHorizontalSeparatorOptions,
-	verticalSeparatorOptions: SegmentioVerticalSeparatorOptions,
-	imageContentMode: UIViewContentMode.Center,
-	labelTextNumberOfLines: 1,
-	labelTextAlignment: NSTextAlignment.Center,
-	segmentStates: SegmentioStates, // tuple of SegmentioState (defaultState, selectState, highlightedState)
-	animationDuration: 0.1
+            backgroundColor: .white,
+            maxVisibleItems: 3,
+            scrollEnabled: true,
+            indicatorOptions: SegmentioIndicatorOptions,
+            horizontalSeparatorOptions: SegmentioHorizontalSeparatorOptions,
+            verticalSeparatorOptions: SegmentioVerticalSeparatorOptions,
+            imageContentMode: .center,
+            labelTextAlignment: .center,
+            segmentStates: SegmentioStates
 )
 ```
 
@@ -125,10 +123,10 @@ Selection indicator can be customized by passing an instance of `SegmentioIndica
 
 ```swift
 SegmentioIndicatorOptions(
-	type: .Bottom,
-	ratio: 1,
-	height: 5,
-	color: UIColor.orangeColor()
+            type: .bottom,
+            ratio: 1,
+            height: 5,
+            color: .orange
 )
 ```
 
@@ -136,9 +134,9 @@ Horizontal borders can be customized by passing an instance of `SegmentioHorizon
 
 ```swift
 SegmentioHorizontalSeparatorOptions(
-	type: SegmentioHorizontalSeparatorType.TopAndBottom, // Top, Bottom, TopAndBottom
-	height: 1,
-	color: UIColor.grayColor()
+            type: SegmentioHorizontalSeparatorType.topAndBottom, // Top, Bottom, TopAndBottom
+            height: 1,
+            color: .gray
 )
 ```
 
@@ -146,8 +144,8 @@ Separators between segments can be customized by passing an instance of  `Segmen
 
 ```swift
 SegmentioVerticalSeparatorOptions(
-	ratio: 0.6 // from 0.1 to 1
-	color: UIColor.grayColor()
+            ratio: 0.6, // from 0.1 to 1
+            color: .gray
 )
 ```
 
@@ -155,21 +153,21 @@ In order to set `SegmentioStates` you need to create a tuple of `SegmentioState`
 
 ```swift
 SegmentioStates(
-	defaultState: segmentioState(
-		backgroundColor: UIColor.clearColor(),
-		titleFont: UIFont.systemFontOfSize(UIFont.smallSystemFontSize()),
-		titleTextColor: UIColor.blackColor()
-	),
-	selectState: segmentioState(
-		backgroundColor: UIColor.orangeColor(),
-		titleFont: UIFont.systemFontOfSize(UIFont.smallSystemFontSize()),
-		titleTextColor: UIColor.whiteColor()
-	),
-	highlightedState: segmentioState(
-		backgroundColor: UIColor.lightGrayColor().colorWithAlphaComponent(0.6),
-		titleFont: UIFont.boldSystemFontOfSize(UIFont.smallSystemFontSize()),
-		titleTextColor: UIColor.blackColor()
-	)
+            defaultState: SegmentioState(
+                backgroundColor: .clear,
+                titleFont: UIFont.systemFont(ofSize: UIFont.smallSystemFontSize),
+                titleTextColor: .black
+            ),
+            selectedState: SegmentioState(
+                backgroundColor: .orange,
+                titleFont: UIFont.systemFont(ofSize: UIFont.smallSystemFontSize),
+                titleTextColor: .white
+            ),
+            highlightedState: SegmentioState(
+                backgroundColor: UIColor.lightGray.withAlphaComponent(0.6),
+                titleFont: UIFont.boldSystemFont(ofSize: UIFont.smallSystemFontSize),
+                titleTextColor: .black
+            )
 )
 ```
 
