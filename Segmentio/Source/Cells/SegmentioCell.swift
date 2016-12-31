@@ -173,12 +173,10 @@ class SegmentioCell: UICollectionViewCell {
     // MARK: - Private functions
     
     fileprivate func setupContainerConstraints() {
-        guard let segmentTitleLabel = segmentTitleLabel else {
-            return
-        }
-        guard let containerView = containerView else {
-            return
-        }
+        
+        guard let segmentTitleLabel = segmentTitleLabel, let containerView = containerView else { return }
+        
+        var constraints: [NSLayoutConstraint] = []
         
         let segmentTitleLabelHorizontalCenterConstraint =
             NSLayoutConstraint(
@@ -190,6 +188,28 @@ class SegmentioCell: UICollectionViewCell {
                 multiplier: 1,
                 constant: 0
         )
+        constraints.append(segmentTitleLabelHorizontalCenterConstraint)
+        
+        if #available(iOS 9, *) {
+        
+            segmentTitleLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 5).isActive = true
+        
+        } else {
+            
+             let anchorConstraint = NSLayoutConstraint(
+                item: segmentTitleLabel,
+                attribute: .leading,
+                relatedBy: .equal,
+                toItem: containerView,
+                attribute: .leadingMargin,
+                multiplier: 1.0,
+                constant: -4.0
+            )
+            anchorConstraint.isActive = true
+            
+            constraints.append(anchorConstraint)
+
+        }
         
         let segmentTitleLabelVerticalCenterConstraint =
             NSLayoutConstraint(
@@ -201,10 +221,10 @@ class SegmentioCell: UICollectionViewCell {
                 multiplier: 1,
                 constant: 0
         )
-        addConstraints([
-            segmentTitleLabelHorizontalCenterConstraint,
-            segmentTitleLabelVerticalCenterConstraint
-            ])
+        constraints.append(segmentTitleLabelVerticalCenterConstraint)
+        
+        addConstraints(constraints)
+        
     }
     
     fileprivate func setupImageContainerConstraints() {
