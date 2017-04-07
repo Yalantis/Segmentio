@@ -1,4 +1,4 @@
-##Segmentio
+## Segmentio
 [![Platform](http://img.shields.io/badge/platform-iOS-blue.svg?style=flat)](https://cocoapods.org/?q=segmentio) [![License](http://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://github.com/Yalantis/Segmentio/blob/master/LICENSE) ![Swift 3.x](https://img.shields.io/badge/Swift-3.0-orange.svg) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
 Animated top/bottom segmented control written in Swift.
@@ -7,15 +7,15 @@ Animated top/bottom segmented control written in Swift.
 
 Check this <a href="https://dribbble.com/shots/2820372-Segmentio-Component">project on dribbble</a>.
 
-##Requirements
+## Requirements
 
 - Xcode 8
 - iOS 8.x+
 - Swift 3
 
-##Installation
+## Installation
 
-####[CocoaPods](http://cocoapods.org)
+#### [CocoaPods](http://cocoapods.org)
 ```ruby
 use_frameworks! 
 
@@ -24,18 +24,18 @@ pod 'Segmentio', '~> 2.1'
 
 *CocoaPods v1.1.0 or later required*
 
-####[Carthage](http://github.com/Carthage/Carthage)
+#### [Carthage](http://github.com/Carthage/Carthage)
 ```ruby
 github "Yalantis/Segmentio" ~> 2.1
 ```
 
-##Usage
-####Import `Segmentio` module
+## Usage
+#### Import `Segmentio` module
 ```swift
 import Segmentio
 ```
 
-####Init
+#### Init
 You can initialize a `Segmentio` instance from code:
 
 ```swift
@@ -54,7 +54,7 @@ add a `UIView` instance in your .storyboard or .xib, set `Segmentio` class and c
 @IBOutlet weak var segmentioView: Segmentio!
 ```
 
-####Setup `Segmentio`
+#### Setup `Segmentio`
 ```swift
 segmentioView.setup(
 	content: [SegmentioItem],
@@ -74,7 +74,7 @@ segmentioView.setup(
 ```
 
 
-####Configuring items 
+#### Configuring items 
 In order to set items you need to create an array of `SegmentioItem` instances:
 
 ```swift
@@ -87,14 +87,14 @@ let tornadoItem = SegmentioItem(
 content.append(tornadoItem)
 ```
 
-####Handling selection
+#### Handling selection
 You can specify selected item manually:
 
 ```swift
 segmentioView.selectedSegmentioIndex = 0
 ```
 
-####Handling callback
+#### Handling callback
 
 ```swift
 segmentioView.valueDidChange = { segmentio, segmentIndex in
@@ -102,7 +102,7 @@ segmentioView.valueDidChange = { segmentio, segmentIndex in
 }
 ```
 
-####Customization
+#### Customization
 `Segmentio` can be customized by passing an instance of `SegmentioOptions` struct:
 
 ```swift
@@ -171,12 +171,12 @@ SegmentioStates(
 )
 ```
 
-####Let us know!
+#### Let us know!
 We’d be really happy if you sent us links to your projects where you use our component. Just send an email to github@yalantis.com And do let us know if you have any questions or suggestion regarding the animation.
 
 P.S. We’re going to publish more awesomeness wrapped in code and a tutorial on how to make UI for iOS (Android) better than better. Stay tuned!
 
-##License
+## License
 
 The MIT License (MIT)
 
