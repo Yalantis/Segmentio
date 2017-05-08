@@ -139,9 +139,9 @@ class SegmentioCell: UICollectionViewCell {
         if style.isWithText() {
             segmentTitleLabel?.textColor = selected ? selectedState.titleTextColor : defaultState.titleTextColor
             segmentTitleLabel?.font = selected ? selectedState.titleFont : defaultState.titleFont
-            backgroundColor = selected ? selectedState.backgroundColor : defaultState.backgroundColor
-            segmentImageView?.tintColor = selected ? selectedState.imageTintColor : defaultState.imageTintColor
         }
+        backgroundColor = selected ? selectedState.backgroundColor : defaultState.backgroundColor
+        segmentImageView?.tintColor = selected ? selectedState.imageTintColor : defaultState.imageTintColor
     }
     
     func configurateBadgeWithCount(_ badgeCount: Int?, color: UIColor?) {
