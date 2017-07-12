@@ -173,38 +173,43 @@ class SegmentioCell: UICollectionViewCell {
     // MARK: - Private functions
     
     fileprivate func setupContainerConstraints() {
-        guard let segmentTitleLabel = segmentTitleLabel else {
-            return
-        }
-        guard let containerView = containerView else {
+        guard let segmentTitleLabel = segmentTitleLabel, let containerView = containerView else {
             return
         }
         
-        let segmentTitleLabelHorizontalCenterConstraint =
-            NSLayoutConstraint(
-                item: segmentTitleLabel,
-                attribute: .centerX,
-                relatedBy: .equal,
-                toItem: containerView,
-                attribute: .centerX,
-                multiplier: 1,
-                constant: 0
+        let segmentTitleLabelVerticalCenterConstraint = NSLayoutConstraint(
+            item: segmentTitleLabel,
+            attribute: .centerY,
+            relatedBy: .equal,
+            toItem: containerView,
+            attribute: .centerY,
+            multiplier: 1,
+            constant: 0
+        )
+        let segmentTitleLabelTrailingConstraint = NSLayoutConstraint(
+            item: segmentTitleLabel,
+            attribute: .trailing,
+            relatedBy: .equal,
+            toItem: containerView,
+            attribute: .trailingMargin,
+            multiplier: 1.0,
+            constant: 0
+        )
+        let segmentTitleLabelLeadingConstraint = NSLayoutConstraint(
+            item: segmentTitleLabel,
+            attribute: .leading,
+            relatedBy: .equal,
+            toItem: containerView,
+            attribute: .leadingMargin,
+            multiplier: 1.0,
+            constant: 0
         )
         
-        let segmentTitleLabelVerticalCenterConstraint =
-            NSLayoutConstraint(
-                item: segmentTitleLabel,
-                attribute: .centerY,
-                relatedBy: .equal,
-                toItem: containerView,
-                attribute: .centerY,
-                multiplier: 1,
-                constant: 0
-        )
         addConstraints([
-            segmentTitleLabelHorizontalCenterConstraint,
-            segmentTitleLabelVerticalCenterConstraint
-            ])
+            segmentTitleLabelTrailingConstraint,
+            segmentTitleLabelVerticalCenterConstraint,
+            segmentTitleLabelLeadingConstraint
+        ])
     }
     
     fileprivate func setupImageContainerConstraints() {
