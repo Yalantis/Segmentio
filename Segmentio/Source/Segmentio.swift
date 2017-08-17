@@ -536,14 +536,16 @@ extension Segmentio: UICollectionViewDataSource {
             withReuseIdentifier: segmentioStyle.rawValue,
             for: indexPath) as! SegmentioCell
         
+        let content = segmentioItems[indexPath.row]
+        
         cell.configure(
-            content: segmentioItems[indexPath.row],
+            content: content,
             style: segmentioStyle,
             options: segmentioOptions,
             isLastCell: indexPath.row == segmentioItems.count - 1
         )
         
-        cell.configure(selected: (indexPath.row == selectedSegmentioIndex))
+        cell.configure(selected: (indexPath.row == selectedSegmentioIndex), selectedImage:content.selectedImage, image:content.image)
         
         return cell
     }
