@@ -96,6 +96,7 @@ open class Segmentio: UIView {
         collectionView.bounces = true
         collectionView.isScrollEnabled = segmentioOptions.scrollEnabled
         collectionView.backgroundColor = .clear
+			collectionView.accessibilityIdentifier = "segmentio_collection_view"
         
         segmentioCollectionView = collectionView
         
