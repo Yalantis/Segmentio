@@ -253,7 +253,7 @@ open class Segmentio: UIView {
             bottomSeparatorView = UIView(frame: CGRect.zero)
             setupConstraintsForSeparatorView(
                 separatorView: bottomSeparatorView,
-                originY: frame.maxY - height
+                originY: bounds.maxY - height
             )
         }
     }
@@ -271,7 +271,7 @@ open class Segmentio: UIView {
             item: separatorView,
             attribute: .top,
             relatedBy: .equal,
-            toItem: superview,
+            toItem: self,
             attribute: .top,
             multiplier: 1,
             constant: originY
