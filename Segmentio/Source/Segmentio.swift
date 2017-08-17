@@ -112,6 +112,8 @@ open class Segmentio: UIView {
             let separatorHeight = horizontalSeparatorOptions.height
             
             switch horizontalSeparatorOptions.type {
+            case .none:
+                separatorsHeight = 0
             case .top:
                 collectionViewFrameMinY = separatorHeight
                 separatorsHeight = separatorHeight
@@ -511,6 +513,8 @@ open class Segmentio: UIView {
         let isIndicatorTop = indicatorOptions.type == .top
         
         switch horizontalSeparatorOptions.type {
+        case .none:
+            break
         case .top:
             indicatorPointY = isIndicatorTop ? indicatorPointY + separatorHeight : indicatorPointY
         case .bottom:

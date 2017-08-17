@@ -56,7 +56,7 @@ public struct SegmentioState {
 // MARK: - Horizontal separator
 
 public enum SegmentioHorizontalSeparatorType {
-    
+    case none
     case top
     case bottom
     case topAndBottom
