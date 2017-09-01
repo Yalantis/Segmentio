@@ -130,7 +130,7 @@ class SegmentioCell: UICollectionViewCell {
         configurateBadgeWithCount(content.badgeCount, color: content.badgeColor)
     }
     
-    func configure(selected: Bool) {
+    func configure(selected: Bool, selectedImage: UIImage? = nil, image: UIImage? = nil) {
         cellSelected = selected
         
         let selectedState = options.states.selectedState
@@ -139,6 +139,10 @@ class SegmentioCell: UICollectionViewCell {
         if style.isWithText() {
             segmentTitleLabel?.textColor = selected ? selectedState.titleTextColor : defaultState.titleTextColor
             segmentTitleLabel?.font = selected ? selectedState.titleFont : defaultState.titleFont
+        }
+                
+        if (style != .onlyLabel) {
+            segmentImageView?.image = selected ? selectedImage : image
         }
     }
     
