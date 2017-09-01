@@ -140,9 +140,7 @@ class SegmentioCell: UICollectionViewCell {
             segmentTitleLabel?.textColor = selected ? selectedState.titleTextColor : defaultState.titleTextColor
             segmentTitleLabel?.font = selected ? selectedState.titleFont : defaultState.titleFont
         }
-        
-        backgroundColor = selected ? selectedState.backgroundColor : defaultState.backgroundColor
-        
+                
         if (style != .onlyLabel) {
             segmentImageView?.image = selected ? selectedImage : image
         }
