@@ -21,7 +21,7 @@ public struct SegmentioItem {
     public init(title: String?, image: UIImage?, selectedImage: UIImage? = nil) {
         self.title = title
         self.image = image
-        self.selectedImage = selectedImage
+        self.selectedImage = selectedImage ?? image
     }
     
     public mutating func addBadge(_ count: Int, color: UIColor) {

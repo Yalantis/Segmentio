@@ -96,7 +96,7 @@ open class Segmentio: UIView {
         collectionView.bounces = true
         collectionView.isScrollEnabled = segmentioOptions.scrollEnabled
         collectionView.backgroundColor = .clear
-			collectionView.accessibilityIdentifier = "segmentio_collection_view"
+        collectionView.accessibilityIdentifier = "segmentio_collection_view"
         
         segmentioCollectionView = collectionView
         
@@ -546,7 +546,11 @@ extension Segmentio: UICollectionViewDataSource {
             isLastCell: indexPath.row == segmentioItems.count - 1
         )
         
-        cell.configure(selected: (indexPath.row == selectedSegmentioIndex), selectedImage:content.selectedImage, image:content.image)
+        cell.configure(
+            selected: (indexPath.row == selectedSegmentioIndex),
+            selectedImage: content.selectedImage,
+            image: content.image
+        )
         
         return cell
     }

@@ -130,7 +130,7 @@ class SegmentioCell: UICollectionViewCell {
         configurateBadgeWithCount(content.badgeCount, color: content.badgeColor)
     }
     
-    func configure(selected: Bool, selectedImage:UIImage? = nil, image:UIImage? = nil) {
+    func configure(selected: Bool, selectedImage: UIImage? = nil, image: UIImage? = nil) {
         cellSelected = selected
         
         let selectedState = options.states.selectedState
