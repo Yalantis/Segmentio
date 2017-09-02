@@ -113,6 +113,8 @@ open class Segmentio: UIView {
             let separatorHeight = horizontalSeparatorOptions.height
             
             switch horizontalSeparatorOptions.type {
+            case .none:
+                separatorsHeight = 0
             case .top:
                 collectionViewFrameMinY = separatorHeight
                 separatorsHeight = separatorHeight
@@ -252,7 +254,7 @@ open class Segmentio: UIView {
             bottomSeparatorView = UIView(frame: CGRect.zero)
             setupConstraintsForSeparatorView(
                 separatorView: bottomSeparatorView,
-                originY: frame.maxY - height
+                originY: bounds.maxY - height
             )
         }
     }
@@ -270,7 +272,7 @@ open class Segmentio: UIView {
             item: separatorView,
             attribute: .top,
             relatedBy: .equal,
-            toItem: superview,
+            toItem: self,
             attribute: .top,
             multiplier: 1,
             constant: originY
@@ -512,6 +514,8 @@ open class Segmentio: UIView {
         let isIndicatorTop = indicatorOptions.type == .top
         
         switch horizontalSeparatorOptions.type {
+        case .none:
+            break
         case .top:
             indicatorPointY = isIndicatorTop ? indicatorPointY + separatorHeight : indicatorPointY
         case .bottom:
