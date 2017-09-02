@@ -49,7 +49,7 @@ class SegmentioCell: UICollectionViewCell {
                     segmentTitleLabel?.font = isHighlighted ? highlightedState.titleFont : highlightedTitleFont
                 }
                 
-                backgroundColor = isHighlighted ? highlightedState.backgroundColor : defaultState.backgroundColor
+                backgroundColor = isHighlighted ? highlightedState.backgroundColor : .clear
             }
         }
     }
