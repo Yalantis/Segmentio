@@ -49,7 +49,7 @@ class SegmentioCell: UICollectionViewCell {
                     segmentTitleLabel?.font = isHighlighted ? highlightedState.titleFont : highlightedTitleFont
                 }
                 
-                backgroundColor = isHighlighted ? highlightedState.backgroundColor : defaultState.backgroundColor
+                backgroundColor = isHighlighted ? highlightedState.backgroundColor : .clear
             }
         }
     }
@@ -130,7 +130,7 @@ class SegmentioCell: UICollectionViewCell {
         configurateBadgeWithCount(content.badgeCount, color: content.badgeColor)
     }
     
-    func configure(selected: Bool) {
+    func configure(selected: Bool, selectedImage: UIImage? = nil, image: UIImage? = nil) {
         cellSelected = selected
         
         let selectedState = options.states.selectedState
@@ -141,6 +141,10 @@ class SegmentioCell: UICollectionViewCell {
             segmentTitleLabel?.font = selected ? selectedState.titleFont : defaultState.titleFont
             segmentTitleLabel?.minimumScaleFactor = 0.5
             segmentTitleLabel?.adjustsFontSizeToFitWidth = true
+        }
+                
+        if (style != .onlyLabel) {
+            segmentImageView?.image = selected ? selectedImage : image
         }
     }
     
