@@ -1,16 +1,16 @@
 PODS:
-  - Segmentio (2.1.1)
+  - Segmentio (2.1.2)
 
 DEPENDENCIES:
   - Segmentio (from `../`)
 
 EXTERNAL SOURCES:
   Segmentio:
-    :path: ../
+    :path: "../"
 
 SPEC CHECKSUMS:
-  Segmentio: fc7d724a2394d62367ac766b88b8e05d8edda012
+  Segmentio: 5d6ce19ca05e83164fff1371396fe6212b8ea82f
 
 PODFILE CHECKSUM: 761653fe0a6001fe4076ba25b04e279672ecc970
 
-COCOAPODS: 1.1.0.rc.3
+COCOAPODS: 1.2.1

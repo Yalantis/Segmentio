@@ -521,7 +521,14 @@ open class Segmentio: UIView {
     }
 
     fileprivate static func intrinsicWidth(for item: SegmentioItem, style: SegmentioStyle) -> CGFloat {
-        var itemWidth: CGFloat = item.intrinsicWidth
+        var itemWidth: CGFloat = 0
+        switch style.isWithText() {
+        case true:
+            itemWidth += item.intrinsicWidth
+        case false:
+            itemWidth += item.image?.size.width ?? 0
+        }
+        itemWidth += style.layoutMargins
         if style == .imageAfterLabel || style == .imageBeforeLabel {
             itemWidth += SegmentioCell.segmentTitleLabelHeight
         }

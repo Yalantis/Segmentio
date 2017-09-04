@@ -163,6 +163,16 @@ public enum SegmentioStyle: String {
             return false
         }
     }
+
+    public var layoutMargins: CGFloat {
+        let defaultLayoutMargins: CGFloat = 8.0
+        switch self {
+        case .onlyLabel, .imageAfterLabel, .imageBeforeLabel, .imageOverLabel, .imageUnderLabel:
+            return 4 * defaultLayoutMargins
+        case .onlyImage:
+            return 2 * defaultLayoutMargins
+        }
+    }
 }
 
 public typealias SegmentioStates = (defaultState: SegmentioState, selectedState: SegmentioState, highlightedState: SegmentioState)
