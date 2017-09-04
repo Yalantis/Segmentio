@@ -1,4 +1,4 @@
-##Segmentio
+## Segmentio
 [![Platform](http://img.shields.io/badge/platform-iOS-blue.svg?style=flat)](https://cocoapods.org/?q=segmentio) [![License](http://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://github.com/Yalantis/Segmentio/blob/master/LICENSE) ![Swift 3.x](https://img.shields.io/badge/Swift-3.0-orange.svg) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
 Animated top/bottom segmented control written in Swift.
@@ -7,15 +7,15 @@ Animated top/bottom segmented control written in Swift.
 
 Check this <a href="https://dribbble.com/shots/2820372-Segmentio-Component">project on dribbble</a>.
 
-##Requirements
+## Requirements
 
 - Xcode 8
 - iOS 8.x+
 - Swift 3
 
-##Installation
+## Installation
 
-####[CocoaPods](http://cocoapods.org)
+#### [CocoaPods](http://cocoapods.org)
 ```ruby
 use_frameworks! 
 
@@ -24,24 +24,24 @@ pod 'Segmentio', '~> 2.1'
 
 *CocoaPods v1.1.0 or later required*
 
-####[Carthage](http://github.com/Carthage/Carthage)
+#### [Carthage](http://github.com/Carthage/Carthage)
 ```ruby
 github "Yalantis/Segmentio" ~> 2.1
 ```
 
-##Usage
-####Import `Segmentio` module
+## Usage
+#### Import `Segmentio` module
 ```swift
 import Segmentio
 ```
 
-####Init
+#### Init
 You can initialize a `Segmentio` instance from code:
 
 ```swift
 var segmentioView: Segmentio!
 
-let segmentioViewRect = CGRect(x: 0, y: 0, width: UIScreen.mainScreen().bounds.width, height: 125)
+let segmentioViewRect = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 125)
 segmentioView = Segmentio(frame: segmentioViewRect)
 view.addSubview(segmentioView)
 ```
@@ -54,9 +54,9 @@ add a `UIView` instance in your .storyboard or .xib, set `Segmentio` class and c
 @IBOutlet weak var segmentioView: Segmentio!
 ```
 
-####Setup `Segmentio`
+#### Setup `Segmentio`
 ```swift
-segmentioView.setupContent(
+segmentioView.setup(
 	content: [SegmentioItem],
 	style: SegmentioStyle,
 	options: SegmentioOptions?
@@ -66,7 +66,7 @@ segmentioView.setupContent(
 To start with default options you can just pass `nil` to the `options` parameter.
 
 ```swift
-segmentioView.setupContent(
+segmentioView.setup(
 	content: [SegmentioItem],
 	style: SegmentioStyle,
 	options: nil
@@ -74,7 +74,7 @@ segmentioView.setupContent(
 ```
 
 
-####Configuring items 
+#### Configuring items 
 In order to set items you need to create an array of `SegmentioItem` instances:
 
 ```swift
@@ -87,14 +87,14 @@ let tornadoItem = SegmentioItem(
 content.append(tornadoItem)
 ```
 
-####Handling selection
+#### Handling selection
 You can specify selected item manually:
 
 ```swift
-segmentioView.selectedSegmentIndex = 0
+segmentioView.selectedSegmentioIndex = 0
 ```
 
-####Handling callback
+#### Handling callback
 
 ```swift
 segmentioView.valueDidChange = { segmentio, segmentIndex in
@@ -102,22 +102,20 @@ segmentioView.valueDidChange = { segmentio, segmentIndex in
 }
 ```
 
-####Customization
+#### Customization
 `Segmentio` can be customized by passing an instance of `SegmentioOptions` struct:
 
 ```swift
 SegmentioOptions(
-	backgroundColor: UIColor.whiteColor(),
-	maxVisibleItems: 3,
-	scrollEnabled: true,
-	indicatorOptions: SegmentioIndicatorOptions,
-	horizontalSeparatorOptions: SegmentioHorizontalSeparatorOptions,
-	verticalSeparatorOptions: SegmentioVerticalSeparatorOptions,
-	imageContentMode: UIViewContentMode.Center,
-	labelTextNumberOfLines: 1,
-	labelTextAlignment: NSTextAlignment.Center,
-	segmentStates: SegmentioStates, // tuple of SegmentioState (defaultState, selectState, highlightedState)
-	animationDuration: 0.1
+            backgroundColor: .white,
+            maxVisibleItems: 3,
+            scrollEnabled: true,
+            indicatorOptions: SegmentioIndicatorOptions,
+            horizontalSeparatorOptions: SegmentioHorizontalSeparatorOptions,
+            verticalSeparatorOptions: SegmentioVerticalSeparatorOptions,
+            imageContentMode: .center,
+            labelTextAlignment: .center,
+            segmentStates: SegmentioStates
 )
 ```
 
@@ -125,10 +123,10 @@ Selection indicator can be customized by passing an instance of `SegmentioIndica
 
 ```swift
 SegmentioIndicatorOptions(
-	type: .Bottom,
-	ratio: 1,
-	height: 5,
-	color: UIColor.orangeColor()
+            type: .bottom,
+            ratio: 1,
+            height: 5,
+            color: .orange
 )
 ```
 
@@ -136,9 +134,9 @@ Horizontal borders can be customized by passing an instance of `SegmentioHorizon
 
 ```swift
 SegmentioHorizontalSeparatorOptions(
-	type: SegmentioHorizontalSeparatorType.TopAndBottom, // Top, Bottom, TopAndBottom
-	height: 1,
-	color: UIColor.grayColor()
+            type: SegmentioHorizontalSeparatorType.topAndBottom, // Top, Bottom, TopAndBottom
+            height: 1,
+            color: .gray
 )
 ```
 
@@ -146,8 +144,8 @@ Separators between segments can be customized by passing an instance of  `Segmen
 
 ```swift
 SegmentioVerticalSeparatorOptions(
-	ratio: 0.6 // from 0.1 to 1
-	color: UIColor.grayColor()
+            ratio: 0.6, // from 0.1 to 1
+            color: .gray
 )
 ```
 
@@ -155,34 +153,34 @@ In order to set `SegmentioStates` you need to create a tuple of `SegmentioState`
 
 ```swift
 SegmentioStates(
-	defaultState: segmentioState(
-		backgroundColor: UIColor.clearColor(),
-		titleFont: UIFont.systemFontOfSize(UIFont.smallSystemFontSize()),
-		titleTextColor: UIColor.blackColor()
-	),
-	selectState: segmentioState(
-		backgroundColor: UIColor.orangeColor(),
-		titleFont: UIFont.systemFontOfSize(UIFont.smallSystemFontSize()),
-		titleTextColor: UIColor.whiteColor()
-	),
-	highlightedState: segmentioState(
-		backgroundColor: UIColor.lightGrayColor().colorWithAlphaComponent(0.6),
-		titleFont: UIFont.boldSystemFontOfSize(UIFont.smallSystemFontSize()),
-		titleTextColor: UIColor.blackColor()
-	)
+            defaultState: SegmentioState(
+                backgroundColor: .clear,
+                titleFont: UIFont.systemFont(ofSize: UIFont.smallSystemFontSize),
+                titleTextColor: .black
+            ),
+            selectedState: SegmentioState(
+                backgroundColor: .orange,
+                titleFont: UIFont.systemFont(ofSize: UIFont.smallSystemFontSize),
+                titleTextColor: .white
+            ),
+            highlightedState: SegmentioState(
+                backgroundColor: UIColor.lightGray.withAlphaComponent(0.6),
+                titleFont: UIFont.boldSystemFont(ofSize: UIFont.smallSystemFontSize),
+                titleTextColor: .black
+            )
 )
 ```
 
-####Let us know!
+#### Let us know!
 We’d be really happy if you sent us links to your projects where you use our component. Just send an email to github@yalantis.com And do let us know if you have any questions or suggestion regarding the animation.
 
 P.S. We’re going to publish more awesomeness wrapped in code and a tutorial on how to make UI for iOS (Android) better than better. Stay tuned!
 
-##License
+## License
 
 The MIT License (MIT)
 
-Copyright © 2016 Yalantis
+Copyright © 2017 Yalantis
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
