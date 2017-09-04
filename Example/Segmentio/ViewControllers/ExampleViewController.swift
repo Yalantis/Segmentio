@@ -50,8 +50,7 @@ class ExampleViewController: UIViewController {
         
         SegmentioBuilder.buildSegmentioView(
             segmentioView: segmentioView,
-            segmentioStyle: segmentioStyle,
-            segmentioPosition: .dynamic
+            segmentioStyle: segmentioStyle
         )
         SegmentioBuilder.setupBadgeCountForIndex(segmentioView, index: 1)
         
