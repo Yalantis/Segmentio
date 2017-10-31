@@ -14,12 +14,14 @@ public struct SegmentioItem {
     
     public var title: String?
     public var image: UIImage?
+    public var selectedImage: UIImage?
     public var badgeCount: Int?
     public var badgeColor: UIColor?
 
-    public init(title: String?, image: UIImage?) {
+    public init(title: String?, image: UIImage?, selectedImage: UIImage? = nil) {
         self.title = title
         self.image = image
+        self.selectedImage = selectedImage ?? image
     }
     
     public mutating func addBadge(_ count: Int, color: UIColor) {
@@ -56,7 +58,7 @@ public struct SegmentioState {
 // MARK: - Horizontal separator
 
 public enum SegmentioHorizontalSeparatorType {
-    
+    case none
     case top
     case bottom
     case topAndBottom
