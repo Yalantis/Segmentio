@@ -8,7 +8,7 @@
 
 import UIKit
 
-private typealias SubviewTreeModifier = ((Void) -> UIView)
+private typealias SubviewTreeModifier = (() -> UIView)
 
 public struct AppearanceOptions: OptionSet {
     
