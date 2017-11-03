@@ -368,14 +368,13 @@ open class Segmentio: UIView {
     // MARK: Scroll to item
     
     fileprivate func scrollToItemAtContext() {
-        guard let numberOfSections = segmentioCollectionView?.numberOfSections else {
+        guard let _ = segmentioCollectionView?.numberOfSections else {
             return
         }
 
         guard selectedSegmentioIndex != -1 else { return }
         
         let item = itemInSuperview()
-        let context = contextForItem(item)
 
         segmentioCollectionView?.scrollRectToVisible(centerRect(for: item), animated: true)
     }
@@ -385,7 +384,7 @@ open class Segmentio: UIView {
         var centerRect = item.cellFrameInSuperview
         if (item.startX + segmentioCollectionView!.contentOffset.x) - (item.collectionViewWidth - centerRect.width) / 2 < 0 {
             centerRect.origin.x = 0
-            var widthToAdd: CGFloat = (item.collectionViewWidth - centerRect.width)
+            let widthToAdd: CGFloat = (item.collectionViewWidth - centerRect.width)
             centerRect.size.width += widthToAdd
         } else if segmentioCollectionView!.contentSize.width - item.endX < (item.collectionViewWidth - centerRect.width) / 2 {
             centerRect.origin.x = segmentioCollectionView!.contentSize.width - item.collectionViewWidth
@@ -694,16 +693,15 @@ extension Segmentio.Points {
                     let updatedStartX = updatedEndX - item.shapeLayerWidth
                     startX = updatedStartX
                 }
-
-                if context.isFirstCell == true {
-                    startX = (cellWidth - item.shapeLayerWidth) / 2
-                    endX = startX + item.shapeLayerWidth
-                }
-
-                if context.isLastCell == true {
-                    startX = item.collectionViewWidth - cellWidth + (cellWidth - item.shapeLayerWidth) / 2
-                    endX = startX + item.shapeLayerWidth
-                }
+            }
+            if context.isFirstCell == true {
+                startX = (cellWidth - item.shapeLayerWidth) / 2
+                startX = 0
+                endX = startX + item.shapeLayerWidth
+            }
+            if context.isLastCell == true {
+                startX = item.collectionViewWidth - cellWidth + (cellWidth - item.shapeLayerWidth) / 2
+                endX = startX + item.shapeLayerWidth
             }
         case .dynamic:
             // If the collection content view is not completely visible...
