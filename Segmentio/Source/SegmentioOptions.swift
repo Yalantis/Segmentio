@@ -17,6 +17,12 @@ public struct SegmentioItem {
     public var selectedImage: UIImage?
     public var badgeCount: Int?
     public var badgeColor: UIColor?
+    public var intrinsicWidth: CGFloat {
+        let label = UILabel()
+        label.text = self.title
+        label.sizeToFit()
+        return label.intrinsicContentSize.width
+    }
 
     public init(title: String?, image: UIImage?, selectedImage: UIImage? = nil) {
         self.title = title
@@ -118,6 +124,13 @@ public struct SegmentioIndicatorOptions {
     
 }
 
+// MARK: - Position
+
+public enum SegmentioPosition {
+    case dynamic
+    case fixed(maxVisibleItems: Int)
+}
+
 // MARK: - Control options
 
 public enum SegmentioStyle: String {
@@ -150,6 +163,16 @@ public enum SegmentioStyle: String {
             return false
         }
     }
+
+    public var layoutMargins: CGFloat {
+        let defaultLayoutMargins: CGFloat = 8.0
+        switch self {
+        case .onlyLabel, .imageAfterLabel, .imageBeforeLabel, .imageOverLabel, .imageUnderLabel:
+            return 4 * defaultLayoutMargins
+        case .onlyImage:
+            return 2 * defaultLayoutMargins
+        }
+    }
 }
 
 public typealias SegmentioStates = (defaultState: SegmentioState, selectedState: SegmentioState, highlightedState: SegmentioState)
@@ -157,7 +180,7 @@ public typealias SegmentioStates = (defaultState: SegmentioState, selectedState:
 public struct SegmentioOptions {
     
     var backgroundColor: UIColor
-    var maxVisibleItems: Int
+    var segmentPosition: SegmentioPosition
     var scrollEnabled: Bool
     var horizontalSeparatorOptions: SegmentioHorizontalSeparatorOptions?
     var verticalSeparatorOptions: SegmentioVerticalSeparatorOptions?
@@ -167,9 +190,9 @@ public struct SegmentioOptions {
     var labelTextNumberOfLines: Int
     var states: SegmentioStates
     var animationDuration: CFTimeInterval
-    
+
     public init(backgroundColor: UIColor = .lightGray,
-                maxVisibleItems: Int = 4,
+                segmentPosition: SegmentioPosition = .fixed(maxVisibleItems: 4),
                 scrollEnabled: Bool = true,
                 indicatorOptions: SegmentioIndicatorOptions? = SegmentioIndicatorOptions(),
                 horizontalSeparatorOptions: SegmentioHorizontalSeparatorOptions? = SegmentioHorizontalSeparatorOptions(),
@@ -180,7 +203,7 @@ public struct SegmentioOptions {
                 segmentStates: SegmentioStates = SegmentioStates(defaultState: SegmentioState(), selectedState: SegmentioState(), highlightedState: SegmentioState()),
                 animationDuration: CFTimeInterval = 0.1) {
         self.backgroundColor = backgroundColor
-        self.maxVisibleItems = maxVisibleItems
+        self.segmentPosition = segmentPosition
         self.scrollEnabled = scrollEnabled
         self.indicatorOptions = indicatorOptions
         self.horizontalSeparatorOptions = horizontalSeparatorOptions
