@@ -19,7 +19,7 @@ Check this <a href="https://dribbble.com/shots/2820372-Segmentio-Component">proj
 ```ruby
 use_frameworks! 
 
-pod 'Segmentio', '~> 2.1'
+pod 'Segmentio', '~> 3.0'
 ```
 
 *CocoaPods v1.1.0 or later required*
