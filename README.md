@@ -108,7 +108,7 @@ segmentioView.valueDidChange = { segmentio, segmentIndex in
 ```swift
 SegmentioOptions(
             backgroundColor: .white,
-            maxVisibleItems: 3,
+            segmentPosition: SegmentioPosition,
             scrollEnabled: true,
             indicatorOptions: SegmentioIndicatorOptions,
             horizontalSeparatorOptions: SegmentioHorizontalSeparatorOptions,
@@ -117,6 +117,15 @@ SegmentioOptions(
             labelTextAlignment: .center,
             segmentStates: SegmentioStates
 )
+```
+
+Segment width rely on `SegmentioPosition` enum. Width can be fixed according to maximum visible items or dynamic according to segment's content size:
+
+```swift
+enum SegmentioPosition {
+case dynamic
+case fixed(maxVisibleItems: Int)
+}
 ```
 
 Selection indicator can be customized by passing an instance of `SegmentioIndicatorOptions`:
