@@ -98,7 +98,13 @@ open class Segmentio: UIView {
         collectionView.isScrollEnabled = segmentioOptions.scrollEnabled
         collectionView.backgroundColor = .clear
         collectionView.accessibilityIdentifier = "segmentio_collection_view"
-        
+      
+  			if #available(iOS 11.0, *) {
+	  			collectionView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
+		  	} else {
+			  	// Fallback on earlier versions
+			  }
+			
         segmentioCollectionView = collectionView
         
         if let segmentioCollectionView = segmentioCollectionView {
