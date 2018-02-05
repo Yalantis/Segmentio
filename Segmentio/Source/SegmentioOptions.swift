@@ -64,6 +64,7 @@ public struct SegmentioState {
 // MARK: - Horizontal separator
 
 public enum SegmentioHorizontalSeparatorType {
+    
     case none
     case top
     case bottom
@@ -77,7 +78,8 @@ public struct SegmentioHorizontalSeparatorOptions {
     var height: CGFloat
     var color: UIColor
     
-    public init(type: SegmentioHorizontalSeparatorType = .topAndBottom, height: CGFloat = 1.0, color: UIColor = .darkGray) {
+    public init(type: SegmentioHorizontalSeparatorType = .topAndBottom, height: CGFloat = 1.0,
+                color: UIColor = .darkGray) {
         self.type = type
         self.height = height
         self.color = color
@@ -115,7 +117,8 @@ public struct SegmentioIndicatorOptions {
     var height: CGFloat
     var color: UIColor
     
-    public init(type: SegmentioIndicatorType = .bottom, ratio: CGFloat = 1, height: CGFloat = 2, color: UIColor = .orange) {
+    public init(type: SegmentioIndicatorType = .bottom, ratio: CGFloat = 1, height: CGFloat = 2,
+                color: UIColor = .orange) {
         self.type = type
         self.ratio = ratio
         self.height = height
@@ -175,7 +178,8 @@ public enum SegmentioStyle: String {
     }
 }
 
-public typealias SegmentioStates = (defaultState: SegmentioState, selectedState: SegmentioState, highlightedState: SegmentioState)
+public typealias SegmentioStates = (defaultState: SegmentioState, selectedState: SegmentioState,
+    highlightedState: SegmentioState)
 
 public struct SegmentioOptions {
     
@@ -200,7 +204,9 @@ public struct SegmentioOptions {
                 imageContentMode: UIViewContentMode = .center,
                 labelTextAlignment: NSTextAlignment = .center,
                 labelTextNumberOfLines: Int = 0,
-                segmentStates: SegmentioStates = SegmentioStates(defaultState: SegmentioState(), selectedState: SegmentioState(), highlightedState: SegmentioState()),
+                segmentStates: SegmentioStates = SegmentioStates(defaultState: SegmentioState(),
+                                                                 selectedState: SegmentioState(),
+                                                                 highlightedState: SegmentioState()),
                 animationDuration: CFTimeInterval = 0.1) {
         self.backgroundColor = backgroundColor
         self.segmentPosition = segmentPosition

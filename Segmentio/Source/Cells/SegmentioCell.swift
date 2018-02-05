@@ -42,10 +42,12 @@ class SegmentioCell: UICollectionViewCell {
                 let selectedState = options.states.selectedState
                 
                 if style.isWithText() {
-                    let highlightedTitleTextColor = cellSelected ? selectedState.titleTextColor : defaultState.titleTextColor
+                    let highlightedTitleTextColor = cellSelected ? selectedState.titleTextColor
+                        : defaultState.titleTextColor
                     let highlightedTitleFont = cellSelected ? selectedState.titleFont : defaultState.titleFont
                     
-                    segmentTitleLabel?.textColor = isHighlighted ? highlightedState.titleTextColor : highlightedTitleTextColor
+                    segmentTitleLabel?.textColor = isHighlighted ? highlightedState.titleTextColor
+                        : highlightedTitleTextColor
                     segmentTitleLabel?.font = isHighlighted ? highlightedState.titleFont : highlightedTitleFont
                 }
                 
