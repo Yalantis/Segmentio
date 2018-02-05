@@ -123,8 +123,8 @@ Segment width rely on `SegmentioPosition` enum. Width can be fixed according to 
 
 ```swift
 enum SegmentioPosition {
-case dynamic
-case fixed(maxVisibleItems: Int)
+    case dynamic
+    case fixed(maxVisibleItems: Int)
 }
 ```
 
