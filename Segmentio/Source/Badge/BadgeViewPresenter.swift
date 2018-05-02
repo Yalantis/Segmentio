@@ -41,8 +41,6 @@ class BadgeViewPresenter {
         if let count = counterValue {
             if count > 9 {
                 constraintConstant = -10.0
-            } else {
-                
             }
             let segmentTitleLabelHorizontalCenterConstraint =
                 NSLayoutConstraint(

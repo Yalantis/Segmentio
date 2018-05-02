@@ -171,6 +171,26 @@ SegmentioStates(
 )
 ```
 
+#### Badge 
+only show image badge 
+
+```swift
+segmentioView.addBadgeWithoutCountValue(
+at: index,
+color: ColorPalette.coral
+)
+```
+
+show image and value 
+
+```swift
+ segmentioView.addBadge(
+            at: index,
+            count: 10,
+            color: ColorPalette.coral
+        )
+```
+
 #### Let us know!
 We’d be really happy if you sent us links to your projects where you use our component. Just send an email to github@yalantis.com And do let us know if you have any questions or suggestion regarding the animation.
 
@@ -199,3 +219,5 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
+
+
