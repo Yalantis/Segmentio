@@ -4,11 +4,14 @@ private let BadgeCounterMaxValue = 99
 private let BadgeCounterOverMaxValueText = "99+"
 private let standardSizedNibName = "BadgeWithCounterViewStandardSized"
 private let bigSizedNibName = "BadgeWithCounterViewBigSized"
+// 只显示badge，不显示数量
+private let standardSizeWithoutValueNibName = "BadgeWithCounterViewStandardSizedWithoutValue"
 
 enum BadgeSize {
     
     case standard
     case big
+    case standerdWithoutValue
     
 }
 
@@ -27,14 +30,17 @@ class BadgeWithCounterView: UIView {
         return BadgeWithCounterView(frame: .zero)
     }
 
-    func setBadgeCounterValue(_ counterValue: Int) {
-        var counterText: String!
-        if counterValue > BadgeCounterMaxValue {
-            counterText = BadgeCounterOverMaxValueText
-        } else {
-            counterText = String(counterValue)
-        }
-        counterValueLabel.text = counterText
+    func setBadgeCounterValue(_ counterValue: Int?) {
+        if let count = counterValue {
+            var counterText: String!
+            if count > BadgeCounterMaxValue {
+                counterText = BadgeCounterOverMaxValueText
+            } else {
+                counterText = String(count)
+            }
+            counterValueLabel.text = counterText
+        } 
+        
     }
     
     func setBadgeBackgroundColor(_ color: UIColor) {
@@ -42,6 +48,13 @@ class BadgeWithCounterView: UIView {
     }
     
     fileprivate class func nibNameForSize(_ size: BadgeSize) -> String {
-        return size == .standard ? standardSizedNibName : bigSizedNibName
+        switch size {
+        case .standard:
+            return standardSizedNibName
+        case .big:
+            return bigSizedNibName
+        case .standerdWithoutValue:
+            return standardSizeWithoutValueNibName
+        }
     }
 }

@@ -147,24 +147,45 @@ class SegmentioCell: UICollectionViewCell {
     }
     
     func configurateBadgeWithCount(_ badgeCount: Int?, color: UIColor?) {
-        guard let badgeCount = badgeCount, let color = color else {
+        guard let color = color else {
             return
         }
         
-        if style == .onlyImage {
-            badgePresenter.addBadgeForContainerView(
-                imageContainerView!,
-                counterValue: badgeCount,
-                backgroundColor: color,
-                badgeSize: .standard
-            )
+        
+        
+        if let count = badgeCount {
+            if style == .onlyImage {
+                badgePresenter.addBadgeForContainerView(
+                    imageContainerView!,
+                    counterValue: count,
+                    backgroundColor: color,
+                    badgeSize: .standard
+                )
+            } else {
+                badgePresenter.addBadgeForContainerView(
+                    containerView!,
+                    counterValue: count,
+                    backgroundColor: color,
+                    badgeSize: .standard
+                )
+            }
         } else {
-            badgePresenter.addBadgeForContainerView(
-                containerView!,
-                counterValue: badgeCount,
-                backgroundColor: color,
-                badgeSize: .standard
-            )
+            // MARK: Badge 是否显示 value，直接更改 badgeSize 即可
+            if style == .onlyImage {
+                badgePresenter.addBadgeForContainerView(
+                    imageContainerView!,
+                    counterValue: badgeCount,
+                    backgroundColor: color,
+                    badgeSize: .standerdWithoutValue
+                )
+            } else {
+                badgePresenter.addBadgeForContainerView(
+                    containerView!,
+                    counterValue: badgeCount,
+                    backgroundColor: color,
+                    badgeSize: .standerdWithoutValue
+                )
+            }
         }
     }
     

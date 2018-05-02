@@ -30,6 +30,8 @@
 		D9EBCEA1512D4B307726BFEB5F29EF70 /* BadgeWithCounterViewStandardSized.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E90ECA263F832D2C77F806A4581AE25 /* BadgeWithCounterViewStandardSized.xib */; };
 		E6E0179AF8247CB20CB77A1E33C88C7F /* RoundImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A561B2B4C70B40E0E028301D454D3EBF /* RoundImageView.swift */; };
 		EA89BD32CAE3C825C749261B9D4A2031 /* Pods-Segmentio_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = FCCE72372A4C77BEF387923951E588F2 /* Pods-Segmentio_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F05DE51A2099906600A4F71F /* BadgeWithCounterViewStandardSizedWithoutValue.xib in Resources */ = {isa = PBXBuildFile; fileRef = F05DE5192099906500A4F71F /* BadgeWithCounterViewStandardSizedWithoutValue.xib */; };
+		F05DE51B2099906600A4F71F /* BadgeWithCounterViewStandardSizedWithoutValue.xib in Resources */ = {isa = PBXBuildFile; fileRef = F05DE5192099906500A4F71F /* BadgeWithCounterViewStandardSizedWithoutValue.xib */; };
 		F6814CD90D68BE2911E97CE7F62E5DA1 /* BadgeWithCounterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64BE9AEFB42AAAC25501C181FF72B653 /* BadgeWithCounterView.swift */; };
 /* End PBXBuildFile section */
 
@@ -87,6 +89,7 @@
 		CEC22C73C1608DFA5D5D78BDCB218219 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		D91D0C0018887EA8F91F91162FF71F60 /* Segmentio.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Segmentio.swift; sourceTree = "<group>"; };
 		E3C9CACA5CC49ABD89BB5C0082B56F17 /* BadgeViewPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BadgeViewPresenter.swift; sourceTree = "<group>"; };
+		F05DE5192099906500A4F71F /* BadgeWithCounterViewStandardSizedWithoutValue.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BadgeWithCounterViewStandardSizedWithoutValue.xib; sourceTree = "<group>"; };
 		FCCE72372A4C77BEF387923951E588F2 /* Pods-Segmentio_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Segmentio_Example-umbrella.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -276,6 +279,7 @@
 			children = (
 				11C011383E55FDF0C1CFAA8E1E01F52C /* BadgeWithCounterViewBigSized.xib */,
 				6E90ECA263F832D2C77F806A4581AE25 /* BadgeWithCounterViewStandardSized.xib */,
+				F05DE5192099906500A4F71F /* BadgeWithCounterViewStandardSizedWithoutValue.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -424,6 +428,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F05DE51B2099906600A4F71F /* BadgeWithCounterViewStandardSizedWithoutValue.xib in Resources */,
 				8F726950BDA00432603D2B6B01881D59 /* BadgeWithCounterViewBigSized.xib in Resources */,
 				655C575E9623729978F286F79E4EAEB8 /* BadgeWithCounterViewStandardSized.xib in Resources */,
 			);
@@ -434,6 +439,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C4EFEC716055615A27A3D1338426807D /* BadgeWithCounterViewBigSized.xib in Resources */,
+				F05DE51A2099906600A4F71F /* BadgeWithCounterViewStandardSizedWithoutValue.xib in Resources */,
 				D9EBCEA1512D4B307726BFEB5F29EF70 /* BadgeWithCounterViewStandardSized.xib in Resources */,
 				1F40A33F3F753FF73C5F80F006E14410 /* Segmentio.bundle in Resources */,
 			);

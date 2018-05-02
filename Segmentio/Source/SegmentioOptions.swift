@@ -24,8 +24,10 @@ public struct SegmentioItem {
         self.selectedImage = selectedImage ?? image
     }
     
-    public mutating func addBadge(_ count: Int, color: UIColor) {
-        self.badgeCount = count
+    public mutating func addBadge(_ count: Int?, color: UIColor) {
+        if let countValue = count {
+            self.badgeCount = countValue
+        }
         self.badgeColor = color
     }
     

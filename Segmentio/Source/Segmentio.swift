@@ -190,6 +190,11 @@ open class Segmentio: UIView {
         segmentioCollectionView?.reloadData()
     }
     
+    open func addBadgeWithOutCountValue(at index: Int, color: UIColor = .red) {
+        segmentioItems[index].addBadge(nil, color: color)
+        segmentioCollectionView?.reloadData()
+    }
+    
     open func removeBadge(at index: Int) {
         segmentioItems[index].removeBadge()
         segmentioCollectionView?.reloadData()
