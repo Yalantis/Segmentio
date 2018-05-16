@@ -1,5 +1,5 @@
 ## Segmentio
-[![Platform](http://img.shields.io/badge/platform-iOS-blue.svg?style=flat)](https://cocoapods.org/?q=segmentio) [![License](http://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://github.com/Yalantis/Segmentio/blob/master/LICENSE) ![Swift 3.x](https://img.shields.io/badge/Swift-3.0-orange.svg) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+[![Platform](http://img.shields.io/badge/platform-iOS-blue.svg?style=flat)](https://cocoapods.org/?q=segmentio) [![License](http://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://github.com/Yalantis/Segmentio/blob/master/LICENSE) ![Swift 4](https://img.shields.io/badge/Swift-4.0-orange.svg) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
 Animated top/bottom segmented control written in Swift.
 
@@ -9,9 +9,9 @@ Check this <a href="https://dribbble.com/shots/2820372-Segmentio-Component">proj
 
 ## Requirements
 
-- Xcode 8
+- Xcode 9
 - iOS 8.x+
-- Swift 3
+- Swift 4
 
 ## Installation
 
@@ -19,7 +19,7 @@ Check this <a href="https://dribbble.com/shots/2820372-Segmentio-Component">proj
 ```ruby
 use_frameworks! 
 
-pod 'Segmentio', '~> 2.1'
+pod 'Segmentio', '~> 3.0'
 ```
 
 *CocoaPods v1.1.0 or later required*
@@ -108,7 +108,7 @@ segmentioView.valueDidChange = { segmentio, segmentIndex in
 ```swift
 SegmentioOptions(
             backgroundColor: .white,
-            maxVisibleItems: 3,
+            segmentPosition: SegmentioPosition,
             scrollEnabled: true,
             indicatorOptions: SegmentioIndicatorOptions,
             horizontalSeparatorOptions: SegmentioHorizontalSeparatorOptions,
@@ -117,6 +117,15 @@ SegmentioOptions(
             labelTextAlignment: .center,
             segmentStates: SegmentioStates
 )
+```
+
+Segment width rely on `SegmentioPosition` enum. Width can be fixed according to maximum visible items or dynamic according to segment's content size:
+
+```swift
+enum SegmentioPosition {
+    case dynamic
+    case fixed(maxVisibleItems: Int)
+}
 ```
 
 Selection indicator can be customized by passing an instance of `SegmentioIndicatorOptions`:

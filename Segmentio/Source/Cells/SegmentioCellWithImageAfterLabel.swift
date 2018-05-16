@@ -19,7 +19,7 @@ final class SegmentioCellWithImageAfterLabel: SegmentioCell {
             return
         }
         
-        let metrics = ["labelHeight": segmentTitleLabelHeight]
+        let metrics = ["labelHeight": SegmentioCell.segmentTitleLabelHeight]
         let views = [
             "imageContainerView": imageContainerView,
             "containerView": containerView

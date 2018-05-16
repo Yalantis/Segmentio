@@ -17,6 +17,12 @@ public struct SegmentioItem {
     public var selectedImage: UIImage?
     public var badgeCount: Int?
     public var badgeColor: UIColor?
+    public var intrinsicWidth: CGFloat {
+        let label = UILabel()
+        label.text = self.title
+        label.sizeToFit()
+        return label.intrinsicContentSize.width
+    }
 
     public init(title: String?, image: UIImage?, selectedImage: UIImage? = nil) {
         self.title = title
@@ -60,6 +66,7 @@ public struct SegmentioState {
 // MARK: - Horizontal separator
 
 public enum SegmentioHorizontalSeparatorType {
+    
     case none
     case top
     case bottom
@@ -73,7 +80,8 @@ public struct SegmentioHorizontalSeparatorOptions {
     var height: CGFloat
     var color: UIColor
     
-    public init(type: SegmentioHorizontalSeparatorType = .topAndBottom, height: CGFloat = 1.0, color: UIColor = .darkGray) {
+    public init(type: SegmentioHorizontalSeparatorType = .topAndBottom, height: CGFloat = 1.0,
+                color: UIColor = .darkGray) {
         self.type = type
         self.height = height
         self.color = color
@@ -111,13 +119,21 @@ public struct SegmentioIndicatorOptions {
     var height: CGFloat
     var color: UIColor
     
-    public init(type: SegmentioIndicatorType = .bottom, ratio: CGFloat = 1, height: CGFloat = 2, color: UIColor = .orange) {
+    public init(type: SegmentioIndicatorType = .bottom, ratio: CGFloat = 1, height: CGFloat = 2,
+                color: UIColor = .orange) {
         self.type = type
         self.ratio = ratio
         self.height = height
         self.color = color
     }
     
+}
+
+// MARK: - Position
+
+public enum SegmentioPosition {
+    case dynamic
+    case fixed(maxVisibleItems: Int)
 }
 
 // MARK: - Control options
@@ -152,14 +168,25 @@ public enum SegmentioStyle: String {
             return false
         }
     }
+
+    public var layoutMargins: CGFloat {
+        let defaultLayoutMargins: CGFloat = 8.0
+        switch self {
+        case .onlyLabel, .imageAfterLabel, .imageBeforeLabel, .imageOverLabel, .imageUnderLabel:
+            return 4 * defaultLayoutMargins
+        case .onlyImage:
+            return 2 * defaultLayoutMargins
+        }
+    }
 }
 
-public typealias SegmentioStates = (defaultState: SegmentioState, selectedState: SegmentioState, highlightedState: SegmentioState)
+public typealias SegmentioStates = (defaultState: SegmentioState, selectedState: SegmentioState,
+    highlightedState: SegmentioState)
 
 public struct SegmentioOptions {
     
     var backgroundColor: UIColor
-    var maxVisibleItems: Int
+    var segmentPosition: SegmentioPosition
     var scrollEnabled: Bool
     var horizontalSeparatorOptions: SegmentioHorizontalSeparatorOptions?
     var verticalSeparatorOptions: SegmentioVerticalSeparatorOptions?
@@ -169,32 +196,22 @@ public struct SegmentioOptions {
     var labelTextNumberOfLines: Int
     var states: SegmentioStates
     var animationDuration: CFTimeInterval
-    
-    public init() {
-        self.backgroundColor = .lightGray
-        self.maxVisibleItems = 4
-        self.scrollEnabled = true
-        
-        self.horizontalSeparatorOptions = SegmentioHorizontalSeparatorOptions()
-        self.verticalSeparatorOptions = SegmentioVerticalSeparatorOptions()
-        
-        self.indicatorOptions = SegmentioIndicatorOptions()
-        
-        self.imageContentMode = .center
-        self.labelTextAlignment = .center
-        self.labelTextNumberOfLines = 0
-        
-        self.states = SegmentioStates(
-            defaultState: SegmentioState(),
-            selectedState: SegmentioState(),
-            highlightedState: SegmentioState()
-        )
-        self.animationDuration = 0.1
-    }
-    
-    public init(backgroundColor: UIColor, maxVisibleItems: Int, scrollEnabled: Bool, indicatorOptions: SegmentioIndicatorOptions?, horizontalSeparatorOptions: SegmentioHorizontalSeparatorOptions?, verticalSeparatorOptions: SegmentioVerticalSeparatorOptions?, imageContentMode: UIViewContentMode, labelTextAlignment: NSTextAlignment, labelTextNumberOfLines: Int, segmentStates: SegmentioStates, animationDuration: CFTimeInterval) {
+
+    public init(backgroundColor: UIColor = .lightGray,
+                segmentPosition: SegmentioPosition = .fixed(maxVisibleItems: 4),
+                scrollEnabled: Bool = true,
+                indicatorOptions: SegmentioIndicatorOptions? = SegmentioIndicatorOptions(),
+                horizontalSeparatorOptions: SegmentioHorizontalSeparatorOptions? = SegmentioHorizontalSeparatorOptions(),
+                verticalSeparatorOptions: SegmentioVerticalSeparatorOptions? = SegmentioVerticalSeparatorOptions(),
+                imageContentMode: UIViewContentMode = .center,
+                labelTextAlignment: NSTextAlignment = .center,
+                labelTextNumberOfLines: Int = 0,
+                segmentStates: SegmentioStates = SegmentioStates(defaultState: SegmentioState(),
+                                                                 selectedState: SegmentioState(),
+                                                                 highlightedState: SegmentioState()),
+                animationDuration: CFTimeInterval = 0.1) {
         self.backgroundColor = backgroundColor
-        self.maxVisibleItems = maxVisibleItems
+        self.segmentPosition = segmentPosition
         self.scrollEnabled = scrollEnabled
         self.indicatorOptions = indicatorOptions
         self.horizontalSeparatorOptions = horizontalSeparatorOptions
@@ -205,5 +222,4 @@ public struct SegmentioOptions {
         self.states = segmentStates
         self.animationDuration = animationDuration
     }
-    
 }

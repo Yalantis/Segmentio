@@ -42,12 +42,12 @@ class ContentViewController: UIViewController {
         hintTableView.estimatedRowHeight = 100
         
         if yal_isPhone6() {
-            bottomCardConstraint.priority = 900
-            heightConstraint.priority = 1000
+            bottomCardConstraint.priority = UILayoutPriority(rawValue: 900)
+            heightConstraint.priority = UILayoutPriority(rawValue: 1000)
             heightConstraint.constant = 430
         } else {
-            bottomCardConstraint.priority = 1000
-            heightConstraint.priority = 900
+            bottomCardConstraint.priority = UILayoutPriority(rawValue: 1000)
+            heightConstraint.priority = UILayoutPriority(rawValue: 900)
         }
         
         if let disaster = disaster {
