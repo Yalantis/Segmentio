@@ -1,6 +1,6 @@
 {
   "name": "Segmentio",
-  "version": "2.1.2",
+  "version": "3.0",
   "homepage": "https://github.com/Yalantis/Segmentio",
   "summary": "Animated top/bottom segmented control written in Swift!",
   "screenshots": "https://raw.githubusercontent.com/Yalantis/Segmentio/master/Assets/animation.gif",
@@ -15,7 +15,7 @@
   },
   "source": {
     "git": "https://github.com/Yalantis/Segmentio.git",
-    "tag": "2.1.2"
+    "tag": "3.0"
   },
   "source_files": "Segmentio/Source/**/*.swift",
   "resources": "Segmentio/Source/Badge/Views/*.xib",
