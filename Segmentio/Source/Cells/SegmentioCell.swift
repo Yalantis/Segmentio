@@ -11,7 +11,7 @@ import UIKit
 class SegmentioCell: UICollectionViewCell {
     
     let padding: CGFloat = 8
-    let segmentTitleLabelHeight: CGFloat = 22
+    static let segmentTitleLabelHeight: CGFloat = 22
     
     var verticalSeparatorView: UIView?
     var segmentTitleLabel: UILabel?
@@ -42,14 +42,16 @@ class SegmentioCell: UICollectionViewCell {
                 let selectedState = options.states.selectedState
                 
                 if style.isWithText() {
-                    let highlightedTitleTextColor = cellSelected ? selectedState.titleTextColor : defaultState.titleTextColor
+                    let highlightedTitleTextColor = cellSelected ? selectedState.titleTextColor
+                        : defaultState.titleTextColor
                     let highlightedTitleFont = cellSelected ? selectedState.titleFont : defaultState.titleFont
                     
-                    segmentTitleLabel?.textColor = isHighlighted ? highlightedState.titleTextColor : highlightedTitleTextColor
+                    segmentTitleLabel?.textColor = isHighlighted ? highlightedState.titleTextColor
+                        : highlightedTitleTextColor
                     segmentTitleLabel?.font = isHighlighted ? highlightedState.titleFont : highlightedTitleFont
                 }
                 
-                backgroundColor = isHighlighted ? highlightedState.backgroundColor : defaultState.backgroundColor
+                backgroundColor = isHighlighted ? highlightedState.backgroundColor : .clear
             }
         }
     }
@@ -130,7 +132,7 @@ class SegmentioCell: UICollectionViewCell {
         configurateBadgeWithCount(content.badgeCount, color: content.badgeColor)
     }
     
-    func configure(selected: Bool) {
+    func configure(selected: Bool, selectedImage: UIImage? = nil, image: UIImage? = nil) {
         cellSelected = selected
         
         let selectedState = options.states.selectedState
@@ -139,6 +141,12 @@ class SegmentioCell: UICollectionViewCell {
         if style.isWithText() {
             segmentTitleLabel?.textColor = selected ? selectedState.titleTextColor : defaultState.titleTextColor
             segmentTitleLabel?.font = selected ? selectedState.titleFont : defaultState.titleFont
+            segmentTitleLabel?.minimumScaleFactor = 0.5
+            segmentTitleLabel?.adjustsFontSizeToFitWidth = true
+        }
+                
+        if (style != .onlyLabel) {
+            segmentImageView?.image = selected ? selectedImage : image
         }
     }
     
@@ -285,6 +293,8 @@ class SegmentioCell: UICollectionViewCell {
             segmentTitleLabel?.textColor = defaultState.titleTextColor
             segmentTitleLabel?.font = defaultState.titleFont
             segmentTitleLabel?.text = content.title
+            segmentTitleLabel?.minimumScaleFactor = 0.5
+            segmentTitleLabel?.adjustsFontSizeToFitWidth = true
         }
     }
     

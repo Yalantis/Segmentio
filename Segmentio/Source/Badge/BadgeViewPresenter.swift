@@ -10,7 +10,8 @@ import UIKit
 
 class BadgeViewPresenter {
     
-    func addBadgeForContainerView(_ containerView: UIView, counterValue: Int, backgroundColor: UIColor = .red, badgeSize: BadgeSize = .standard) {
+    func addBadgeForContainerView(_ containerView: UIView, counterValue: Int, backgroundColor: UIColor = .red,
+                                  badgeSize: BadgeSize = .standard) {
         var badgeView: BadgeWithCounterView!
         for view in containerView.subviews {
             if view is BadgeWithCounterView {
@@ -73,6 +74,7 @@ enum Separator {
     case top
     case bottom
     case topAndBottom
+    
 }
 
 

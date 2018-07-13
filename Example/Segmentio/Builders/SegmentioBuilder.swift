@@ -19,11 +19,11 @@ struct SegmentioBuilder {
         )
     }
     
-    static func buildSegmentioView(segmentioView: Segmentio, segmentioStyle: SegmentioStyle) {
+    static func buildSegmentioView(segmentioView: Segmentio, segmentioStyle: SegmentioStyle, segmentioPosition: SegmentioPosition = .fixed(maxVisibleItems: 3)) {
         segmentioView.setup(
             content: segmentioContent(),
             style: segmentioStyle,
-            options: segmentioOptions(segmentioStyle: segmentioStyle)
+            options: segmentioOptions(segmentioStyle: segmentioStyle, segmentioPosition: segmentioPosition)
         )
     }
     
@@ -38,7 +38,7 @@ struct SegmentioBuilder {
         ]
     }
     
-    private static func segmentioOptions(segmentioStyle: SegmentioStyle) -> SegmentioOptions {
+    private static func segmentioOptions(segmentioStyle: SegmentioStyle, segmentioPosition: SegmentioPosition = .fixed(maxVisibleItems: 3)) -> SegmentioOptions {
         var imageContentMode = UIViewContentMode.center
         switch segmentioStyle {
         case .imageBeforeLabel, .imageAfterLabel:
@@ -49,7 +49,7 @@ struct SegmentioBuilder {
         
         return SegmentioOptions(
             backgroundColor: ColorPalette.white,
-            maxVisibleItems: 3,
+            segmentPosition: segmentioPosition,
             scrollEnabled: true,
             indicatorOptions: segmentioIndicatorOptions(),
             horizontalSeparatorOptions: segmentioHorizontalSeparatorOptions(),
