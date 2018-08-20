@@ -724,7 +724,6 @@ extension Segmentio.Points {
             
             if context.isFirstCell == true {
                 startX = (cellWidth - item.shapeLayerWidth) / 2
-                startX = 0
                 endX = startX + item.shapeLayerWidth
             }
             
