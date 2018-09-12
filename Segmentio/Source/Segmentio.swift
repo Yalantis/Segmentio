@@ -344,11 +344,11 @@ open class Segmentio: UIView {
                 position: segmentioOptions.segmentPosition,
                 style: segmentioStyle
             )
-            
+            let insetX = ((points.endPoint.x - points.startPoint.x) - (item.endX - item.startX))/2
             moveShapeLayer(
                 indicatorLayer,
-                startPoint: points.startPoint,
-                endPoint: points.endPoint,
+                startPoint: CGPoint(x: points.startPoint.x + insetX, y: points.startPoint.y),
+                endPoint: CGPoint(x: points.endPoint.x - insetX, y: points.endPoint.y),
                 animated: true
             )
         }
