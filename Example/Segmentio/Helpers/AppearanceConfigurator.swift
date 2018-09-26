@@ -17,8 +17,8 @@ class AppearanceConfigurator {
         UINavigationBar.appearance().isTranslucent = false
         UINavigationBar.appearance().tintColor = ColorPalette.black
         let attributes = [
-            NSAttributedStringKey.font : UIFont.exampleAvenirMedium(ofSize: 17),
-            NSAttributedStringKey.foregroundColor : ColorPalette.black
+            NSAttributedString.Key.font : UIFont.exampleAvenirMedium(ofSize: 17),
+            NSAttributedString.Key.foregroundColor : ColorPalette.black
         ]
         UINavigationBar.appearance().titleTextAttributes = attributes
     }

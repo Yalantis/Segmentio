@@ -31,10 +31,10 @@ class EmbedContainerViewController: UIViewController {
             removeCurrentViewController()
         }
         
-        addChildViewController(controller)
+        addChild(controller)
         view.addSubview(controller.view)
         currentViewController = controller
-        controller.didMove(toParentViewController: self)
+        controller.didMove(toParent: self)
     }
     
     fileprivate func controller(_ style: SegmentioStyle) -> ExampleViewController {
@@ -45,14 +45,14 @@ class EmbedContainerViewController: UIViewController {
     }
     
     fileprivate func removeCurrentViewController() {
-        currentViewController?.willMove(toParentViewController: nil)
+        currentViewController?.willMove(toParent: nil)
         currentViewController?.view.removeFromSuperview()
-        currentViewController?.removeFromParentViewController()
+        currentViewController?.removeFromParent()
     }
     
     fileprivate func swapCurrentController(_ controller: UIViewController) {
-        currentViewController?.willMove(toParentViewController: nil)
-        addChildViewController(controller)
+        currentViewController?.willMove(toParent: nil)
+        addChild(controller)
         view.addSubview(controller.view)
         
         UIView.animate(
@@ -63,9 +63,9 @@ class EmbedContainerViewController: UIViewController {
             },
             completion: { _ in
                 self.currentViewController?.view.removeFromSuperview()
-                self.currentViewController?.removeFromParentViewController()
+                self.currentViewController?.removeFromParent()
                 self.currentViewController = controller
-                self.currentViewController?.didMove(toParentViewController: self)
+                self.currentViewController?.didMove(toParent: self)
             }
         )
     }
