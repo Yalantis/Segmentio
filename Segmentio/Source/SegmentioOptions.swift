@@ -189,11 +189,27 @@ public struct SegmentioOptions {
     var horizontalSeparatorOptions: SegmentioHorizontalSeparatorOptions?
     var verticalSeparatorOptions: SegmentioVerticalSeparatorOptions?
     var indicatorOptions: SegmentioIndicatorOptions?
-    var imageContentMode: UIViewContentMode
+    var imageContentMode: UIView.ContentMode
     var labelTextAlignment: NSTextAlignment
     var labelTextNumberOfLines: Int
     var states: SegmentioStates
     var animationDuration: CFTimeInterval
+    
+    public init() {
+        self.backgroundColor = .lightGray
+        self.segmentPosition = .fixed(maxVisibleItems: 4)
+        self.scrollEnabled = true
+        self.indicatorOptions = SegmentioIndicatorOptions()
+        self.horizontalSeparatorOptions = SegmentioHorizontalSeparatorOptions()
+        self.verticalSeparatorOptions = SegmentioVerticalSeparatorOptions()
+        self.imageContentMode = .center
+        self.labelTextAlignment = .center
+        self.labelTextNumberOfLines = 0
+        self.states = SegmentioStates(defaultState: SegmentioState(),
+                                        selectedState: SegmentioState(),
+                                        highlightedState: SegmentioState())
+        self.animationDuration = 0.1
+    }
 
     public init(backgroundColor: UIColor = .lightGray,
                 segmentPosition: SegmentioPosition = .fixed(maxVisibleItems: 4),
@@ -201,7 +217,7 @@ public struct SegmentioOptions {
                 indicatorOptions: SegmentioIndicatorOptions? = SegmentioIndicatorOptions(),
                 horizontalSeparatorOptions: SegmentioHorizontalSeparatorOptions? = SegmentioHorizontalSeparatorOptions(),
                 verticalSeparatorOptions: SegmentioVerticalSeparatorOptions? = SegmentioVerticalSeparatorOptions(),
-                imageContentMode: UIViewContentMode = .center,
+                imageContentMode: UIView.ContentMode = .center,
                 labelTextAlignment: NSTextAlignment = .center,
                 labelTextNumberOfLines: Int = 0,
                 segmentStates: SegmentioStates = SegmentioStates(defaultState: SegmentioState(),
