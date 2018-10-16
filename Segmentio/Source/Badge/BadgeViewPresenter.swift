@@ -15,7 +15,7 @@ class BadgeViewPresenter {
         var badgeView: BadgeWithCounterView!
         for view in containerView.subviews {
             if view is BadgeWithCounterView {
-                badgeView = view as! BadgeWithCounterView
+                badgeView = view as? BadgeWithCounterView
                 badgeView?.setBadgeBackgroundColor(backgroundColor)
                 badgeView?.setBadgeCounterValue(counterValue)
             }
@@ -24,7 +24,7 @@ class BadgeViewPresenter {
             badgeView = badgeViewForCounterValue(counterValue, backgroundColor: backgroundColor, size: badgeSize)
             badgeView.translatesAutoresizingMaskIntoConstraints = false
             containerView.addSubview(badgeView)
-            containerView.bringSubview(toFront: badgeView)
+            containerView.bringSubviewToFront(badgeView)
             setupBadgeConstraints(badgeView, counterValue: counterValue)
         }
     }
