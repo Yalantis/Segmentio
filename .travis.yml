@@ -2,13 +2,20 @@
 # * http://www.objc.io/issue-6/travis-ci.html
 # * https://github.com/supermarin/xcpretty#usage
 
-osx_image: xcode7.3
-language: objective-c
-# cache: cocoapods
-# podfile: Example/Podfile
-# before_install:
-# - gem install cocoapods # Since Travis is not always on latest version
-# - pod install --project-directory=Example
+osx_image: xcode10
+language: swift
+
+env:
+  global:
+  - LC_CTYPE=en_US.UTF-8
+  - LANG=en_US.UTF-8
+  matrix:
+    - DESTINATION="OS=12.0,name=iPhone XS" SDK="iphonesimulator12.0" POD_LINT="YES" SWIFT_LINT="YES"
+
+before_install:
+  - gem install cocoapods # Since Travis is not always on latest version
+  - pod install --project-directory=Example
+
 script:
-- set -o pipefail && xcodebuild test -workspace Example/Segmentio.xcworkspace -scheme Segmentio-Example -sdk iphonesimulator9.3 ONLY_ACTIVE_ARCH=NO | xcpretty
-- pod lib lint
+  - set -o pipefail && xcodebuild build -workspace Example/Segmentio.xcworkspace -scheme Segmentio-Example -sdk iphonesimulator12.0 ONLY_ACTIVE_ARCH=NO | xcpretty
+  - pod lib lint
