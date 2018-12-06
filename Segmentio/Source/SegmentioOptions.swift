@@ -23,7 +23,7 @@ public struct SegmentioItem {
         label.sizeToFit()
         return label.intrinsicContentSize.width
     }
-
+    
     public init(title: String?, image: UIImage?, selectedImage: UIImage? = nil) {
         self.title = title
         self.image = image
@@ -98,7 +98,7 @@ public struct SegmentioVerticalSeparatorOptions {
         self.ratio = ratio
         self.color = color
     }
-
+    
 }
 
 // MARK: - Indicator
@@ -166,7 +166,7 @@ public enum SegmentioStyle: String {
             return false
         }
     }
-
+    
     public var layoutMargins: CGFloat {
         let defaultLayoutMargins: CGFloat = 8.0
         switch self {
@@ -194,6 +194,7 @@ public struct SegmentioOptions {
     var labelTextNumberOfLines: Int
     var states: SegmentioStates
     var animationDuration: CFTimeInterval
+    var attributedKey: [NSAttributedString.Key : Any]
     
     public init() {
         self.backgroundColor = .lightGray
@@ -206,11 +207,12 @@ public struct SegmentioOptions {
         self.labelTextAlignment = .center
         self.labelTextNumberOfLines = 0
         self.states = SegmentioStates(defaultState: SegmentioState(),
-                                        selectedState: SegmentioState(),
-                                        highlightedState: SegmentioState())
+                                      selectedState: SegmentioState(),
+                                      highlightedState: SegmentioState())
         self.animationDuration = 0.1
+        self.attributedKey = [:]
     }
-
+    
     public init(backgroundColor: UIColor = .lightGray,
                 segmentPosition: SegmentioPosition = .fixed(maxVisibleItems: 4),
                 scrollEnabled: Bool = true,
@@ -223,7 +225,8 @@ public struct SegmentioOptions {
                 segmentStates: SegmentioStates = SegmentioStates(defaultState: SegmentioState(),
                                                                  selectedState: SegmentioState(),
                                                                  highlightedState: SegmentioState()),
-                animationDuration: CFTimeInterval = 0.1) {
+                animationDuration: CFTimeInterval = 0.1,
+                attributedKey: [NSAttributedString.Key : Any] = [:]) {
         self.backgroundColor = backgroundColor
         self.segmentPosition = segmentPosition
         self.scrollEnabled = scrollEnabled
@@ -235,5 +238,6 @@ public struct SegmentioOptions {
         self.labelTextNumberOfLines = labelTextNumberOfLines
         self.states = segmentStates
         self.animationDuration = animationDuration
+        self.attributedKey = attributedKey
     }
 }

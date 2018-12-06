@@ -64,7 +64,7 @@ class SegmentioCell: UICollectionViewCell {
         if let imageContainerView = imageContainerView {
             contentView.addSubview(imageContainerView)
         }
-
+        
         segmentImageView = UIImageView(frame: CGRect.zero)
         if let segmentImageView = segmentImageView, let imageContainerView = imageContainerView {
             imageContainerView.addSubview(segmentImageView)
@@ -79,7 +79,7 @@ class SegmentioCell: UICollectionViewCell {
         if let segmentTitleLabel = segmentTitleLabel, let containerView = containerView {
             containerView.addSubview(segmentTitleLabel)
         }
-
+        
         segmentImageView?.translatesAutoresizingMaskIntoConstraints = false
         segmentTitleLabel?.translatesAutoresizingMaskIntoConstraints = false
         containerView?.translatesAutoresizingMaskIntoConstraints = false
@@ -144,7 +144,7 @@ class SegmentioCell: UICollectionViewCell {
             segmentTitleLabel?.minimumScaleFactor = 0.5
             segmentTitleLabel?.adjustsFontSizeToFitWidth = true
         }
-                
+        
         if (style != .onlyLabel) {
             segmentImageView?.image = selected ? selectedImage : image
         }
@@ -177,7 +177,7 @@ class SegmentioCell: UICollectionViewCell {
         setupImageContainerConstraints()
         return // implement in subclasses
     }
-
+    
     // MARK: - Private functions
     
     fileprivate func setupContainerConstraints() {
@@ -217,7 +217,7 @@ class SegmentioCell: UICollectionViewCell {
             segmentTitleLabelTrailingConstraint,
             segmentTitleLabelVerticalCenterConstraint,
             segmentTitleLabelLeadingConstraint
-        ])
+            ])
     }
     
     fileprivate func setupImageContainerConstraints() {
@@ -278,7 +278,7 @@ class SegmentioCell: UICollectionViewCell {
             segmentImageViewTopConstraint
             ])
     }
-
+    
     
     fileprivate func setupContent(content: SegmentioItem) {
         if style.isWithImage() {
@@ -295,6 +295,8 @@ class SegmentioCell: UICollectionViewCell {
             segmentTitleLabel?.text = content.title
             segmentTitleLabel?.minimumScaleFactor = 0.5
             segmentTitleLabel?.adjustsFontSizeToFitWidth = true
+            guard let text = segmentTitleLabel?.text else { return }
+            segmentTitleLabel?.attributedText = NSAttributedString(string: text, attributes: options.attributedKey)
         }
     }
     
@@ -306,7 +308,7 @@ class SegmentioCell: UICollectionViewCell {
             bottomConstraint?.constant = padding + indicatorOptions.height
         }
     }
-
+    
     // MARK: - Vertical separator
     
     fileprivate func addVerticalSeparator() {
