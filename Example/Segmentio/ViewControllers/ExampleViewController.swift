@@ -13,12 +13,12 @@ class ExampleViewController: UIViewController {
     
     var segmentioStyle = SegmentioStyle.imageOverLabel
     
-    @IBOutlet fileprivate weak var segmentViewHeightConstraint: NSLayoutConstraint!
-    @IBOutlet fileprivate weak var segmentioView: Segmentio!
-    @IBOutlet fileprivate weak var containerView: UIView!
-    @IBOutlet fileprivate weak var scrollView: UIScrollView!
+    @IBOutlet private var segmentViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet private var segmentioView: Segmentio!
+    @IBOutlet private var containerView: UIView!
+    @IBOutlet private var scrollView: UIScrollView!
     
-    fileprivate lazy var viewControllers: [UIViewController] = {
+    private lazy var viewControllers: [UIViewController] = {
         return self.preparedViewControllers()
     }()
     
@@ -46,15 +46,13 @@ class ExampleViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        setupScrollView()
         
+        setupScrollView()
         SegmentioBuilder.buildSegmentioView(
             segmentioView: segmentioView,
             segmentioStyle: segmentioStyle
         )
         SegmentioBuilder.setupBadgeCountForIndex(segmentioView, index: 1)
-        
-        segmentioView.selectedSegmentioIndex = selectedSegmentioIndex()
         
         segmentioView.valueDidChange = { [weak self] _, segmentIndex in
             if let scrollViewWidth = self?.scrollView.frame.width {
@@ -65,6 +63,7 @@ class ExampleViewController: UIViewController {
                 )
             }
         }
+        segmentioView.selectedSegmentioIndex = selectedSegmentioIndex()
     }
     
     // Example viewControllers
@@ -117,7 +116,7 @@ class ExampleViewController: UIViewController {
     }
     
     fileprivate func selectedSegmentioIndex() -> Int {
-        return 0
+        return 4
     }
     
     // MARK: - Setup container view
