@@ -129,11 +129,11 @@
 		327AF5C71D1ABEC100534355 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				327AF5CB1D1ABEC100534355 /* HomeViewController.swift */,
-				327AF5CC1D1ABEC100534355 /* SideMenuViewController.swift */,
+				327AF5C81D1ABEC100534355 /* ContentViewController.swift */,
 				327AF5C91D1ABEC100534355 /* EmbedContainerViewController.swift */,
 				327AF5CA1D1ABEC100534355 /* ExampleViewController.swift */,
-				327AF5C81D1ABEC100534355 /* ContentViewController.swift */,
+				327AF5CB1D1ABEC100534355 /* HomeViewController.swift */,
+				327AF5CC1D1ABEC100534355 /* SideMenuViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";

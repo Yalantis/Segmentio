@@ -19,14 +19,14 @@ Check this <a href="https://dribbble.com/shots/2820372-Segmentio-Component">proj
 ```ruby
 use_frameworks! 
 
-pod 'Segmentio', '~> 3.2'
+pod 'Segmentio', '~> 3.3'
 ```
 
 *CocoaPods v1.1.0 or later required*
 
 #### [Carthage](http://github.com/Carthage/Carthage)
 ```ruby
-github "Yalantis/Segmentio" ~> 3.2
+github "Yalantis/Segmentio" ~> 3.3
 ```
 
 ## Usage
@@ -189,7 +189,7 @@ P.S. We’re going to publish more awesomeness wrapped in code and a tutorial on
 
 The MIT License (MIT)
 
-Copyright © 2018 Yalantis
+Copyright © 2019 Yalantis
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
