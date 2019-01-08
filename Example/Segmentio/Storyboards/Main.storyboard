@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Sgi-ow-Mpv">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Sgi-ow-Mpv">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -18,7 +18,7 @@
                         <viewControllerLayoutGuide type="bottom" id="Cxz-xC-i78"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="6th-V5-ZMU">
-                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j4J-17-RS0">
@@ -167,7 +167,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Sgi-ow-Mpv" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="A36-fE-w8g">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <userDefinedRuntimeAttributes>
@@ -243,11 +243,11 @@
                                         <rect key="frame" x="0.0" y="94" width="262" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="k0c-n4-4H9" id="9bd-UY-udW">
-                                            <rect key="frame" x="0.0" y="0.0" width="262" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="262" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="bIG-dp-uan">
-                                                    <rect key="frame" x="42" y="0.0" width="205" height="43"/>
+                                                    <rect key="frame" x="42" y="0.0" width="205" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="13"/>
                                                     <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -301,7 +301,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vkr-KO-SOm" customClass="Segmentio" customModule="Segmentio">
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vkr-KO-SOm" customClass="Segmentio" customModule="Segmentio">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="125"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="125" id="MbU-cC-j02"/>
@@ -335,11 +335,11 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="qlN-Ul-M6a" firstAttribute="top" secondItem="aMO-Fm-zcR" secondAttribute="bottom" id="2Pq-46-L6D"/>
                             <constraint firstItem="aMO-Fm-zcR" firstAttribute="top" secondItem="Vkr-KO-SOm" secondAttribute="bottom" id="ABa-Nj-ipD"/>
                             <constraint firstItem="aMO-Fm-zcR" firstAttribute="leading" secondItem="cqi-F1-zxi" secondAttribute="leading" id="VS6-Ut-9kj"/>
                             <constraint firstItem="Vkr-KO-SOm" firstAttribute="leading" secondItem="cqi-F1-zxi" secondAttribute="leading" id="WiX-2W-ZKT"/>
                             <constraint firstItem="i1Z-h8-Bjj" firstAttribute="leading" secondItem="cqi-F1-zxi" secondAttribute="leading" id="alp-VQ-F4b"/>
-                            <constraint firstItem="qlN-Ul-M6a" firstAttribute="top" secondItem="aMO-Fm-zcR" secondAttribute="bottom" id="fcW-K6-p6g"/>
                             <constraint firstAttribute="trailing" secondItem="i1Z-h8-Bjj" secondAttribute="trailing" id="oEB-9v-hrk"/>
                             <constraint firstItem="i1Z-h8-Bjj" firstAttribute="top" secondItem="Vkr-KO-SOm" secondAttribute="bottom" id="peT-4o-Nkr"/>
                             <constraint firstAttribute="trailing" secondItem="Vkr-KO-SOm" secondAttribute="trailing" id="q72-v4-XyQ"/>
@@ -389,7 +389,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="cards" width="125" height="53"/>
+        <image name="cards" width="125.5" height="53.5"/>
         <image name="defaultCheckbox" width="12" height="12"/>
         <image name="menu" width="28" height="14"/>
         <image name="oval" width="18" height="18"/>

@@ -68,7 +68,7 @@ class ExampleViewController: UIViewController {
     
     // Example viewControllers
     
-    fileprivate func preparedViewControllers() -> [ContentViewController] {
+    private func preparedViewControllers() -> [ContentViewController] {
         let tornadoController = ContentViewController.create()
         tornadoController.disaster = Disaster(
             cardName: "Before tornado",
@@ -115,13 +115,13 @@ class ExampleViewController: UIViewController {
         ]
     }
     
-    fileprivate func selectedSegmentioIndex() -> Int {
-        return 4
+    private func selectedSegmentioIndex() -> Int {
+        return 1
     }
     
     // MARK: - Setup container view
     
-    fileprivate func setupScrollView() {
+    private func setupScrollView() {
         scrollView.contentSize = CGSize(
             width: UIScreen.main.bounds.width * CGFloat(viewControllers.count),
             height: containerView.frame.height
@@ -131,21 +131,20 @@ class ExampleViewController: UIViewController {
             viewController.view.frame = CGRect(
                 x: UIScreen.main.bounds.width * CGFloat(index),
                 y: 0,
-                width: scrollView.frame.width,
-                height: scrollView.frame.height
+                width: view.frame.width,
+                height: view.frame.height
             )
             addChild(viewController)
-            scrollView.addSubview(viewController.view, options: .useAutoresize) // module's extension
+            scrollView.addSubview(viewController.view)
             viewController.didMove(toParent: self)
         }
     }
     
     // MARK: - Actions
     
-    fileprivate func goToControllerAtIndex(_ index: Int) {
+    private func goToControllerAtIndex(_ index: Int) {
         segmentioView.selectedSegmentioIndex = index
     }
-
 }
 
 extension ExampleViewController: UIScrollViewDelegate {
@@ -158,5 +157,4 @@ extension ExampleViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         scrollView.contentSize = CGSize(width: scrollView.contentSize.width, height: 0)
     }
-    
 }
