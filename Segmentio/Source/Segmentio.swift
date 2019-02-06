@@ -334,6 +334,15 @@ open class Segmentio: UIView {
         let itemWitdh = segmentioItems.enumerated().map { (index, _) -> CGFloat in
             return segmentWidth(for: IndexPath(item: index, section: 0))
         }
+        
+        var isRTL = false
+        if #available(iOS 9.0, *) {
+            isRTL = UIView.userInterfaceLayoutDirection(for: semanticContentAttribute) == .rightToLeft
+        } else {
+            // Use the previous technique
+            isRTL = UIApplication.shared.userInterfaceLayoutDirection == .rightToLeft
+        }
+        
         if let indicatorLayer = indicatorLayer, let options = segmentioOptions.indicatorOptions {
             let item = itemInSuperview(ratio: options.ratio)
 
@@ -343,7 +352,8 @@ open class Segmentio: UIView {
                 allItemsCellWidth: itemWitdh,
                 pointY: indicatorPointY(),
                 position: segmentioOptions.segmentPosition,
-                style: segmentioStyle
+                style: segmentioStyle,
+                isRTL: isRTL
             )
             let insetX = ((points.endPoint.x - points.startPoint.x) - (item.endX - item.startX))/2
             moveShapeLayer(
@@ -363,7 +373,8 @@ open class Segmentio: UIView {
                 allItemsCellWidth: itemWitdh,
                 pointY: bounds.midY,
                 position: segmentioOptions.segmentPosition,
-                style: segmentioStyle
+                style: segmentioStyle,
+                isRTL: isRTL
             )
             
             moveShapeLayer(
@@ -450,25 +461,14 @@ open class Segmentio: UIView {
         var cellRect = CGRect.zero
         var shapeLayerWidth: CGFloat = 0
         
-        if let collectionView = segmentioCollectionView, selectedSegmentioIndex != -1 {
-            collectionViewWidth = collectionView.frame.width
+        if let collectionView = segmentioCollectionView, selectedSegmentioIndex != -1,
+            let cellAttributes = collectionView.layoutAttributesForItem(at: IndexPath(row: selectedSegmentioIndex, section: 0)) {
             cellWidth = segmentWidth(for: IndexPath(row: selectedSegmentioIndex, section: 0))
-            var x: CGFloat = 0
+            collectionViewWidth = collectionView.frame.width
             
-            switch segmentioOptions.segmentPosition {
-            case .fixed:
-                x = floor(CGFloat(selectedSegmentioIndex) * cellWidth - collectionView.contentOffset.x)
-                
-            case .dynamic:
-                for i in 0..<selectedSegmentioIndex {
-                    x += segmentWidth(for: IndexPath(item: i, section: 0))
-                }
-                
-                x -= collectionView.contentOffset.x
-            }
-            
+            let cellFrameInSuperview = collectionView.convert(cellAttributes.frame, to: collectionView.superview)
             cellRect = CGRect(
-                x: x,
+                x: cellFrameInSuperview.minX,
                 y: 0,
                 width: cellWidth,
                 height: collectionView.frame.height
@@ -670,7 +670,7 @@ extension Segmentio: UIScrollViewDelegate {
 
 extension Segmentio.Points {
     
-    init(item: Segmentio.ItemInSuperview, atIndex index: Int, allItemsCellWidth: [CGFloat], pointY: CGFloat, position: SegmentioPosition, style: SegmentioStyle) {
+    init(item: Segmentio.ItemInSuperview, atIndex index: Int, allItemsCellWidth: [CGFloat], pointY: CGFloat, position: SegmentioPosition, style: SegmentioStyle, isRTL: Bool) {
         let cellWidth = item.cellFrameInSuperview.width
         var startX = item.startX
         var endX = item.endX
@@ -685,11 +685,17 @@ extension Segmentio.Points {
         // Cell will try to position itself in the middle, unless it can't because
         // the collection view has reached the beginning or end
         startX = (item.collectionViewWidth / 2) - (cellWidth / 2 )
+        
+        var isFixedPosition = false
+        if case .fixed = position {
+            isFixedPosition = true
+        }
+        
         if spaceBefore < (item.collectionViewWidth - cellWidth) / 2 {
-            startX = spaceBefore
+            startX = isFixedPosition && isRTL ? item.collectionViewWidth - spaceBefore - cellWidth : spaceBefore
         }
         if spaceAfter < (item.collectionViewWidth - cellWidth) / 2 {
-            startX = item.collectionViewWidth - spaceAfter - cellWidth
+            startX = isFixedPosition && isRTL ? spaceAfter : item.collectionViewWidth - spaceAfter - cellWidth
         }
         endX = startX + cellWidth
         
