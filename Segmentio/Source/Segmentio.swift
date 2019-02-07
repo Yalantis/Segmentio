@@ -344,7 +344,6 @@ open class Segmentio: UIView {
         let itemWitdh = segmentioItems.enumerated().map { (index, _) -> CGFloat in
             return segmentWidth(for: IndexPath(item: index, section: 0))
         }
-        
         let isCommonBehaviour = (isFlipped && isRTL) || (!isFlipped && !isRTL)
         
         if let indicatorLayer = indicatorLayer, let options = segmentioOptions.indicatorOptions {
@@ -579,7 +578,6 @@ open class Segmentio: UIView {
             transform = CGAffineTransform(scaleX: -1, y: 1)
             isFlipped = true
         }
-        
     }
 }
 
@@ -705,7 +703,6 @@ extension Segmentio.Points {
         // Cell will try to position itself in the middle, unless it can't because
         // the collection view has reached the beginning or end
         startX = (item.collectionViewWidth / 2) - (cellWidth / 2 )
-        
         if spaceBefore < (item.collectionViewWidth - cellWidth) / 2 {
             startX = isCommonBehaviour ? spaceBefore : item.collectionViewWidth - spaceBefore - cellWidth
         }
