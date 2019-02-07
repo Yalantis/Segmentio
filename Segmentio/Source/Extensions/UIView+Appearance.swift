@@ -30,24 +30,31 @@ extension UIView {
         if options.union(.overlay) == .overlay {
             if options.union(.useAutoresize) != .useAutoresize {
                 subview.translatesAutoresizingMaskIntoConstraints = false
-                let views = dictionaryOfNames([subview])
                 
-                let horisontalConstraints = NSLayoutConstraint.constraints(
-                    withVisualFormat: "|[subview]|",
-                    options: [],
-                    metrics: nil,
-                    views: views
-                )
-                addConstraints(horisontalConstraints)
-                
-                let verticalConstraints = NSLayoutConstraint.constraints(
-                    withVisualFormat: "V:|[subview]|",
-                    options: [],
-                    metrics: nil,
-                    views: views
-                )
-                addConstraints(verticalConstraints)
-                
+                if #available(iOS 11.0, *) {
+                    subview.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor).isActive = true
+                    subview.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor).isActive = true
+                    subview.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor).isActive = true
+                    subview.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor).isActive = true
+                } else {
+                    let views = dictionaryOfNames([subview])
+                    
+                    let horisontalConstraints = NSLayoutConstraint.constraints(
+                        withVisualFormat: "|[subview]|",
+                        options: [],
+                        metrics: nil,
+                        views: views
+                    )
+                    addConstraints(horisontalConstraints)
+                    
+                    let verticalConstraints = NSLayoutConstraint.constraints(
+                        withVisualFormat: "V:|[subview]|",
+                        options: [],
+                        metrics: nil,
+                        views: views
+                    )
+                    addConstraints(verticalConstraints)
+                }
             } else {
                 frame = bounds
                 subview.autoresizingMask = [.flexibleWidth, .flexibleHeight]

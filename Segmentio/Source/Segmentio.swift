@@ -334,6 +334,10 @@ open class Segmentio: UIView {
         let itemWitdh = segmentioItems.enumerated().map { (index, _) -> CGFloat in
             return segmentWidth(for: IndexPath(item: index, section: 0))
         }
+        var superviewInsets: UIEdgeInsets = .zero
+        if #available(iOS 11.0, *) {
+            superviewInsets = segmentioCollectionView?.superview?.safeAreaInsets ?? .zero
+        }
         if let indicatorLayer = indicatorLayer, let options = segmentioOptions.indicatorOptions {
             let item = itemInSuperview(ratio: options.ratio)
 
@@ -343,7 +347,9 @@ open class Segmentio: UIView {
                 allItemsCellWidth: itemWitdh,
                 pointY: indicatorPointY(),
                 position: segmentioOptions.segmentPosition,
-                style: segmentioStyle
+                style: segmentioStyle,
+                leftInset: superviewInsets.left,
+                rightInset: superviewInsets.right
             )
             let insetX = ((points.endPoint.x - points.startPoint.x) - (item.endX - item.startX))/2
             moveShapeLayer(
@@ -363,7 +369,9 @@ open class Segmentio: UIView {
                 allItemsCellWidth: itemWitdh,
                 pointY: bounds.midY,
                 position: segmentioOptions.segmentPosition,
-                style: segmentioStyle
+                style: segmentioStyle,
+                leftInset: superviewInsets.left,
+                rightInset: superviewInsets.right
             )
             
             moveShapeLayer(
@@ -450,25 +458,15 @@ open class Segmentio: UIView {
         var cellRect = CGRect.zero
         var shapeLayerWidth: CGFloat = 0
         
-        if let collectionView = segmentioCollectionView, selectedSegmentioIndex != -1 {
+        if let collectionView = segmentioCollectionView, selectedSegmentioIndex != -1,
+            let cellAttributes = collectionView.layoutAttributesForItem(at: IndexPath(row: selectedSegmentioIndex, section: 0)) {
             collectionViewWidth = collectionView.frame.width
             cellWidth = segmentWidth(for: IndexPath(row: selectedSegmentioIndex, section: 0))
-            var x: CGFloat = 0
+            collectionViewWidth = collectionView.frame.width
             
-            switch segmentioOptions.segmentPosition {
-            case .fixed:
-                x = floor(CGFloat(selectedSegmentioIndex) * cellWidth - collectionView.contentOffset.x)
-                
-            case .dynamic:
-                for i in 0..<selectedSegmentioIndex {
-                    x += segmentWidth(for: IndexPath(item: i, section: 0))
-                }
-                
-                x -= collectionView.contentOffset.x
-            }
-            
+            let cellFrameInSuperview = collectionView.convert(cellAttributes.frame, to: collectionView.superview)
             cellRect = CGRect(
-                x: x,
+                x: cellFrameInSuperview.minX,
                 y: 0,
                 width: cellWidth,
                 height: collectionView.frame.height
@@ -670,12 +668,12 @@ extension Segmentio: UIScrollViewDelegate {
 
 extension Segmentio.Points {
     
-    init(item: Segmentio.ItemInSuperview, atIndex index: Int, allItemsCellWidth: [CGFloat], pointY: CGFloat, position: SegmentioPosition, style: SegmentioStyle) {
+    init(item: Segmentio.ItemInSuperview, atIndex index: Int, allItemsCellWidth: [CGFloat], pointY: CGFloat, position: SegmentioPosition, style: SegmentioStyle, leftInset: CGFloat, rightInset: CGFloat) {
         let cellWidth = item.cellFrameInSuperview.width
         var startX = item.startX
         var endX = item.endX
-        var spaceBefore: CGFloat = 0
-        var spaceAfter: CGFloat = 0
+        var spaceBefore: CGFloat = leftInset
+        var spaceAfter: CGFloat = -rightInset
         var i = 0
         allItemsCellWidth.forEach { width in
             if i < index { spaceBefore += width }
