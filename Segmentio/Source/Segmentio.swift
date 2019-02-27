@@ -348,8 +348,7 @@ open class Segmentio: UIView {
                 pointY: indicatorPointY(),
                 position: segmentioOptions.segmentPosition,
                 style: segmentioStyle,
-                leftInset: superviewInsets.left,
-                rightInset: superviewInsets.right
+                insets: superviewInsets
             )
             let insetX = ((points.endPoint.x - points.startPoint.x) - (item.endX - item.startX))/2
             moveShapeLayer(
@@ -370,8 +369,7 @@ open class Segmentio: UIView {
                 pointY: bounds.midY,
                 position: segmentioOptions.segmentPosition,
                 style: segmentioStyle,
-                leftInset: superviewInsets.left,
-                rightInset: superviewInsets.right
+                insets: superviewInsets
             )
             
             moveShapeLayer(
@@ -668,12 +666,12 @@ extension Segmentio: UIScrollViewDelegate {
 
 extension Segmentio.Points {
     
-    init(item: Segmentio.ItemInSuperview, atIndex index: Int, allItemsCellWidth: [CGFloat], pointY: CGFloat, position: SegmentioPosition, style: SegmentioStyle, leftInset: CGFloat, rightInset: CGFloat) {
+    init(item: Segmentio.ItemInSuperview, atIndex index: Int, allItemsCellWidth: [CGFloat], pointY: CGFloat, position: SegmentioPosition, style: SegmentioStyle, insets: UIEdgeInsets) {
         let cellWidth = item.cellFrameInSuperview.width
         var startX = item.startX
         var endX = item.endX
-        var spaceBefore: CGFloat = leftInset
-        var spaceAfter: CGFloat = -rightInset
+        var spaceBefore: CGFloat = insets.left
+        var spaceAfter: CGFloat = -insets.right
         var i = 0
         allItemsCellWidth.forEach { width in
             if i < index { spaceBefore += width }
