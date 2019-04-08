@@ -286,13 +286,16 @@ class SegmentioCell: UICollectionViewCell {
         if style.isWithImage() {
             segmentImageView?.contentMode = options.imageContentMode
             segmentImageView?.image = content.image
+            if let imageTintColor = content.imageTintColor {
+                segmentImageView?.tintColor = imageTintColor
+            }
         }
         
         if style.isWithText() {
             segmentTitleLabel?.textAlignment = options.labelTextAlignment
             segmentTitleLabel?.numberOfLines = options.labelTextNumberOfLines
             let defaultState = options.states.defaultState
-            segmentTitleLabel?.textColor = defaultState.titleTextColor
+            segmentTitleLabel?.textColor =  content.textColor ??  defaultState.titleTextColor
             segmentTitleLabel?.font = defaultState.titleFont
             segmentTitleLabel?.text = content.title
             segmentTitleLabel?.minimumScaleFactor = 0.5

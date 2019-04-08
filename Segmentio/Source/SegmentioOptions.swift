@@ -13,8 +13,10 @@ import UIKit
 public struct SegmentioItem {
     
     public var title: String?
+    public var textColor: UIColor?
     public var image: UIImage?
     public var selectedImage: UIImage?
+    public var imageTintColor: UIColor?
     public var badgeCount: Int?
     public var badgeColor: UIColor?
     public var intrinsicWidth: CGFloat {
@@ -24,10 +26,12 @@ public struct SegmentioItem {
         return label.intrinsicContentSize.width
     }
 
-    public init(title: String?, image: UIImage?, selectedImage: UIImage? = nil) {
+    public init(title: String?, image: UIImage?, selectedImage: UIImage? = nil, titleColor: UIColor? = nil, imageTintColor: UIColor? = nil) {
         self.title = title
+        self.textColor = titleColor
         self.image = image
         self.selectedImage = selectedImage ?? image
+        self.imageTintColor = imageTintColor
     }
     
     public mutating func addBadge(_ count: Int, color: UIColor) {
