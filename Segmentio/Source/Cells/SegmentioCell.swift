@@ -141,6 +141,7 @@ class SegmentioCell: UICollectionViewCell {
         if style.isWithText() {
             segmentTitleLabel?.textColor = selected ? selectedState.titleTextColor : defaultState.titleTextColor
             segmentTitleLabel?.font = selected ? selectedState.titleFont : defaultState.titleFont
+            segmentTitleLabel?.alpha = selected ? selectedState.titleAlpha : defaultState.titleAlpha
             segmentTitleLabel?.minimumScaleFactor = 0.5
             segmentTitleLabel?.adjustsFontSizeToFitWidth = true
         }
