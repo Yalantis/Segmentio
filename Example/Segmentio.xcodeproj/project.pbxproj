@@ -129,11 +129,11 @@
 		327AF5C71D1ABEC100534355 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				327AF5CB1D1ABEC100534355 /* HomeViewController.swift */,
-				327AF5CC1D1ABEC100534355 /* SideMenuViewController.swift */,
+				327AF5C81D1ABEC100534355 /* ContentViewController.swift */,
 				327AF5C91D1ABEC100534355 /* EmbedContainerViewController.swift */,
 				327AF5CA1D1ABEC100534355 /* ExampleViewController.swift */,
-				327AF5C81D1ABEC100534355 /* ContentViewController.swift */,
+				327AF5CB1D1ABEC100534355 /* HomeViewController.swift */,
+				327AF5CC1D1ABEC100534355 /* SideMenuViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -232,7 +232,6 @@
 				607FACCD1AFB9204008FA782 /* Frameworks */,
 				607FACCE1AFB9204008FA782 /* Resources */,
 				0F262642822A946CA50DC25B /* [CP] Embed Pods Frameworks */,
-				252D3AEAEF13B143A7D04B54 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -308,21 +307,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Segmentio_Example/Pods-Segmentio_Example-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		252D3AEAEF13B143A7D04B54 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Segmentio_Example/Pods-Segmentio_Example-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		269ECFC9CB046D6FAC3B00EC /* [CP] Check Pods Manifest.lock */ = {
@@ -424,6 +408,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -472,6 +457,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;

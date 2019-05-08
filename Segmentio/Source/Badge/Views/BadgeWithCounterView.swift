@@ -1,4 +1,4 @@
-import Foundation
+import UIKit
 
 private let BadgeCounterMaxValue = 99
 private let BadgeCounterOverMaxValueText = "99+"

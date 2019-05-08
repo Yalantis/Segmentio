@@ -13,12 +13,12 @@ class ExampleViewController: UIViewController {
     
     var segmentioStyle = SegmentioStyle.imageOverLabel
     
-    @IBOutlet fileprivate weak var segmentViewHeightConstraint: NSLayoutConstraint!
-    @IBOutlet fileprivate weak var segmentioView: Segmentio!
-    @IBOutlet fileprivate weak var containerView: UIView!
-    @IBOutlet fileprivate weak var scrollView: UIScrollView!
+    @IBOutlet private var segmentViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet private var segmentioView: Segmentio!
+    @IBOutlet private var containerView: UIView!
+    @IBOutlet private var scrollView: UIScrollView!
     
-    fileprivate lazy var viewControllers: [UIViewController] = {
+    private lazy var viewControllers: [UIViewController] = {
         return self.preparedViewControllers()
     }()
     
@@ -46,15 +46,13 @@ class ExampleViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        setupScrollView()
         
+        setupScrollView()
         SegmentioBuilder.buildSegmentioView(
             segmentioView: segmentioView,
             segmentioStyle: segmentioStyle
         )
         SegmentioBuilder.setupBadgeCountForIndex(segmentioView, index: 1)
-        
-        segmentioView.selectedSegmentioIndex = selectedSegmentioIndex()
         
         segmentioView.valueDidChange = { [weak self] _, segmentIndex in
             if let scrollViewWidth = self?.scrollView.frame.width {
@@ -65,11 +63,12 @@ class ExampleViewController: UIViewController {
                 )
             }
         }
+        segmentioView.selectedSegmentioIndex = selectedSegmentioIndex()
     }
     
     // Example viewControllers
     
-    fileprivate func preparedViewControllers() -> [ContentViewController] {
+    private func preparedViewControllers() -> [ContentViewController] {
         let tornadoController = ContentViewController.create()
         tornadoController.disaster = Disaster(
             cardName: "Before tornado",
@@ -116,13 +115,13 @@ class ExampleViewController: UIViewController {
         ]
     }
     
-    fileprivate func selectedSegmentioIndex() -> Int {
-        return 0
+    private func selectedSegmentioIndex() -> Int {
+        return 1
     }
     
     // MARK: - Setup container view
     
-    fileprivate func setupScrollView() {
+    private func setupScrollView() {
         scrollView.contentSize = CGSize(
             width: UIScreen.main.bounds.width * CGFloat(viewControllers.count),
             height: containerView.frame.height
@@ -132,8 +131,8 @@ class ExampleViewController: UIViewController {
             viewController.view.frame = CGRect(
                 x: UIScreen.main.bounds.width * CGFloat(index),
                 y: 0,
-                width: scrollView.frame.width,
-                height: scrollView.frame.height
+                width: view.frame.width,
+                height: view.frame.height
             )
             addChild(viewController)
             scrollView.addSubview(viewController.view, options: .useAutoresize) // module's extension
@@ -143,10 +142,9 @@ class ExampleViewController: UIViewController {
     
     // MARK: - Actions
     
-    fileprivate func goToControllerAtIndex(_ index: Int) {
+    private func goToControllerAtIndex(_ index: Int) {
         segmentioView.selectedSegmentioIndex = index
     }
-
 }
 
 extension ExampleViewController: UIScrollViewDelegate {
@@ -159,5 +157,4 @@ extension ExampleViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         scrollView.contentSize = CGSize(width: scrollView.contentSize.width, height: 0)
     }
-    
 }
