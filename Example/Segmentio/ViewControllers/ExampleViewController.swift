@@ -135,7 +135,7 @@ class ExampleViewController: UIViewController {
                 height: view.frame.height
             )
             addChild(viewController)
-            scrollView.addSubview(viewController.view)
+            scrollView.addSubview(viewController.view, options: .useAutoresize) // module's extension
             viewController.didMove(toParent: self)
         }
     }
