@@ -49,6 +49,15 @@ open class Segmentio: UIView {
     private var indicatorLayer: CAShapeLayer?
     private var selectedLayer: CAShapeLayer?
     
+    private var isRTL: Bool {
+        if #available(iOS 9.0, *) {
+            return UIView.userInterfaceLayoutDirection(for: semanticContentAttribute) == .rightToLeft
+        } else {
+            return UIApplication.shared.userInterfaceLayoutDirection == .rightToLeft
+        }
+    }
+    private var isFlipped = false
+    
     // MARK: - Lifecycle
     
     required public init?(coder aDecoder: NSCoder) {
@@ -167,6 +176,7 @@ open class Segmentio: UIView {
             }
         }
         
+        checkForRTLAndFlipIfNeeded()
         setupHorizontalSeparatorIfPossible()
         setupCellWithStyle(segmentioStyle)
         segmentioCollectionView?.reloadData()
@@ -334,6 +344,8 @@ open class Segmentio: UIView {
         let itemWitdh = segmentioItems.enumerated().map { (index, _) -> CGFloat in
             return segmentWidth(for: IndexPath(item: index, section: 0))
         }
+        let isCommonBehaviour = (isFlipped && isRTL) || (!isFlipped && !isRTL)
+        
         if let indicatorLayer = indicatorLayer, let options = segmentioOptions.indicatorOptions {
             let item = itemInSuperview(ratio: options.ratio)
 
@@ -343,7 +355,8 @@ open class Segmentio: UIView {
                 allItemsCellWidth: itemWitdh,
                 pointY: indicatorPointY(),
                 position: segmentioOptions.segmentPosition,
-                style: segmentioStyle
+                style: segmentioStyle,
+                isCommonBehaviour: isCommonBehaviour
             )
             let insetX = ((points.endPoint.x - points.startPoint.x) - (item.endX - item.startX))/2
             moveShapeLayer(
@@ -363,7 +376,8 @@ open class Segmentio: UIView {
                 allItemsCellWidth: itemWitdh,
                 pointY: bounds.midY,
                 position: segmentioOptions.segmentPosition,
-                style: segmentioStyle
+                style: segmentioStyle,
+                isCommonBehaviour: isCommonBehaviour
             )
             
             moveShapeLayer(
@@ -450,25 +464,14 @@ open class Segmentio: UIView {
         var cellRect = CGRect.zero
         var shapeLayerWidth: CGFloat = 0
         
-        if let collectionView = segmentioCollectionView, selectedSegmentioIndex != -1 {
-            collectionViewWidth = collectionView.frame.width
+        if let collectionView = segmentioCollectionView, selectedSegmentioIndex != -1,
+            let cellAttributes = collectionView.layoutAttributesForItem(at: IndexPath(row: selectedSegmentioIndex, section: 0)) {
             cellWidth = segmentWidth(for: IndexPath(row: selectedSegmentioIndex, section: 0))
-            var x: CGFloat = 0
+            collectionViewWidth = collectionView.frame.width
             
-            switch segmentioOptions.segmentPosition {
-            case .fixed:
-                x = floor(CGFloat(selectedSegmentioIndex) * cellWidth - collectionView.contentOffset.x)
-                
-            case .dynamic:
-                for i in 0..<selectedSegmentioIndex {
-                    x += segmentWidth(for: IndexPath(item: i, section: 0))
-                }
-                
-                x -= collectionView.contentOffset.x
-            }
-            
+            let cellFrameInSuperview = collectionView.convert(cellAttributes.frame, to: collectionView.superview)
             cellRect = CGRect(
-                x: x,
+                x: cellFrameInSuperview.minX,
                 y: 0,
                 width: cellWidth,
                 height: collectionView.frame.height
@@ -565,6 +568,17 @@ open class Segmentio: UIView {
         
         return indicatorPointY
     }
+    
+    private func checkForRTLAndFlipIfNeeded() {
+        var isDynamicPosition = false
+        if case .dynamic = segmentioOptions.segmentPosition {
+            isDynamicPosition = true
+        }
+        if isRTL && isDynamicPosition {
+            transform = CGAffineTransform(scaleX: -1, y: 1)
+            isFlipped = true
+        }
+    }
 }
 
 // MARK: - UICollectionViewDataSource
@@ -595,6 +609,10 @@ extension Segmentio: UICollectionViewDataSource {
             selectedImage: content.selectedImage,
             image: content.image
         )
+        
+        if isFlipped {
+            cell.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
+        }
         
         return cell
     }
@@ -670,7 +688,7 @@ extension Segmentio: UIScrollViewDelegate {
 
 extension Segmentio.Points {
     
-    init(item: Segmentio.ItemInSuperview, atIndex index: Int, allItemsCellWidth: [CGFloat], pointY: CGFloat, position: SegmentioPosition, style: SegmentioStyle) {
+    init(item: Segmentio.ItemInSuperview, atIndex index: Int, allItemsCellWidth: [CGFloat], pointY: CGFloat, position: SegmentioPosition, style: SegmentioStyle, isCommonBehaviour: Bool) {
         let cellWidth = item.cellFrameInSuperview.width
         var startX = item.startX
         var endX = item.endX
@@ -686,10 +704,10 @@ extension Segmentio.Points {
         // the collection view has reached the beginning or end
         startX = (item.collectionViewWidth / 2) - (cellWidth / 2 )
         if spaceBefore < (item.collectionViewWidth - cellWidth) / 2 {
-            startX = spaceBefore
+            startX = isCommonBehaviour ? spaceBefore : item.collectionViewWidth - spaceBefore - cellWidth
         }
         if spaceAfter < (item.collectionViewWidth - cellWidth) / 2 {
-            startX = item.collectionViewWidth - spaceAfter - cellWidth
+            startX = isCommonBehaviour ? item.collectionViewWidth - spaceAfter - cellWidth : spaceAfter
         }
         endX = startX + cellWidth
         
