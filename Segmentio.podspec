@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name           = "Segmentio"
-  spec.version        = "4.0"
+  spec.version        = "4.1"
   spec.swift_version  = "5.0"
 
   spec.homepage = "https://github.com/Yalantis/Segmentio"
