@@ -334,7 +334,6 @@ open class Segmentio: UIView {
         segmentioCollectionView?.collectionViewLayout.invalidateLayout()
         segmentioCollectionView?.reloadData()
         guard selectedSegmentioIndex != -1 else { return }
-        scrollToItemAtContext()
         moveShapeLayerAtContext()
     }
 
@@ -344,6 +343,12 @@ open class Segmentio: UIView {
         let itemWitdh = segmentioItems.enumerated().map { (index, _) -> CGFloat in
             return segmentWidth(for: IndexPath(item: index, section: 0))
         }
+
+        var superviewInsets: UIEdgeInsets = .zero
+        if #available(iOS 11.0, *) {
+            superviewInsets = segmentioCollectionView?.superview?.safeAreaInsets ?? .zero
+        }
+        
         let isCommonBehaviour = (isFlipped && isRTL) || (!isFlipped && !isRTL)
         
         if let indicatorLayer = indicatorLayer, let options = segmentioOptions.indicatorOptions {
@@ -356,6 +361,7 @@ open class Segmentio: UIView {
                 pointY: indicatorPointY(),
                 position: segmentioOptions.segmentPosition,
                 style: segmentioStyle,
+                insets: superviewInsets,
                 isCommonBehaviour: isCommonBehaviour
             )
             let insetX = ((points.endPoint.x - points.startPoint.x) - (item.endX - item.startX))/2
@@ -377,6 +383,7 @@ open class Segmentio: UIView {
                 pointY: bounds.midY,
                 position: segmentioOptions.segmentPosition,
                 style: segmentioStyle,
+                insets: superviewInsets,
                 isCommonBehaviour: isCommonBehaviour
             )
             
@@ -611,7 +618,7 @@ extension Segmentio: UICollectionViewDataSource {
         )
         
         if isFlipped {
-            cell.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
+            cell.contentView.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
         }
         
         return cell
@@ -688,12 +695,12 @@ extension Segmentio: UIScrollViewDelegate {
 
 extension Segmentio.Points {
     
-    init(item: Segmentio.ItemInSuperview, atIndex index: Int, allItemsCellWidth: [CGFloat], pointY: CGFloat, position: SegmentioPosition, style: SegmentioStyle, isCommonBehaviour: Bool) {
+    init(item: Segmentio.ItemInSuperview, atIndex index: Int, allItemsCellWidth: [CGFloat], pointY: CGFloat, position: SegmentioPosition, style: SegmentioStyle, insets: UIEdgeInsets, isCommonBehaviour: Bool) {
         let cellWidth = item.cellFrameInSuperview.width
         var startX = item.startX
         var endX = item.endX
-        var spaceBefore: CGFloat = 0
-        var spaceAfter: CGFloat = 0
+        var spaceBefore: CGFloat = isCommonBehaviour ? insets.left : -insets.right
+        var spaceAfter: CGFloat = isCommonBehaviour ? -insets.right : insets.left
         var i = 0
         allItemsCellWidth.forEach { width in
             if i < index { spaceBefore += width }
