@@ -334,7 +334,6 @@ open class Segmentio: UIView {
         segmentioCollectionView?.collectionViewLayout.invalidateLayout()
         segmentioCollectionView?.reloadData()
         guard selectedSegmentioIndex != -1 else { return }
-        scrollToItemAtContext()
         moveShapeLayerAtContext()
     }
 
@@ -619,7 +618,7 @@ extension Segmentio: UICollectionViewDataSource {
         )
         
         if isFlipped {
-            cell.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
+            cell.contentView.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
         }
         
         return cell
@@ -700,8 +699,8 @@ extension Segmentio.Points {
         let cellWidth = item.cellFrameInSuperview.width
         var startX = item.startX
         var endX = item.endX
-        var spaceBefore: CGFloat = insets.left
-        var spaceAfter: CGFloat = -insets.right
+        var spaceBefore: CGFloat = isCommonBehaviour ? insets.left : -insets.right
+        var spaceAfter: CGFloat = isCommonBehaviour ? -insets.right : insets.left
         var i = 0
         allItemsCellWidth.forEach { width in
             if i < index { spaceBefore += width }
