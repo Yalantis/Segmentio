@@ -108,7 +108,7 @@ class SideMenuViewController: UIViewController {
     }
     
     fileprivate func uncheckCurrentStyle() {
-        guard let currentStyleIndex = menuItems.index(of: currentStyle) else {
+        guard let currentStyleIndex = menuItems.firstIndex(of: currentStyle) else {
             return
         }
         
