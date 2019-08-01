@@ -137,6 +137,13 @@ public enum SegmentioPosition {
     case fixed(maxVisibleItems: Int)
 }
 
+// MARK: - Inset
+public enum SegmentioInsetStyle {
+    case none
+    case centralized
+    case custom(insets: UIEdgeInsets)
+}
+
 // MARK: - Control options
 
 public enum SegmentioStyle: String {
@@ -197,6 +204,7 @@ public struct SegmentioOptions {
     var labelTextNumberOfLines: Int
     var states: SegmentioStates
     var animationDuration: CFTimeInterval
+    var insetStyle: SegmentioInsetStyle
     
     public init() {
         self.backgroundColor = .lightGray
@@ -212,6 +220,7 @@ public struct SegmentioOptions {
                                         selectedState: SegmentioState(),
                                         highlightedState: SegmentioState())
         self.animationDuration = 0.1
+        self.insetStyle = .none
     }
 
     public init(backgroundColor: UIColor = .lightGray,
@@ -226,7 +235,8 @@ public struct SegmentioOptions {
                 segmentStates: SegmentioStates = SegmentioStates(defaultState: SegmentioState(),
                                                                  selectedState: SegmentioState(),
                                                                  highlightedState: SegmentioState()),
-                animationDuration: CFTimeInterval = 0.1) {
+                animationDuration: CFTimeInterval = 0.1,
+                insetStyle: SegmentioInsetStyle = .none) {
         self.backgroundColor = backgroundColor
         self.segmentPosition = segmentPosition
         self.scrollEnabled = scrollEnabled
@@ -238,5 +248,6 @@ public struct SegmentioOptions {
         self.labelTextNumberOfLines = labelTextNumberOfLines
         self.states = segmentStates
         self.animationDuration = animationDuration
+        self.insetStyle = insetStyle
     }
 }

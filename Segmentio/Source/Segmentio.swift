@@ -80,7 +80,6 @@ open class Segmentio: UIView {
     
     private func commonInit() {
         let layout = UICollectionViewFlowLayout()
-        layout.sectionInset = UIEdgeInsets.zero
         layout.scrollDirection = .horizontal
         layout.minimumInteritemSpacing = 0
         layout.minimumLineSpacing = 0
@@ -654,7 +653,31 @@ extension Segmentio: UICollectionViewDelegateFlowLayout {
                                sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: segmentWidth(for: indexPath), height: collectionView.frame.height)
     }
-    
+
+    public func collectionView(_ collectionView: UICollectionView,
+                               layout collectionViewLayout: UICollectionViewLayout,
+                               insetForSectionAt section: Int) -> UIEdgeInsets {
+        switch segmentioOptions.insetStyle {
+        case .none:
+            return .zero
+        case .centralized:
+            return insetForCentralizedElements()
+        case let .custom(insets: insets):
+            return insets
+        }
+    }
+
+    private func insetForCentralizedElements() -> UIEdgeInsets {
+        let firstItemIndexPath = IndexPath(row: 0, section: 0)
+        let firstItemWidth = segmentWidth(for: firstItemIndexPath)
+        let leftSpacing = (self.frame.width - firstItemWidth) / 2
+
+        let lastItemIndexPath = IndexPath(row: segmentioItems.count - 1, section: 0)
+        let lastItemWidth = segmentWidth(for: lastItemIndexPath)
+        let rightSpacing = (self.frame.width - lastItemWidth) / 2
+
+        return UIEdgeInsets(top: 0, left: leftSpacing, bottom: 0, right: rightSpacing)
+    }
 }
 
 // MARK: - UIScrollViewDelegate
