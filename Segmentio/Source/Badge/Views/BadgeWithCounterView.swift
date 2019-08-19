@@ -44,6 +44,11 @@ class BadgeWithCounterView: UIView {
     }
     
     fileprivate class func nibNameForSize(_ size: BadgeSize) -> String {
-        return size == .standard ? standardSizedNibName : bigSizedNibName
+        switch size {
+        case .standard:
+            return standardSizedNibName
+        case .big:
+            return bigSizedNibName
+        }
     }
 }
