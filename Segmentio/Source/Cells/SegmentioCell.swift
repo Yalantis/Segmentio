@@ -125,7 +125,7 @@ class SegmentioCell: UICollectionViewCell {
         }
         
         if let _ = options.verticalSeparatorOptions {
-            if isLastCell == false {
+            if !isLastCell {
                 setupVerticalSeparators()
             }
         }
@@ -312,12 +312,13 @@ class SegmentioCell: UICollectionViewCell {
     // MARK: - Vertical separator
     
     private func addVerticalSeparator() {
-        let contentViewWidth = contentView.bounds.width
+        let contentViewHeight = contentView.bounds.height
+        let x: CGFloat = contentView.bounds.width - 1
         let rect = CGRect(
-            x: contentView.bounds.width - 1,
-            y: 0,
+            x: x,
+            y: 0.0,
             width: 1,
-            height: contentViewWidth
+            height: contentViewHeight
         )
         verticalSeparatorView = UIView(frame: rect)
         
@@ -334,7 +335,7 @@ class SegmentioCell: UICollectionViewCell {
         // setup constraints
         
         verticalSeparatorView.translatesAutoresizingMaskIntoConstraints = false
-        
+        verticalSeparatorView.layer.masksToBounds = true
         let widthConstraint = NSLayoutConstraint(
             item: verticalSeparatorView,
             attribute: .width,
@@ -344,7 +345,6 @@ class SegmentioCell: UICollectionViewCell {
             multiplier: 1,
             constant: 1
         )
-        widthConstraint.isActive = true
         
         let trailingConstraint = NSLayoutConstraint(
             item: verticalSeparatorView,
@@ -355,7 +355,6 @@ class SegmentioCell: UICollectionViewCell {
             multiplier: 1,
             constant: 0
         )
-        trailingConstraint.isActive = true
         
         let topConstraint = NSLayoutConstraint(
             item: verticalSeparatorView,
@@ -366,18 +365,22 @@ class SegmentioCell: UICollectionViewCell {
             multiplier: 1,
             constant: 0
         )
-        topConstraint.isActive = true
         
         let bottomConstraint = NSLayoutConstraint(
-            item: contentView,
+            item: verticalSeparatorView,
             attribute: .bottom,
             relatedBy: .equal,
-            toItem: verticalSeparatorView,
+            toItem: contentView,
             attribute: .bottom,
             multiplier: 1,
             constant: 0
         )
-        bottomConstraint.isActive = true
+        NSLayoutConstraint.activate([
+            widthConstraint,
+            trailingConstraint,
+            topConstraint,
+            bottomConstraint
+        ])
     }
     
     private func setupVerticalSeparators() {
@@ -398,7 +401,7 @@ class SegmentioCell: UICollectionViewCell {
         let path = UIBezierPath()
         path.move(to: CGPoint(x: verticalSeparatorView.frame.width / 2, y: startY))
         path.addLine(to: CGPoint(x: verticalSeparatorView.frame.width / 2, y: endY))
-        
+
         verticalSeparatorLayer.path = path.cgPath
         verticalSeparatorLayer.lineWidth = 1
         verticalSeparatorLayer.strokeColor = verticalSeparatorOptions.color.cgColor

@@ -24,6 +24,7 @@ open class Segmentio: UIView {
         var shapeLayerWidth: CGFloat
         var startX: CGFloat
         var endX: CGFloat
+        var isLastItem: Bool
     }
     
     open var valueDidChange: SegmentioSelectionCallback?
@@ -343,7 +344,7 @@ open class Segmentio: UIView {
         let itemWitdh = segmentioItems.enumerated().map { (index, _) -> CGFloat in
             return segmentWidth(for: IndexPath(item: index, section: 0))
         }
-
+        
         var superviewInsets: UIEdgeInsets = .zero
         if #available(iOS 11.0, *) {
             superviewInsets = segmentioCollectionView?.superview?.safeAreaInsets ?? .zero
@@ -365,6 +366,7 @@ open class Segmentio: UIView {
                 isCommonBehaviour: isCommonBehaviour
             )
             let insetX = ((points.endPoint.x - points.startPoint.x) - (item.endX - item.startX))/2
+            
             moveShapeLayer(
                 indicatorLayer,
                 startPoint: CGPoint(x: points.startPoint.x + insetX, y: points.startPoint.y),
@@ -386,7 +388,7 @@ open class Segmentio: UIView {
                 insets: superviewInsets,
                 isCommonBehaviour: isCommonBehaviour
             )
-            
+
             moveShapeLayer(
                 selectedLayer,
                 startPoint: points.startPoint,
@@ -436,8 +438,7 @@ open class Segmentio: UIView {
     private func moveShapeLayer(_ shapeLayer: CAShapeLayer, startPoint: CGPoint, endPoint: CGPoint,
                                     animated: Bool = false) {
         var endPointWithVerticalSeparator = endPoint
-        let isLastItem = selectedSegmentioIndex + 1 == segmentioItems.count
-        endPointWithVerticalSeparator.x = endPoint.x - (isLastItem ? 0 : 1)
+        endPointWithVerticalSeparator.x = endPoint.x - 1
         
         let shapeLayerPath = UIBezierPath()
         shapeLayerPath.move(to: startPoint)
@@ -473,7 +474,9 @@ open class Segmentio: UIView {
         
         if let collectionView = segmentioCollectionView, selectedSegmentioIndex != -1,
             let cellAttributes = collectionView.layoutAttributesForItem(at: IndexPath(row: selectedSegmentioIndex, section: 0)) {
-            cellWidth = segmentWidth(for: IndexPath(row: selectedSegmentioIndex, section: 0))
+            
+            let indexPath = IndexPath(row: selectedSegmentioIndex, section: 0)
+            cellWidth = segmentWidth(for: indexPath)
             collectionViewWidth = collectionView.frame.width
             
             let cellFrameInSuperview = collectionView.convert(cellAttributes.frame, to: collectionView.superview)
@@ -486,13 +489,13 @@ open class Segmentio: UIView {
             
             shapeLayerWidth = floor(cellWidth * ratio)
         }
-        
         return ItemInSuperview(
             collectionViewWidth: collectionViewWidth,
             cellFrameInSuperview: cellRect,
             shapeLayerWidth: shapeLayerWidth,
             startX: floor(cellRect.midX - (shapeLayerWidth / 2)),
-            endX: floor(cellRect.midX + (shapeLayerWidth / 2))
+            endX: floor(cellRect.midX + (shapeLayerWidth / 2)),
+            isLastItem: selectedSegmentioIndex == segmentioItems.count - 1
         )
     }
 
@@ -509,8 +512,8 @@ open class Segmentio: UIView {
         switch segmentioOptions.segmentPosition {
         case .fixed(let maxVisibleItems):
             let maxItems = maxVisibleItems > segmentioItems.count ? segmentioItems.count : maxVisibleItems
-            width = maxItems == 0 ? 0 : floor(collectionViewWidth / CGFloat(maxItems))
-            
+            width = maxItems == 0 ? 0 : collectionViewWidth / CGFloat(maxItems)
+
         case .dynamic:
             guard !segmentioItems.isEmpty else {
                 break
@@ -662,7 +665,7 @@ extension Segmentio: UICollectionViewDelegateFlowLayout {
 extension Segmentio: UIScrollViewDelegate {
 
     public func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if isPerformingScrollAnimation {
+        if isPerformingScrollAnimation || selectedSegmentioIndex == -1 {
             return
         }
 
@@ -696,12 +699,14 @@ extension Segmentio: UIScrollViewDelegate {
 extension Segmentio.Points {
     
     init(item: Segmentio.ItemInSuperview, atIndex index: Int, allItemsCellWidth: [CGFloat], pointY: CGFloat, position: SegmentioPosition, style: SegmentioStyle, insets: UIEdgeInsets, isCommonBehaviour: Bool) {
+        let separatorWidth: CGFloat = 1
         let cellWidth = item.cellFrameInSuperview.width
         var startX = item.startX
         var endX = item.endX
         var spaceBefore: CGFloat = isCommonBehaviour ? insets.left : -insets.right
         var spaceAfter: CGFloat = isCommonBehaviour ? -insets.right : insets.left
         var i = 0
+
         allItemsCellWidth.forEach { width in
             if i < index { spaceBefore += width }
             if i > index { spaceAfter += width }
@@ -709,15 +714,26 @@ extension Segmentio.Points {
         }
         // Cell will try to position itself in the middle, unless it can't because
         // the collection view has reached the beginning or end
-        startX = (item.collectionViewWidth / 2) - (cellWidth / 2 )
+        
+        startX = (item.collectionViewWidth / 2) - (cellWidth / 2)
+        if !isCommonBehaviour {
+            startX += separatorWidth
+        }
+        
         if spaceBefore < (item.collectionViewWidth - cellWidth) / 2 {
-            startX = isCommonBehaviour ? spaceBefore : item.collectionViewWidth - spaceBefore - cellWidth
+            startX = isCommonBehaviour
+                ? spaceBefore
+                : item.collectionViewWidth - spaceBefore - cellWidth + separatorWidth
         }
         if spaceAfter < (item.collectionViewWidth - cellWidth) / 2 {
-            startX = isCommonBehaviour ? item.collectionViewWidth - spaceAfter - cellWidth : spaceAfter
+            startX = isCommonBehaviour
+                ? item.collectionViewWidth - spaceAfter - cellWidth
+                : spaceAfter + (item.isLastItem ? 0 : separatorWidth)
         }
-        endX = startX + cellWidth
-        
+                
+        let additionalOffsetForLastItem: CGFloat = item.isLastItem ? separatorWidth : 0
+        endX = startX + cellWidth + additionalOffsetForLastItem
+                        
         startPoint = CGPoint(x: startX, y: pointY)
         endPoint = CGPoint(x: endX, y: pointY)
     }
