@@ -149,6 +149,7 @@ open class Segmentio: UIView {
         if let options = options {
             segmentioOptions = options
             segmentioCollectionView?.isScrollEnabled = segmentioOptions.scrollEnabled
+            segmentioCollectionView?.isUserInteractionEnabled = segmentioOptions.userInterractionEnabled
             backgroundColor = options.backgroundColor
         }
         

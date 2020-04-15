@@ -197,7 +197,8 @@ public struct SegmentioOptions {
     var labelTextNumberOfLines: Int
     var states: SegmentioStates
     var animationDuration: CFTimeInterval
-    
+    var userInterractionEnabled: Bool
+
     public init() {
         self.backgroundColor = .lightGray
         self.segmentPosition = .fixed(maxVisibleItems: 4)
@@ -212,6 +213,7 @@ public struct SegmentioOptions {
                                         selectedState: SegmentioState(),
                                         highlightedState: SegmentioState())
         self.animationDuration = 0.1
+        self.userInterractionEnabled = true
     }
 
     public init(backgroundColor: UIColor = .lightGray,
@@ -226,7 +228,8 @@ public struct SegmentioOptions {
                 segmentStates: SegmentioStates = SegmentioStates(defaultState: SegmentioState(),
                                                                  selectedState: SegmentioState(),
                                                                  highlightedState: SegmentioState()),
-                animationDuration: CFTimeInterval = 0.1) {
+                animationDuration: CFTimeInterval = 0.1,
+                userInterractionEnabled: Bool = true) {
         self.backgroundColor = backgroundColor
         self.segmentPosition = segmentPosition
         self.scrollEnabled = scrollEnabled
@@ -238,5 +241,6 @@ public struct SegmentioOptions {
         self.labelTextNumberOfLines = labelTextNumberOfLines
         self.states = segmentStates
         self.animationDuration = animationDuration
+        self.userInterractionEnabled = userInterractionEnabled
     }
 }
