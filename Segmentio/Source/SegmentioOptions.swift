@@ -119,13 +119,15 @@ public struct SegmentioIndicatorOptions {
     var ratio: CGFloat
     var height: CGFloat
     var color: UIColor
+    var roundedCorners: Bool
     
     public init(type: SegmentioIndicatorType = .bottom, ratio: CGFloat = 1, height: CGFloat = 2,
-                color: UIColor = .orange) {
+                color: UIColor = .orange, roundedCorners: Bool = false) {
         self.type = type
         self.ratio = ratio
         self.height = height
         self.color = color
+        self.roundedCorners = roundedCorners
     }
     
 }

@@ -171,7 +171,8 @@ open class Segmentio: UIView {
                     shapeLayer: indicatorLayer,
                     backgroundColor: indicatorOptions.color,
                     height: indicatorOptions.height,
-                    sublayer: layer
+                    sublayer: layer,
+                    rounded: indicatorOptions.roundedCorners
                 )
             }
         }
@@ -320,10 +321,11 @@ open class Segmentio: UIView {
     // MARK: CAShapeLayers setup
 
     private func setupShapeLayer(shapeLayer: CAShapeLayer, backgroundColor: UIColor, height: CGFloat,
-                                     sublayer: CALayer) {
+                                 sublayer: CALayer, rounded: Bool = false) {
         shapeLayer.fillColor = backgroundColor.cgColor
         shapeLayer.strokeColor = backgroundColor.cgColor
         shapeLayer.lineWidth = height
+        shapeLayer.lineCap = rounded ? .round : .butt
         layer.insertSublayer(shapeLayer, below: sublayer)
     }
     
@@ -343,7 +345,7 @@ open class Segmentio: UIView {
         let itemWitdh = segmentioItems.enumerated().map { (index, _) -> CGFloat in
             return segmentWidth(for: IndexPath(item: index, section: 0))
         }
-
+        
         var superviewInsets: UIEdgeInsets = .zero
         if #available(iOS 11.0, *) {
             superviewInsets = segmentioCollectionView?.superview?.safeAreaInsets ?? .zero
@@ -364,12 +366,17 @@ open class Segmentio: UIView {
                 insets: superviewInsets,
                 isCommonBehaviour: isCommonBehaviour
             )
-            let insetX = ((points.endPoint.x - points.startPoint.x) - (item.endX - item.startX))/2
+            let insetX = ((points.endPoint.x - points.startPoint.x) - (item.endX - item.startX)) / 2
+            
+            // check rounded property
+            let roundedCorners = segmentioOptions.indicatorOptions?.roundedCorners ?? false
+            let lineCapSize = roundedCorners ? (segmentioOptions.indicatorOptions?.height ?? 0) / 2 : 0
             moveShapeLayer(
                 indicatorLayer,
-                startPoint: CGPoint(x: points.startPoint.x + insetX, y: points.startPoint.y),
-                endPoint: CGPoint(x: points.endPoint.x - insetX, y: points.endPoint.y),
-                animated: true
+                startPoint: CGPoint(x: points.startPoint.x + lineCapSize + insetX, y: points.startPoint.y),
+                endPoint: CGPoint(x: points.endPoint.x - insetX - lineCapSize, y: points.endPoint.y),
+                animated: true,
+                roundedCorners: roundedCorners
             )
         }
         
@@ -434,7 +441,7 @@ open class Segmentio: UIView {
     // MARK: Move shape layer
     
     private func moveShapeLayer(_ shapeLayer: CAShapeLayer, startPoint: CGPoint, endPoint: CGPoint,
-                                    animated: Bool = false) {
+                                animated: Bool = false, roundedCorners: Bool = false) {
         var endPointWithVerticalSeparator = endPoint
         let isLastItem = selectedSegmentioIndex + 1 == segmentioItems.count
         endPointWithVerticalSeparator.x = endPoint.x - (isLastItem ? 0 : 1)
@@ -442,8 +449,9 @@ open class Segmentio: UIView {
         let shapeLayerPath = UIBezierPath()
         shapeLayerPath.move(to: startPoint)
         shapeLayerPath.addLine(to: endPointWithVerticalSeparator)
+        shapeLayerPath.lineCapStyle = roundedCorners ? .round : .butt
         
-        if animated == true {
+        if animated {
             isPerformingScrollAnimation = true
             isUserInteractionEnabled = false
             
@@ -672,7 +680,8 @@ extension Segmentio: UIScrollViewDelegate {
                 indicatorLayer,
                 startPoint: CGPoint(x: item.startX, y: indicatorPointY()),
                 endPoint: CGPoint(x: item.endX, y: indicatorPointY()),
-                animated: false
+                animated: false,
+                roundedCorners: true
             )
         }
         
@@ -709,7 +718,8 @@ extension Segmentio.Points {
         }
         // Cell will try to position itself in the middle, unless it can't because
         // the collection view has reached the beginning or end
-        startX = (item.collectionViewWidth / 2) - (cellWidth / 2 )
+        startX = (item.collectionViewWidth / 2) - (cellWidth / 2)
+        
         if spaceBefore < (item.collectionViewWidth - cellWidth) / 2 {
             startX = isCommonBehaviour ? spaceBefore : item.collectionViewWidth - spaceBefore - cellWidth
         }
