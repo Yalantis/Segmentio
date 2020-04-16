@@ -150,6 +150,7 @@ open class Segmentio: UIView {
         if let options = options {
             segmentioOptions = options
             segmentioCollectionView?.isScrollEnabled = segmentioOptions.scrollEnabled
+            segmentioCollectionView?.isUserInteractionEnabled = segmentioOptions.userInterractionEnabled
             backgroundColor = options.backgroundColor
         }
         
@@ -172,7 +173,8 @@ open class Segmentio: UIView {
                     shapeLayer: indicatorLayer,
                     backgroundColor: indicatorOptions.color,
                     height: indicatorOptions.height,
-                    sublayer: layer
+                    sublayer: layer,
+                    rounded: indicatorOptions.roundedCorners
                 )
             }
         }
@@ -321,10 +323,11 @@ open class Segmentio: UIView {
     // MARK: CAShapeLayers setup
 
     private func setupShapeLayer(shapeLayer: CAShapeLayer, backgroundColor: UIColor, height: CGFloat,
-                                     sublayer: CALayer) {
+                                 sublayer: CALayer, rounded: Bool = false) {
         shapeLayer.fillColor = backgroundColor.cgColor
         shapeLayer.strokeColor = backgroundColor.cgColor
         shapeLayer.lineWidth = height
+        shapeLayer.lineCap = rounded ? .round : .butt
         layer.insertSublayer(shapeLayer, below: sublayer)
     }
     
@@ -365,13 +368,18 @@ open class Segmentio: UIView {
                 insets: superviewInsets,
                 isCommonBehaviour: isCommonBehaviour
             )
-            let insetX = ((points.endPoint.x - points.startPoint.x) - (item.endX - item.startX))/2
+            let insetX = ((points.endPoint.x - points.startPoint.x) - (item.endX - item.startX)) / 2
             
+            // check rounded property
+            let roundedCorners = segmentioOptions.indicatorOptions?.roundedCorners ?? false
+            let lineCapSize = roundedCorners ? (segmentioOptions.indicatorOptions?.height ?? 0) / 2 : 0
+
             moveShapeLayer(
                 indicatorLayer,
-                startPoint: CGPoint(x: points.startPoint.x + insetX, y: points.startPoint.y),
-                endPoint: CGPoint(x: points.endPoint.x - insetX, y: points.endPoint.y),
-                animated: true
+                startPoint: CGPoint(x: points.startPoint.x + lineCapSize + insetX, y: points.startPoint.y),
+                endPoint: CGPoint(x: points.endPoint.x - insetX - lineCapSize, y: points.endPoint.y),
+                animated: true,
+                roundedCorners: roundedCorners
             )
         }
         
@@ -436,15 +444,16 @@ open class Segmentio: UIView {
     // MARK: Move shape layer
     
     private func moveShapeLayer(_ shapeLayer: CAShapeLayer, startPoint: CGPoint, endPoint: CGPoint,
-                                    animated: Bool = false) {
+                                animated: Bool = false, roundedCorners: Bool = false) {
         var endPointWithVerticalSeparator = endPoint
         endPointWithVerticalSeparator.x = endPoint.x - 1
         
         let shapeLayerPath = UIBezierPath()
         shapeLayerPath.move(to: startPoint)
         shapeLayerPath.addLine(to: endPointWithVerticalSeparator)
+        shapeLayerPath.lineCapStyle = roundedCorners ? .round : .butt
         
-        if animated == true {
+        if animated {
             isPerformingScrollAnimation = true
             isUserInteractionEnabled = false
             
@@ -675,7 +684,8 @@ extension Segmentio: UIScrollViewDelegate {
                 indicatorLayer,
                 startPoint: CGPoint(x: item.startX, y: indicatorPointY()),
                 endPoint: CGPoint(x: item.endX, y: indicatorPointY()),
-                animated: false
+                animated: false,
+                roundedCorners: true
             )
         }
         
