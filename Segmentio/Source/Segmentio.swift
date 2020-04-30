@@ -218,6 +218,8 @@ open class Segmentio: UIView {
                 return SegmentioCellWithImageBeforeLabel.self
             case .imageAfterLabel:
                 return SegmentioCellWithImageAfterLabel.self
+            case .imageOrLabel:
+                return SegmentioCellWithImageOrLabel.self
             }
         }
         

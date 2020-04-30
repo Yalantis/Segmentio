@@ -143,7 +143,7 @@ public enum SegmentioPosition {
 
 public enum SegmentioStyle: String {
     
-    case onlyLabel, onlyImage, imageOverLabel, imageUnderLabel, imageBeforeLabel, imageAfterLabel
+    case onlyLabel, onlyImage, imageOverLabel, imageUnderLabel, imageBeforeLabel, imageAfterLabel, imageOrLabel
     
     public static let allStyles = [
         onlyLabel,
@@ -151,12 +151,13 @@ public enum SegmentioStyle: String {
         imageOverLabel,
         imageUnderLabel,
         imageBeforeLabel,
-        imageAfterLabel
+        imageAfterLabel,
+        imageOrLabel
     ]
     
     public func isWithText() -> Bool {
         switch self {
-        case .onlyLabel, .imageOverLabel, .imageUnderLabel, .imageBeforeLabel, .imageAfterLabel:
+        case .onlyLabel, .imageOverLabel, .imageUnderLabel, .imageBeforeLabel, .imageAfterLabel,.imageOrLabel:
             return true
         default:
             return false
@@ -165,7 +166,7 @@ public enum SegmentioStyle: String {
     
     public func isWithImage() -> Bool {
         switch self {
-        case .imageOverLabel, .imageUnderLabel, .imageBeforeLabel, .imageAfterLabel, .onlyImage:
+        case .imageOverLabel, .imageUnderLabel, .imageBeforeLabel, .imageAfterLabel, .onlyImage,.imageOrLabel:
             return true
         default:
             return false
@@ -175,7 +176,7 @@ public enum SegmentioStyle: String {
     public var layoutMargins: CGFloat {
         let defaultLayoutMargins: CGFloat = 8.0
         switch self {
-        case .onlyLabel, .imageAfterLabel, .imageBeforeLabel, .imageOverLabel, .imageUnderLabel:
+        case .onlyLabel, .imageAfterLabel, .imageBeforeLabel, .imageOverLabel, .imageUnderLabel,.imageOrLabel:
             return 4 * defaultLayoutMargins
         case .onlyImage:
             return 2 * defaultLayoutMargins
