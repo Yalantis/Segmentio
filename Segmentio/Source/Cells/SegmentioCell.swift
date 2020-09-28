@@ -148,6 +148,7 @@ class SegmentioCell: UICollectionViewCell {
                 
         if (style != .onlyLabel) {
             segmentImageView?.image = selected ? selectedImage : image
+            segmentImageView?.tintColor = selected ? selectedState.imageTintColor : defaultState.imageTintColor
         }
     }
     
