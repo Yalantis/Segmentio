@@ -327,7 +327,7 @@ open class Segmentio: UIView {
         shapeLayer.fillColor = backgroundColor.cgColor
         shapeLayer.strokeColor = backgroundColor.cgColor
         shapeLayer.lineWidth = height
-        shapeLayer.lineCap = rounded ? .round : .butt
+        shapeLayer.lineCap = rounded ? "round" : "butt"
         layer.insertSublayer(shapeLayer, below: sublayer)
     }
     
