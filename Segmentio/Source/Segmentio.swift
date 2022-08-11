@@ -191,8 +191,8 @@ open class Segmentio: UIView {
         setupHorizontalSeparatorIfPossible()
     }
     
-    open func addBadge(at index: Int, count: Int, color: UIColor = .red) {
-        segmentioItems[index].addBadge(count, color: color)
+    open func addBadge(at index: Int, count: Int, color: UIColor = .red, badgePosition: BadgePosition = .topRight) {
+        segmentioItems[index].addBadge(count, color: color, badgePosition: badgePosition)
         segmentioCollectionView?.reloadData()
     }
     

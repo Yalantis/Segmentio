@@ -23,6 +23,7 @@ public struct SegmentioItem {
         label.sizeToFit()
         return label.intrinsicContentSize.width
     }
+    public var badgePosition: BadgePosition = .topRight
 
     public init(title: String?, image: UIImage?, selectedImage: UIImage? = nil) {
         self.title = title
@@ -30,9 +31,10 @@ public struct SegmentioItem {
         self.selectedImage = selectedImage ?? image
     }
     
-    public mutating func addBadge(_ count: Int, color: UIColor) {
+    public mutating func addBadge(_ count: Int, color: UIColor, badgePosition: BadgePosition) {
         self.badgeCount = count
         self.badgeColor = color
+        self.badgePosition = badgePosition
     }
     
     public mutating func removeBadge() {

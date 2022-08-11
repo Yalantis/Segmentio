@@ -12,7 +12,7 @@ enum BadgeSize {
     
 }
 
-enum BadgePosition {
+public enum BadgePosition {
     case topLeft
     case topRight
     case bottomLeft
