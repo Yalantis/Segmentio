@@ -129,7 +129,7 @@ class SegmentioCell: UICollectionViewCell {
                 setupVerticalSeparators()
             }
         }
-        configurateBadgeWithCount(content.badgeCount, color: content.badgeColor)
+        configurateBadgeWithCount(content.badgeCount, color: content.badgeColor, badgePosition: content.badgePosition)
     }
     
     func configure(selected: Bool, selectedImage: UIImage? = nil, image: UIImage? = nil) {
@@ -151,8 +151,8 @@ class SegmentioCell: UICollectionViewCell {
         }
     }
     
-    func configurateBadgeWithCount(_ badgeCount: Int?, color: UIColor?) {
-        guard let badgeCount = badgeCount, let color = color else {
+    func configurateBadgeWithCount(_ badgeCount: Int?, color: UIColor?, badgePosition: BadgePosition?) {
+        guard let badgeCount = badgeCount, let color = color, let badgePosition = badgePosition else {
             return
         }
         
@@ -162,14 +162,16 @@ class SegmentioCell: UICollectionViewCell {
                 imageContainerView!,
                 counterValue: badgeCount,
                 backgroundColor: color,
-                badgeSize: .standard
+                badgeSize: .standard,
+                badgePosition: badgePosition
             )
         } else {
             badgePresenter.addBadgeForContainerView(
                 containerView!,
                 counterValue: badgeCount,
                 backgroundColor: color,
-                badgeSize: .standard
+                badgeSize: .standard,
+                badgePosition: badgePosition
             )
         }
     }

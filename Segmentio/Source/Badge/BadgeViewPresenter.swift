@@ -11,7 +11,7 @@ import UIKit
 class BadgeViewPresenter {
     
     func addBadgeForContainerView(_ containerView: UIView, counterValue: Int, backgroundColor: UIColor = .red,
-                                  badgeSize: BadgeSize = .standard) {
+                                  badgeSize: BadgeSize = .standard, badgePosition: BadgePosition = .topRight) {
         var badgeView: BadgeWithCounterView!
         for view in containerView.subviews {
             if view is BadgeWithCounterView {
@@ -25,7 +25,7 @@ class BadgeViewPresenter {
             badgeView.translatesAutoresizingMaskIntoConstraints = false
             containerView.addSubview(badgeView)
             containerView.bringSubviewToFront(badgeView)
-            setupBadgeConstraints(badgeView, counterValue: counterValue)
+            setupBadgeConstraints(badgeView, counterValue: counterValue, badgePosition: badgePosition)
         }
     }
     
@@ -37,34 +37,51 @@ class BadgeViewPresenter {
         }
     }
     
-    fileprivate func setupBadgeConstraints(_ badgeView: BadgeWithCounterView, counterValue: Int) {
-        var constraintConstant:CGFloat = -5.0
-        if counterValue > 9 {
-            constraintConstant = -10.0
+    fileprivate func setupBadgeConstraints(_ badgeView: BadgeWithCounterView, counterValue: Int, badgePosition: BadgePosition) {
+        guard let superView = badgeView.superview else { return }
+        var targetVerticalCenter: NSLayoutConstraint.Attribute?
+        var targetHorizontalCenter: NSLayoutConstraint.Attribute?
+
+        switch badgePosition {
+        case .topLeft:
+            targetVerticalCenter = .top
+            targetHorizontalCenter = .left
+        case .topRight:
+            targetVerticalCenter = .top
+            targetHorizontalCenter = .right
+        case .bottomLeft:
+            targetVerticalCenter = .bottom
+            targetHorizontalCenter = .left
+        case .bottomRight:
+            targetVerticalCenter = .bottom
+            targetHorizontalCenter = .right
         }
-        let segmentTitleLabelHorizontalCenterConstraint =
-            NSLayoutConstraint(
-                item: badgeView,
-                attribute: .top,
-                relatedBy: .equal,
-                toItem: badgeView.superview,
-                attribute: .top,
-                multiplier: 1,
-                constant: 6.0
-        )
+        
+        guard let targetVerticalCenter = targetVerticalCenter else { return }
+        guard let targetHorizontalCenter = targetHorizontalCenter else { return }
         
         let segmentTitleLabelVerticalCenterConstraint =
             NSLayoutConstraint(
                 item: badgeView,
-                attribute: .trailing,
+                attribute: .centerY,
                 relatedBy: .equal,
                 toItem: badgeView.superview,
-                attribute: .trailing,
+                attribute: targetVerticalCenter,
                 multiplier: 1,
-                constant: constraintConstant
+                constant: 0.0
         )
-        segmentTitleLabelHorizontalCenterConstraint.isActive = true
+        let segmentTitleLabelHorizontalCenterConstraint =
+            NSLayoutConstraint(
+                item: badgeView,
+                attribute: .centerX,
+                relatedBy: .equal,
+                toItem: superView,
+                attribute: targetHorizontalCenter,
+                multiplier: 1,
+                constant: 0.0
+        )
         segmentTitleLabelVerticalCenterConstraint.isActive = true
+        segmentTitleLabelHorizontalCenterConstraint.isActive = true
     }
     
 }
