@@ -79,7 +79,7 @@ class BadgeViewPresenter {
                 attribute: targetHorizontalCenter,
                 multiplier: 1,
                 constant: 0.0
-        )f
+        )
         segmentTitleLabelVerticalCenterConstraint.isActive = true
         segmentTitleLabelHorizontalCenterConstraint.isActive = true
     }
