@@ -39,37 +39,26 @@ class BadgeViewPresenter {
     
     fileprivate func setupBadgeConstraints(_ badgeView: BadgeWithCounterView, counterValue: Int, badgePosition: BadgePosition) {
         guard let superView = badgeView.superview else { return }
-        var targetHorizontalCenter: NSLayoutConstraint.Attribute?
         var targetVerticalCenter: NSLayoutConstraint.Attribute?
+        var targetHorizontalCenter: NSLayoutConstraint.Attribute?
 
         switch badgePosition {
         case .topLeft:
-            targetHorizontalCenter = .top
-            targetVerticalCenter = .left
+            targetVerticalCenter = .top
+            targetHorizontalCenter = .left
         case .topRight:
-            targetHorizontalCenter = .top
-            targetVerticalCenter = .right
+            targetVerticalCenter = .top
+            targetHorizontalCenter = .right
         case .bottomLeft:
-            targetHorizontalCenter = .bottom
-            targetVerticalCenter = .left
+            targetVerticalCenter = .bottom
+            targetHorizontalCenter = .left
         case .bottomRight:
-            targetHorizontalCenter = .bottom
-            targetVerticalCenter = .right
+            targetVerticalCenter = .bottom
+            targetHorizontalCenter = .right
         }
         
-        guard let targetHorizontalCenter = targetHorizontalCenter else { return }
         guard let targetVerticalCenter = targetVerticalCenter else { return }
-        
-        let segmentTitleLabelHorizontalCenterConstraint =
-            NSLayoutConstraint(
-                item: badgeView,
-                attribute: .centerX,
-                relatedBy: .equal,
-                toItem: superView,
-                attribute: targetHorizontalCenter,
-                multiplier: 1,
-                constant: 0.0
-        )
+        guard let targetHorizontalCenter = targetHorizontalCenter else { return }
         
         let segmentTitleLabelVerticalCenterConstraint =
             NSLayoutConstraint(
@@ -81,8 +70,18 @@ class BadgeViewPresenter {
                 multiplier: 1,
                 constant: 0.0
         )
-        segmentTitleLabelHorizontalCenterConstraint.isActive = true
+        let segmentTitleLabelHorizontalCenterConstraint =
+            NSLayoutConstraint(
+                item: badgeView,
+                attribute: .centerX,
+                relatedBy: .equal,
+                toItem: superView,
+                attribute: targetHorizontalCenter,
+                multiplier: 1,
+                constant: 0.0
+        )f
         segmentTitleLabelVerticalCenterConstraint.isActive = true
+        segmentTitleLabelHorizontalCenterConstraint.isActive = true
     }
     
 }
