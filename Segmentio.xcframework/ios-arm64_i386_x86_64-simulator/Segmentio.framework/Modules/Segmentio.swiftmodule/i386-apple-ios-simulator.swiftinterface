@@ -1,0 +1,148 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.6.1 (swiftlang-5.6.0.323.66 clang-1316.0.20.12)
+// swift-module-flags: -target i386-apple-ios8.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name Segmentio
+import QuartzCore
+@_exported import Segmentio
+import Swift
+import UIKit
+import _Concurrency
+public struct SegmentioItem {
+  public var title: Swift.String?
+  public var image: UIKit.UIImage?
+  public var selectedImage: UIKit.UIImage?
+  public var badgeCount: Swift.Int?
+  public var badgeColor: UIKit.UIColor?
+  public var intrinsicWidth: CoreGraphics.CGFloat {
+    get
+  }
+  public var badgePosition: Segmentio.BadgePosition
+  public init(title: Swift.String?, image: UIKit.UIImage?, selectedImage: UIKit.UIImage? = nil)
+  public mutating func addBadge(_ count: Swift.Int, color: UIKit.UIColor, badgePosition: Segmentio.BadgePosition)
+  public mutating func removeBadge()
+}
+public struct SegmentioState {
+  public init(backgroundColor: UIKit.UIColor = .clear, titleFont: UIKit.UIFont = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize), titleTextColor: UIKit.UIColor = .black, titleAlpha: CoreGraphics.CGFloat = 1)
+}
+public enum SegmentioHorizontalSeparatorType {
+  case none
+  case top
+  case bottom
+  case topAndBottom
+  public static func == (a: Segmentio.SegmentioHorizontalSeparatorType, b: Segmentio.SegmentioHorizontalSeparatorType) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public struct SegmentioHorizontalSeparatorOptions {
+  public init(type: Segmentio.SegmentioHorizontalSeparatorType = .topAndBottom, height: CoreGraphics.CGFloat = 1.0, color: UIKit.UIColor = .darkGray)
+}
+public struct SegmentioVerticalSeparatorOptions {
+  public init(ratio: CoreGraphics.CGFloat = 1, color: UIKit.UIColor = .darkGray)
+}
+public enum SegmentioIndicatorType {
+  case top
+  case bottom
+  public static func == (a: Segmentio.SegmentioIndicatorType, b: Segmentio.SegmentioIndicatorType) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public struct SegmentioIndicatorOptions {
+  public init(type: Segmentio.SegmentioIndicatorType = .bottom, ratio: CoreGraphics.CGFloat = 1, height: CoreGraphics.CGFloat = 2, color: UIKit.UIColor = .orange, roundedCorners: Swift.Bool = false)
+}
+public enum SegmentioPosition {
+  case dynamic
+  case fixed(maxVisibleItems: Swift.Int)
+}
+public enum SegmentioStyle : Swift.String {
+  case onlyLabel, onlyImage, imageOverLabel, imageUnderLabel, imageBeforeLabel, imageAfterLabel
+  public static let allStyles: [Segmentio.SegmentioStyle]
+  public func isWithText() -> Swift.Bool
+  public func isWithImage() -> Swift.Bool
+  public var layoutMargins: CoreGraphics.CGFloat {
+    get
+  }
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public typealias SegmentioStates = (defaultState: Segmentio.SegmentioState, selectedState: Segmentio.SegmentioState, highlightedState: Segmentio.SegmentioState)
+public struct SegmentioOptions {
+  public init()
+  public init(backgroundColor: UIKit.UIColor = .lightGray, segmentPosition: Segmentio.SegmentioPosition = .fixed(maxVisibleItems: 4), scrollEnabled: Swift.Bool = true, indicatorOptions: Segmentio.SegmentioIndicatorOptions? = SegmentioIndicatorOptions(), horizontalSeparatorOptions: Segmentio.SegmentioHorizontalSeparatorOptions? = SegmentioHorizontalSeparatorOptions(), verticalSeparatorOptions: Segmentio.SegmentioVerticalSeparatorOptions? = SegmentioVerticalSeparatorOptions(), imageContentMode: UIKit.UIView.ContentMode = .center, labelTextAlignment: UIKit.NSTextAlignment = .center, labelTextNumberOfLines: Swift.Int = 0, segmentStates: Segmentio.SegmentioStates = (defaultState: SegmentioState(),
+                                                                 selectedState: SegmentioState(),
+                                                                 highlightedState: SegmentioState()), animationDuration: CoreFoundation.CFTimeInterval = 0.1, userInterractionEnabled: Swift.Bool = true)
+}
+public enum BadgePosition {
+  case topLeft
+  case topRight
+  case bottomLeft
+  case bottomRight
+  public static func == (a: Segmentio.BadgePosition, b: Segmentio.BadgePosition) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public typealias SegmentioSelectionCallback = ((_ segmentio: Segmentio.Segmentio, _ selectedSegmentioIndex: Swift.Int) -> Swift.Void)
+@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) open class Segmentio : UIKit.UIView {
+  @_Concurrency.MainActor(unsafe) open var valueDidChange: Segmentio.SegmentioSelectionCallback?
+  @_Concurrency.MainActor(unsafe) open var selectedSegmentioIndex: Swift.Int {
+    get
+    set
+  }
+  @_Concurrency.MainActor(unsafe) open var segmentioItems: [Segmentio.SegmentioItem] {
+    get
+  }
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreGraphics.CGRect)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func layoutSubviews()
+  @_Concurrency.MainActor(unsafe) open func setup(content: [Segmentio.SegmentioItem], style: Segmentio.SegmentioStyle, options: Segmentio.SegmentioOptions?)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func didMoveToSuperview()
+  @_Concurrency.MainActor(unsafe) open func addBadge(at index: Swift.Int, count: Swift.Int, color: UIKit.UIColor = .red, badgePosition: Segmentio.BadgePosition = .topRight)
+  @_Concurrency.MainActor(unsafe) open func removeBadge(at index: Swift.Int)
+  @_Concurrency.MainActor(unsafe) public func reloadSegmentio()
+  @objc deinit
+}
+extension Segmentio.Segmentio : UIKit.UICollectionViewDataSource {
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, numberOfItemsInSection section: Swift.Int) -> Swift.Int
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, cellForItemAt indexPath: Foundation.IndexPath) -> UIKit.UICollectionViewCell
+}
+extension Segmentio.Segmentio : UIKit.UICollectionViewDelegate {
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, shouldSelectItemAt indexPath: Foundation.IndexPath) -> Swift.Bool
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, didSelectItemAt indexPath: Foundation.IndexPath)
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, willDisplay cell: UIKit.UICollectionViewCell, forItemAt indexPath: Foundation.IndexPath)
+}
+extension Segmentio.Segmentio : UIKit.UICollectionViewDelegateFlowLayout {
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, layout collectionViewLayout: UIKit.UICollectionViewLayout, sizeForItemAt indexPath: Foundation.IndexPath) -> CoreGraphics.CGSize
+}
+extension Segmentio.Segmentio : UIKit.UIScrollViewDelegate {
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func scrollViewDidScroll(_ scrollView: UIKit.UIScrollView)
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func scrollViewDidEndDecelerating(_ scrollView: UIKit.UIScrollView)
+}
+public struct AppearanceOptions : Swift.OptionSet {
+  public static let overlay: Segmentio.AppearanceOptions
+  public static let useAutoresize: Segmentio.AppearanceOptions
+  public let rawValue: Swift.UInt
+  public init(rawValue: Swift.UInt)
+  public typealias ArrayLiteralElement = Segmentio.AppearanceOptions
+  public typealias Element = Segmentio.AppearanceOptions
+  public typealias RawValue = Swift.UInt
+}
+extension UIKit.UIView {
+  @_Concurrency.MainActor(unsafe) public func addSubview(_ subview: UIKit.UIView, options: Segmentio.AppearanceOptions)
+  @_Concurrency.MainActor(unsafe) public func insertSubview(_ subview: UIKit.UIView, index: Swift.Int, options: Segmentio.AppearanceOptions)
+}
+extension Segmentio.SegmentioHorizontalSeparatorType : Swift.Equatable {}
+extension Segmentio.SegmentioHorizontalSeparatorType : Swift.Hashable {}
+extension Segmentio.SegmentioIndicatorType : Swift.Equatable {}
+extension Segmentio.SegmentioIndicatorType : Swift.Hashable {}
+extension Segmentio.SegmentioStyle : Swift.Equatable {}
+extension Segmentio.SegmentioStyle : Swift.Hashable {}
+extension Segmentio.SegmentioStyle : Swift.RawRepresentable {}
+extension Segmentio.BadgePosition : Swift.Equatable {}
+extension Segmentio.BadgePosition : Swift.Hashable {}
