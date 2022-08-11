@@ -12,6 +12,13 @@ enum BadgeSize {
     
 }
 
+enum BadgePosition {
+    case topLeft
+    case topRight
+    case bottomLeft
+    case bottomRight
+}
+
 class BadgeWithCounterView: UIView {
     
     @IBOutlet fileprivate weak var counterValueLabel: UILabel!
