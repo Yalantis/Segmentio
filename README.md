@@ -29,6 +29,15 @@ pod 'Segmentio'
 github "Yalantis/Segmentio"
 ```
 
+#### [Swift Package Manager](https://swift.org/package-manager)
+In Xcode choose *File ▸ Add Package Dependencies…* and enter `https://github.com/Yalantis/Segmentio.git`, or add it to your `Package.swift`:
+```swift
+dependencies: [
+    .package(url: "https://github.com/Yalantis/Segmentio.git", branch: "master")
+]
+```
+The badge nibs are shipped as package resources, so `BadgeWithCounterView` works the same as with CocoaPods.
+
 ## Usage
 #### Import `Segmentio` module
 ```swift
